@@ -20,7 +20,7 @@
     const { useState, useMemo, useEffect, useCallback } = React;
 
     // ==========================================
-    // 🖼️ COMPONENTS: ไอคอน SVG ทั้งหมดของเว็บ
+    // 🖼️ COMPONENTS: ไอคอน SVG
     // ==========================================
     const IconPlus = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>;
     const IconHome = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>;
@@ -30,52 +30,17 @@
     const IconFileText = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>;
     const IconCalendar = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>;
     const IconLoader = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>;
-    const IconEye = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>;
-    const IconEyeOff = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>;
-    const IconImage = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>;
-    const IconList = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>;
-    const IconChevronLeft = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="15 18 9 12 15 6"></polyline></svg>;
-    const IconChevronRight = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="9 18 15 12 9 6"></polyline></svg>;
     const IconTrash = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>;
     
-    // 🔗 ไอคอนสำหรับปุ่ม Link (Notion, Globe, Drive แบบของแท้)
     const IconGlobe = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>;
     const IconNotion = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M8 16V8l8 8V8"></path></svg>;
     const IconDrive = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M12 10l-6 10l-3 -5l6 -10z"></path><path d="M9 15h12l-3 5h-12z"></path><path d="M15 15l-6 -10h6l6 10z"></path></svg>;
 
-    // ==========================================
-    // 🎨 ตัวแปรสีหลัก (COLORS Object)
-    // ==========================================
     const COLORS = {
-      blue: '#CCE9ED',       
-      pink: '#FFD2E4',       
-      purple: '#FFEEB1',     
-      orange: '#E7F098',     
-      bg: '#fcfcfc',         
-      white: '#ffffff',
-      textMain: '#ff96d3',   
-      textSoft: '#b5e48c',   
-      pinkDeep: '#ff96d3',   
-      blueDeep: '#b5e48c',   
-      purpleDeep: '#ff96d3', 
-      orangeDeep: '#b5e48c', 
-      cardBg: '#ffffff',
-      cardBgDone: '#FFD2E4', 
-      
-      cardWhite: '#ffffff',
-      cardBorder: '#f0f0f0',
-      cardInner: '#ffffff',
-      cloudWhite: '#ffffff',
-      modalBg: '#ffffff',
-      navBarBg: '#ffffff',
-      profileBorder: '#ff96d3',
-      buttonBg: '#ffffff',
-      dividerColor: '#f3f4f6',
-      emptyStateBg: '#ffffff',
-      calendarBg: '#ffffff',
-      searchInputBg: '#ffffff',
-      filterBarBg: '#ffffff',
-      bannerOverlayBg: '#ffffff',
+      blue: '#CCE9ED', pink: '#FFD2E4', purple: '#FFEEB1', orange: '#E7F098', bg: '#fcfcfc', white: '#ffffff',
+      textMain: '#ff96d3', textSoft: '#b5e48c', pinkDeep: '#ff96d3', blueDeep: '#b5e48c', purpleDeep: '#ff96d3', orangeDeep: '#b5e48c',
+      cardBg: '#ffffff', cardBgDone: '#FFD2E4', cardWhite: '#ffffff', cardBorder: '#f0f0f0', cardInner: '#ffffff', cloudWhite: '#ffffff',
+      modalBg: '#ffffff', navBarBg: '#ffffff', profileBorder: '#ff96d3', buttonBg: '#ffffff', dividerColor: '#f3f4f6',
     };
 
     const FluffyCloud = React.memo(({ top, left, right, bottom, scale = 1, opacity = 0.7, delay = '0s', reverse = false }) => (
@@ -97,7 +62,6 @@
         <div className="absolute bottom-[10%] right-[-10%] w-80 h-80 rounded-full blur-[100px] opacity-30 animate-float-reverse" style={{ backgroundColor: COLORS.blue }}></div>
         <div className="absolute top-[40%] right-[10%] w-48 h-48 rounded-full blur-[80px] opacity-20 animate-float" style={{ backgroundColor: COLORS.purple }}></div>
         <FluffyCloud top="8%" left="-5%" scale={1.5} opacity={0.6} delay="0s" />
-        <FluffyCloud top="35%" left="-15%" scale={2.5} opacity={0.3} delay="2.5s" />
         <FluffyCloud bottom="20%" left="5%" scale={1.6} opacity={0.6} delay="3s" />
         <FluffyCloud top="50%" right="-5%" scale={1.8} opacity={0.5} delay="1s" reverse={true} />
       </div>
@@ -111,18 +75,10 @@
             <div className="flex items-center gap-1">
              <h1 className="text-2xl font-black italic tracking-tighter flex">
              {"namtip".split('').map((char, index) => (
-                <span 
-                  key={index} 
-                  className={`drop-shadow-sm inline-block animate-text-wave pb-2 ${char === ' ' ? 'w-2.5' : 'pr-[1.5px]'}`} 
-                  style={{ animationDelay: `${index * 0.1}s`, color: '#ff96d3' }}
-                >
-                  {char}
-                </span>
+                <span key={index} className={`drop-shadow-sm inline-block animate-text-wave pb-2 ${char === ' ' ? 'w-2.5' : 'pr-[1.5px]'}`} style={{ animationDelay: `${index * 0.1}s`, color: '#ff96d3' }}>{char}</span>
               ))}
             </h1>
-              <button onClick={() => isAdmin ? setIsAdmin(false) : setShowAuthModal(true)} className={`px-1.5 py-0.5 ml-1 rounded-full text-[7px] font-black uppercase tracking-widest border shadow-sm transition-all active:scale-95`} style={{ backgroundColor: isAdmin ? `${COLORS.buttonBg}99` : `${COLORS.buttonBg}cc`, color: isAdmin ? '#ff96d3' : '#9ca3af', borderColor: isAdmin ? '#FFD2E4' : '#e5e7eb' }}>
-                {isAdmin ? 'Admin' : 'Guest'}
-              </button>
+              <button onClick={() => isAdmin ? setIsAdmin(false) : setShowAuthModal(true)} className={`px-1.5 py-0.5 ml-1 rounded-full text-[7px] font-black uppercase tracking-widest border shadow-sm transition-all active:scale-95`} style={{ backgroundColor: isAdmin ? `${COLORS.buttonBg}99` : `${COLORS.buttonBg}cc`, color: isAdmin ? '#ff96d3' : '#9ca3af', borderColor: isAdmin ? '#FFD2E4' : '#e5e7eb' }}>{isAdmin ? 'Admin' : 'Guest'}</button>
             </div>
             <div className="flex items-center gap-1.5 opacity-70">
               <div className="w-3 h-[1px]" style={{ backgroundColor: COLORS.pinkDeep }}></div>
@@ -130,14 +86,7 @@
             </div>
           </div>
           <div onClick={isAdmin ? handleImageUpload : undefined} className={`w-16 h-16 rounded-[1.25rem] flex items-center justify-center relative overflow-hidden transition-transform ${isAdmin ? 'cursor-pointer hover:scale-105 active:scale-95' : ''}`} style={{ backgroundColor: COLORS.cardInner, borderWidth: '2px', borderColor: COLORS.profileBorder }}>
-            {profileImage ? (
-              <img src={profileImage} alt="Profile" className="w-full h-full object-cover" />
-            ) : (
-              <>
-                <div className="absolute inset-0 opacity-40" style={{ background: `linear-gradient(to top right, ${COLORS.pink}, ${COLORS.blue})` }}></div>
-                <span className="text-2xl relative z-10 select-none">🐰</span>
-              </>
-            )}
+            {profileImage ? <img src={profileImage} alt="Profile" className="w-full h-full object-cover" /> : <><div className="absolute inset-0 opacity-40" style={{ background: `linear-gradient(to top right, ${COLORS.pink}, ${COLORS.blue})` }}></div><span className="text-2xl relative z-10 select-none">🐰</span></>}
           </div>
         </div>
       </div>
@@ -150,34 +99,20 @@
         const rad = (angle * Math.PI) / 180;
         return { cx: 50 + 15 * Math.sin(rad), cy: 50 - 15 * Math.cos(rad), r: 18 };
       });
-
       return (
         <div onClick={triggerFlowerBounce} className={`backdrop-blur-sm rounded-[28px] p-3 flex flex-col items-center justify-center shadow-lg h-full relative overflow-hidden transition-all duration-300 cursor-pointer ${isBouncing ? 'scale-95' : 'hover:scale-[1.02]'}`} style={{ backgroundColor: `${COLORS.cardWhite}cc`, borderWidth: '1px', borderColor: COLORS.cardBorder, boxShadow: '0 10px 15px -3px rgba(255,210,228,0.2)' }}>
           <div className="absolute top-2 left-3 text-[8px] font-black text-purpleDeep uppercase tracking-tighter opacity-70" style={{ color: COLORS.purpleDeep }}>ความสำเร็จวันนี้</div>
           <div className="relative w-full h-20 flex items-center justify-center mt-2">
-            {progress > 0 && (
-              <div className="absolute inset-0 pointer-events-none">
-                  <div className="absolute top-1/2 left-1/4 w-1.5 h-1.5 bg-[#ff96d3] rounded-full animate-float-particle-1 opacity-60"></div>
-                  <div className="absolute top-2/3 right-1/4 w-2 h-2 bg-[#b5e48c] rounded-full animate-float-particle-2 opacity-60"></div>
-                  <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-[#CCE9ED] rounded-full animate-float-particle-3 opacity-60"></div>
-              </div>
-            )}
             <svg viewBox="0 0 100 100" className="w-20 h-20 overflow-visible">
               <g transform="translate(50, 50)">
                   <g className="animate-breathe">
                     <g transform={`scale(${bloomScale})`} className="transition-transform duration-1000 cubic-bezier(0.34, 1.56, 0.64, 1)">
                       <g transform="translate(-50, -50)">
-                        {petals.map((p, i) => (
-                          <circle key={i} cx={p.cx} cy={p.cy} r={p.r} fill="#FFD2E4" opacity="0.95" className="transition-all duration-700"/>
-                        ))}
-                        <circle cx="50" cy="50" r="14" fill="#FFEEB1" className="transition-all duration-700" />
+                        {petals.map((p, i) => <circle key={i} cx={p.cx} cy={p.cy} r={p.r} fill="#FFD2E4" opacity="0.95" className="transition-all duration-700"/>)}
+                        <circle cx="50" cy="50" r="14" fill="#FFEEB1" />
                         {isFullBloom && (
                           <g transform="translate(50, 50)" className="animate-fade-in">
-                            <path d="M -5 -1 Q -3 -3 -1 -1" fill="none" stroke="#ff96d3" strokeWidth="1.2" strokeLinecap="round" />
-                            <path d="M 1 -1 Q 3 -3 5 -1" fill="none" stroke="#ff96d3" strokeWidth="1.2" strokeLinecap="round" />
-                            <path d="M -1.5 2 Q 0 4 1.5 2" fill="none" stroke="#ff96d3" strokeWidth="1.2" strokeLinecap="round" />
-                            <ellipse cx="-6" cy="1" rx="1.5" ry="1" fill="#ff96d3" opacity="0.6"/>
-                            <ellipse cx="6" cy="1" rx="1.5" ry="1" fill="#ff96d3" opacity="0.6"/>
+                            <path d="M -5 -1 Q -3 -3 -1 -1" fill="none" stroke="#ff96d3" strokeWidth="1.2" strokeLinecap="round" /><path d="M 1 -1 Q 3 -3 5 -1" fill="none" stroke="#ff96d3" strokeWidth="1.2" strokeLinecap="round" /><path d="M -1.5 2 Q 0 4 1.5 2" fill="none" stroke="#ff96d3" strokeWidth="1.2" strokeLinecap="round" />
                           </g>
                         )}
                       </g>
@@ -198,40 +133,19 @@
     const CompactStats = React.memo(({ isAdmin, selectedNextDate, nextQueueDate, handleSetManualDate, waitingCount }) => (
       <div className="backdrop-blur-sm rounded-[28px] p-1 shadow-lg h-full flex overflow-hidden relative group transition-all" style={{ backgroundColor: `${COLORS.cardWhite}cc`, borderWidth: '1px', borderColor: COLORS.cardBorder, boxShadow: '0 10px 15px -3px rgba(204,233,237,0.3)' }}>
           <div className={`flex-1 flex flex-col justify-center items-center p-2 relative rounded-l-[24px] transition-colors overflow-hidden ${isAdmin ? 'hover:bg-white/50 cursor-pointer' : ''}`} style={{ backgroundColor: `${COLORS.orange}66` }}>
-            {isAdmin && (
-              <input type="date" className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10" value={selectedNextDate || nextQueueDate} onChange={(e) => handleSetManualDate(e.target.value)} />
-            )}
+            {isAdmin && <input type="date" className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10" value={selectedNextDate || nextQueueDate} onChange={(e) => handleSetManualDate(e.target.value)} />}
             <div className="absolute top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-md text-[7px] font-black shadow-sm border uppercase tracking-wider whitespace-nowrap" style={{ color: COLORS.blueDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.orange }}>NEXT QUEUE</div>
-            
             <div className="flex flex-col items-center mt-1 relative z-0 pointer-events-none">
               <span className="text-3xl font-black leading-none tracking-tighter" style={{ color: COLORS.textSoft }}>{new Date(nextQueueDate).getDate()}</span>
               <span className="text-[8px] font-black opacity-80 uppercase mt-0.5" style={{ color: COLORS.blueDeep }}>{new Date(nextQueueDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
             </div>
-
-            {isAdmin && selectedNextDate && (
-              <button 
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleSetManualDate(''); }} 
-                className="absolute bottom-1.5 left-1/2 -translate-x-1/2 z-20 px-2.5 py-0.5 rounded-md text-[7px] font-black shadow-sm border hover:bg-[#fff9f9] active:scale-90 transition-all"
-                style={{ color: COLORS.pinkDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.pink }}
-                title="กลับไปคำนวณวันว่างอัตโนมัติ"
-              >
-                AUTO
-              </button>
-            )}
+            {isAdmin && selectedNextDate && <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleSetManualDate(''); }} className="absolute bottom-1.5 left-1/2 -translate-x-1/2 z-20 px-2.5 py-0.5 rounded-md text-[7px] font-black shadow-sm border hover:bg-[#fff9f9] active:scale-90 transition-all" style={{ color: COLORS.pinkDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.pink }}>AUTO</button>}
           </div>
-
           <div className="my-4 rounded-full" style={{ width: '1px', backgroundColor: `${COLORS.dividerColor}99` }}></div>
-          
           <div className="flex-1 flex flex-col justify-center items-center p-2 relative">
             <div className="absolute top-2 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-md text-[7px] font-black shadow-sm border uppercase tracking-wider whitespace-nowrap z-10" style={{ color: COLORS.pinkDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.pink }}>จำนวนคิวก่อนหน้า</div>
-            
             <div className="relative mt-5 flex flex-col items-center">
-               <div className="relative">
-                 <div className="absolute inset-0 blur-lg rounded-full opacity-40 scale-125" style={{ backgroundColor: COLORS.blue }}></div>
-                 <div className="w-11 h-11 rounded-full flex flex-col items-center justify-center shadow-[inset_0_2px_8px_rgba(0,0,0,0.02)] relative z-10" style={{ backgroundColor: COLORS.cardInner, borderWidth: '2px', borderColor: COLORS.blue }}>
-                    <span className="text-xl font-black leading-none" style={{ color: COLORS.pinkDeep }}>{waitingCount}</span>
-                 </div>
-               </div>
+               <div className="relative"><div className="absolute inset-0 blur-lg rounded-full opacity-40 scale-125" style={{ backgroundColor: COLORS.blue }}></div><div className="w-11 h-11 rounded-full flex flex-col items-center justify-center shadow-[inset_0_2px_8px_rgba(0,0,0,0.02)] relative z-10" style={{ backgroundColor: COLORS.cardInner, borderWidth: '2px', borderColor: COLORS.blue }}><span className="text-xl font-black leading-none" style={{ color: COLORS.pinkDeep }}>{waitingCount}</span></div></div>
                <span className="text-[8px] font-black opacity-60 uppercase mt-1.5 relative z-10" style={{ color: COLORS.pinkDeep }}>คิว</span>
             </div>
           </div>
@@ -239,84 +153,29 @@
     ));
 
     const TaskCard = React.memo(({ task, isAdmin, onEdit, onToggleDoing, onToggleStatus }) => (
-      <div onClick={() => isAdmin && onEdit(task)} className={`relative mb-2 rounded-[22px] p-3 transition-all shadow-sm group backdrop-blur-sm ${isAdmin ? 'active:scale-[0.97] cursor-pointer' : ''}`} 
-        style={{ 
-          backgroundColor: task.status === 'done' ? COLORS.cardBgDone : task.status === 'doing' ? COLORS.cardBg : COLORS.cardBg,
-          borderWidth: '1px',
-          borderStyle: 'solid',
-          borderColor: task.status === 'doing' ? COLORS.pinkDeep : (task.status === 'done' ? 'transparent' : COLORS.cardBorder), 
-          opacity: task.status === 'done' ? 0.9 : 1 
-        }}
-      >
-        {task.status === 'doing' && (
-           <div className="absolute inset-0 pointer-events-none z-0">
-             <div className="absolute -bottom-2 -left-3 text-[14px] animate-float-particle-1 drop-shadow-sm">🍋</div>
-             <div className="absolute top-[30%] -left-4 text-[10px] animate-float-particle-3 drop-shadow-sm" style={{ animationDelay: '1.5s' }}>🍋</div>
-             <div className="absolute -bottom-2 -right-3 text-[14px] animate-float-particle-2 drop-shadow-sm" style={{ animationDelay: '0.5s' }}>🍋</div>
-             <div className="absolute top-[30%] -right-4 text-[10px] animate-float-particle-1 drop-shadow-sm" style={{ animationDelay: '1.2s' }}>🍋</div>
-           </div>
-        )}
-        <div className="absolute left-2 top-3 bottom-3 w-1 rounded-full shadow-sm z-10" style={{ backgroundColor: task.channel === 'LINE' ? '#D5EDB5' : task.channel === 'FB' || task.channel === 'FACEBOOK' ? '#C0D5E9' : task.channel === 'IG' ? '#FFD3DE' : COLORS.pinkDeep }}></div>
+      <div onClick={() => isAdmin && onEdit(task)} className={`relative mb-2 rounded-[22px] p-3 transition-all shadow-sm group backdrop-blur-sm ${isAdmin ? 'active:scale-[0.97] cursor-pointer' : ''}`} style={{ backgroundColor: task.status === 'done' ? COLORS.cardBgDone : COLORS.cardBg, borderWidth: '1px', borderColor: task.status === 'doing' ? COLORS.pinkDeep : (task.status === 'done' ? 'transparent' : COLORS.cardBorder), opacity: task.status === 'done' ? 0.9 : 1 }}>
+        <div className="absolute left-2 top-3 bottom-3 w-1 rounded-full" style={{ backgroundColor: task.channel === 'LINE' ? '#D5EDB5' : task.channel === 'FB' ? '#C0D5E9' : COLORS.pinkDeep }}></div>
         <div className="pl-3 pr-1 relative z-10">
           <div className="flex justify-between items-start mb-1">
-            <div className="flex items-center gap-2 min-w-0">
-              <span className="font-bold text-base truncate" style={{ color: task.status === 'done' ? '#ff96d3' : COLORS.textMain }}>{task.client}</span>
-              
-              {/* Priority Badges (จะไม่โชว์ถ้าเลือกเป็น "ปกติ") */}
-              {task.priority === 'urgent' && <span className="text-[9px] font-bold animate-pulse px-2 py-0.5 rounded-full shadow-sm border" style={{ color: COLORS.pinkDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.pink }}>{'\u{1F525}'} ด่วน</span>}
-              {task.priority === 'very_urgent' && <span className="text-[9px] font-bold animate-pulse px-2 py-0.5 rounded-full shadow-sm border" style={{ color: COLORS.pinkDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.pink }}>{'\u{1F525}'} ด่วนมาก</span>}
-            </div>
-            <div className="flex items-center gap-1 text-[9px] font-black bg-[#fff9f9]/80 px-2.5 py-0.5 rounded-lg border shadow-sm" style={{ color: COLORS.pinkDeep, borderColor: COLORS.pink }}>
-                <IconCalendar size={11} style={{ color: COLORS.pinkDeep }} />
-                {task.deadline ? (
-                    (() => {
-                        const parts = task.deadline.toString().substring(0, 10).split('-');
-                        if(parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0].substring(2)}`;
-                        return task.deadline;
-                    })()
-                ) : ''}
-            </div>
+            <div className="flex items-center gap-2 min-w-0"><span className="font-bold text-base truncate" style={{ color: task.status === 'done' ? '#ff96d3' : COLORS.textMain }}>{task.client}</span></div>
+            <div className="flex items-center gap-1 text-[9px] font-black bg-[#fff9f9]/80 px-2.5 py-0.5 rounded-lg border shadow-sm" style={{ color: COLORS.pinkDeep, borderColor: COLORS.pink }}>{task.deadline ? task.deadline.substring(0, 10).split('-').reverse().join('/') : ''}</div>
           </div>
-          
           <div className="flex justify-between items-end mt-1">
             <div className="flex-1 min-w-0 mr-4 flex flex-col gap-0.5 mt-1">
               <span className={`text-[11px] font-black truncate ${task.status === 'done' ? 'line-through text-[#ff96d3]/60' : ''}`} style={{ color: task.status === 'done' ? '' : COLORS.blueDeep }}>{task.type}</span>
-              
-              {task.time_period && (
-                <span className={`text-[10px] flex items-center gap-1 mt-0.5 ${task.status === 'done' ? 'text-[#ff96d3]/80' : 'text-gray-500'}`}>
-                  <IconClock size={10} /> {task.time_period}
-                </span>
-              )}
-              
-              {task.channel && (
-                <span className={`text-[10px] truncate ${task.status === 'done' ? 'text-[#ff96d3]/80' : 'text-gray-500'}`}>
-                  <span className="font-bold">Link:</span> {task.channel}
-                </span>
-              )}
-
-              {task.details && (
-                <span className={`text-[10px] leading-tight line-clamp-2 mt-0.5 ${task.status === 'done' ? 'text-[#ff96d3]/80' : 'text-gray-500'}`}>
-                  <span className="font-bold">สถานที่:</span> {task.details}
-                </span>
-              )}
+              {task.time_period && <span className="text-[10px] flex items-center gap-1 mt-0.5 text-gray-500"><IconClock size={10} /> {task.time_period}</span>}
+              {task.channel && <span className="text-[10px] truncate text-gray-500"><span className="font-bold">Link:</span> {task.channel}</span>}
             </div>
-
             {isAdmin ? (
               <div className="flex gap-1.5 shrink-0">
-                <button onClick={(e) => onToggleDoing(e, task.id)} className={`relative w-[28px] h-[28px] rounded-[8px] flex items-center justify-center transition-all active:scale-90 shadow-[0_3px_10px_rgba(255,210,228,1)]`} style={{ color: task.status === 'doing' ? COLORS.orangeDeep : '#B0BEC5', backgroundColor: task.status === 'doing' ? '#fff9f9' : COLORS.buttonBg, borderWidth: '2px', borderColor: `${COLORS.cardBorder}cc` }}>
-                  <div className={`${task.status === 'doing' ? 'animate-spin-slow' : ''} flex items-center justify-center`}>
-                    <IconLoader size={14} />
-                  </div>
-                </button>
-                <button onClick={(e) => onToggleStatus(e, task.id)} className={`relative w-[28px] h-[28px] rounded-[8px] flex items-center justify-center transition-all active:scale-90 shadow-[0_3px_10px_rgba(255,210,228,1)]`} style={{ color: task.status === 'done' ? COLORS.pinkDeep : '#B0BEC5', backgroundColor: task.status === 'done' ? '#fff9f9' : COLORS.buttonBg, borderWidth: '2px', borderColor: `${COLORS.cardBorder}cc` }}>
-                  <IconCheck size={16} />
-                </button>
+                <button onClick={(e) => onToggleDoing(e, task.id)} className="w-[28px] h-[28px] rounded-[8px] flex items-center justify-center border shadow-sm bg-white active:scale-90" style={{ color: task.status === 'doing' ? COLORS.orangeDeep : '#B0BEC5' }}><IconLoader size={14} className={task.status === 'doing' ? 'animate-spin-slow' : ''} /></button>
+                <button onClick={(e) => onToggleStatus(e, task.id)} className="w-[28px] h-[28px] rounded-[8px] flex items-center justify-center border shadow-sm bg-white active:scale-90" style={{ color: task.status === 'done' ? COLORS.pinkDeep : '#B0BEC5' }}><IconCheck size={16} /></button>
               </div>
             ) : (
               <div className="flex items-center shrink-0">
-                {task.status === 'doing' && <span className="text-[10px] font-bold flex items-center gap-1 px-2 py-1 rounded-md border shadow-sm" style={{ color: COLORS.blueDeep, backgroundColor: '#fff9f9', borderColor: COLORS.pink }}><IconLoader size={10} className="animate-spin-slow"/> กำลังทำ</span>}
-                {task.status === 'done' && <span className="text-[10px] font-bold flex items-center gap-1 px-2 py-1 rounded-md border shadow-sm" style={{ color: COLORS.pinkDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.pink }}><IconCheck size={10} /> เสร็จแล้ว</span>}
-                {task.status === 'todo' && <span className="text-[10px] font-bold text-gray-400 flex items-center gap-1 px-2 py-1 rounded-md border border-gray-100 shadow-sm" style={{ backgroundColor: COLORS.buttonBg }}><IconClock size={10} /> รอคิว</span>}
+                {task.status === 'doing' && <span className="text-[10px] font-bold flex items-center gap-1 px-2 py-1 rounded-md border" style={{ color: COLORS.blueDeep, backgroundColor: '#fff9f9', borderColor: COLORS.pink }}>กำลังทำ</span>}
+                {task.status === 'done' && <span className="text-[10px] font-bold flex items-center gap-1 px-2 py-1 rounded-md border" style={{ color: COLORS.pinkDeep, backgroundColor: COLORS.white, borderColor: COLORS.pink }}>เสร็จแล้ว</span>}
+                {task.status === 'todo' && <span className="text-[10px] font-bold text-gray-400 flex items-center gap-1 px-2 py-1 rounded-md border">รอคิว</span>}
               </div>
             )}
           </div>
@@ -324,181 +183,55 @@
       </div>
     ));
 
-    const CalendarView = React.memo(({ currentMonth, setCurrentMonth, selectedDate, setSelectedDate, today, tasks }) => {
-      const year = currentMonth.getFullYear();
-      const month = currentMonth.getMonth();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const firstDay = new Date(year, month, 1).getDay(); 
-
-      const days = [];
-      for (let i = 0; i < firstDay; i++) days.push(null); 
-      for (let i = 1; i <= daysInMonth; i++) days.push(i);
-
-      const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-
-      return (
-        <div className="backdrop-blur-xl rounded-[32px] p-5 mb-5 animate-fadeIn shadow-sm" style={{ backgroundColor: `${COLORS.cardWhite}e6`, borderWidth: '1px', borderColor: COLORS.cardBorder, boxShadow: '0 12px 30px rgba(255,210,228,0.2)' }}>
-          <div className="flex justify-between items-center mb-4 px-2">
-            <button onClick={() => setCurrentMonth(new Date(year, month - 1, 1))} className="p-1.5 rounded-full transition-colors" style={{ color: COLORS.blueDeep }}><IconChevronLeft size={20}/></button>
-            <h3 className="font-black text-[16px] tracking-widest" style={{ color: COLORS.pinkDeep }}>{monthNames[month]} {year}</h3>
-            <button onClick={() => setCurrentMonth(new Date(year, month + 1, 1))} className="p-1.5 rounded-full transition-colors" style={{ color: COLORS.blueDeep }}><IconChevronRight size={20}/></button>
-          </div>
-          
-          <div className="grid grid-cols-7 gap-1 text-center mb-3">
-            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-              <div key={d} className="text-[9px] font-black opacity-60 uppercase" style={{ color: COLORS.blueDeep }}>{d}</div>
-            ))}
-          </div>
-          
-          <div className="grid grid-cols-7 gap-y-3 gap-x-1 text-center">
-            {days.map((day, index) => {
-              if (!day) return <div key={`empty-${index}`} className="h-10"></div>;
-              
-              const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-              const isSelected = selectedDate === dateStr;
-              const isToday = today === dateStr;
-              
-              const hasTasks = tasks.some(t => t.deadline && t.deadline.toString().substring(0, 10) === dateStr); 
-
-              return (
-                <div key={dateStr} className="flex justify-center items-center h-10">
-                  <div 
-                    onClick={() => setSelectedDate(dateStr)} 
-                    className={`relative w-10 h-10 flex flex-col items-center justify-center cursor-pointer transition-all ${
-                      isSelected 
-                        ? 'text-white rounded-full font-black shadow-md scale-105'
-                        : isToday 
-                          ? 'font-black rounded-full'
-                          : 'font-bold hover:bg-[#fff9f9] hover:shadow-sm rounded-full'
-                    }`}
-                    style={{
-                        backgroundColor: isSelected ? COLORS.pinkDeep : isToday ? COLORS.pink : '',
-                        color: isSelected ? COLORS.white : isToday ? COLORS.pinkDeep : COLORS.blueDeep,
-                        borderWidth: isToday && !isSelected ? '2px' : '0px',
-                        borderColor: isToday && !isSelected ? COLORS.pink : ''
-                    }}
-                  >
-                    <span className="text-[13px] z-10 leading-none">{day}</span>
-                    {hasTasks && (
-                      <div className="absolute bottom-1 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: isSelected ? COLORS.white : COLORS.pinkDeep }}></div> 
-                    )}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      );
-    });
-
-    // ==========================================
-    // 🏠 MAIN APP COMPONENT
-    // ==========================================
     function App() {
       const [tasks, setTasks] = useState([]);
-      const [taskTypes, setTaskTypes] = useState(['Logo', 'Banner', 'Artwork']); 
-      const [channels, setChannels] = useState(['LINE', 'FB', 'IG']); 
-      
+      const [taskTypes, setTaskTypes] = useState(['Logo', 'Banner', 'Artwork']);
       const [isLoading, setIsLoading] = useState(true);
-      const [isSaving, setIsSaving] = useState(false); 
-      
       const [view, setView] = useState('dashboard');
-      const [isCalendarView, setIsCalendarView] = useState(false);
-      const [currentMonth, setCurrentMonth] = useState(new Date());
-      const [selectedDate, setSelectedDate] = useState(() => {
-        const d = new Date();
-        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-      });
-      
-      const [showModal, setShowModal] = useState(false);     
-      const [editingTask, setEditingTask] = useState(null);  
-      const [taskToDelete, setTaskToDelete] = useState(null);
-      const [showAuthModal, setShowAuthModal] = useState(false);   
-      const [showImageModal, setShowImageModal] = useState(false); 
-      const [showBannerModal, setShowBannerModal] = useState(false); 
-      
-      const [searchQuery, setSearchQuery] = useState('');
-      const [filterType, setFilterType] = useState('all');
-      
       const [isAdmin, setIsAdmin] = useState(false);
-      const [password, setPassword] = useState('');
-      const [authError, setAuthError] = useState(false);
-      const [isVerifyingAuth, setIsVerifyingAuth] = useState(false);
-      
+      const [showModal, setShowModal] = useState(false);
+      const [editingTask, setEditingTask] = useState(null);
       const [profileImage, setProfileImage] = useState(null);
-      const [tempImageUrl, setTempImageUrl] = useState('');   
-      const [bannerImage, setBannerImage] = useState(null);   
-      const [tempBannerUrl, setTempBannerUrl] = useState(''); 
+      const [bannerImage, setBannerImage] = useState(null);
       const [isBannerVisible, setIsBannerVisible] = useState(true);
-      
-      const [selectedNextDate, setSelectedNextDate] = useState(''); 
-      const [isBouncing, setIsBouncing] = useState(false); 
+      const [selectedNextDate, setSelectedNextDate] = useState('');
+      const [isBouncing, setIsBouncing] = useState(false);
+      const [showAuthModal, setShowAuthModal] = useState(false);
+      const [password, setPassword] = useState('');
+
+      // 🌟 1. ประกาศ State สำหรับเก็บลิงก์ทั้ง 3
+      const [linkNotion, setLinkNotion] = useState('https://notion.so');
+      const [linkWebsite, setLinkWebsite] = useState('https://google.com');
+      const [linkDrive, setLinkDrive] = useState('https://drive.google.com');
 
       const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwvj3YBpwPA6HuYgtkuZeRJp4cxvlprb4sXjxtMfbNBOdqmQxE2-FWYKulV3_809vK6/exec";
 
       const fetchAPI = async (payload) => {
-        try {
-          const res = await fetch(WEB_APP_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(payload)
-          });
-          return await res.json();
-        } catch (error) {
-          console.error("API Error:", error);
-          throw error;
-        }
+        const res = await fetch(WEB_APP_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
+        return await res.json();
       };
 
       useEffect(() => {
-        document.title = "namtip"; 
-        
         fetch(WEB_APP_URL + "?action=getInitialData")
           .then(res => res.json())
           .then(response => {
             if (response.status === 'success') {
               setTasks(response.data.tasks || []);
-              if (response.data.taskTypes && response.data.taskTypes.length > 0) setTaskTypes(response.data.taskTypes);
-              if (response.data.channels && response.data.channels.length > 0) setChannels(response.data.channels);
               if (response.data.profileImage) setProfileImage(response.data.profileImage);
               if (response.data.bannerImage) setBannerImage(response.data.bannerImage);
-              if (response.data.bannerVisible !== undefined) setIsBannerVisible(response.data.bannerVisible);
               if (response.data.lockedNextDate) setSelectedNextDate(response.data.lockedNextDate);
+              
+              // 🌟 2. ดึงค่าลิงก์จากชีต (response.data) มาใส่ใน State
+              if (response.data.linkNotion) setLinkNotion(response.data.linkNotion);
+              if (response.data.linkWebsite) setLinkWebsite(response.data.linkWebsite);
+              if (response.data.linkDrive) setLinkDrive(response.data.linkDrive);
             }
-            setIsLoading(false);
-          })
-          .catch(error => {
-            console.error("Error loading data:", error);
             setIsLoading(false);
           });
       }, []);
 
-      const handleAdminLogin = (e) => {
-        e.preventDefault();
-        setIsVerifyingAuth(true);
-        setAuthError(false);
-
-        fetchAPI({ action: 'verifyAdminPassword', inputPassword: password })
-          .then(res => {
-            setIsVerifyingAuth(false);
-            if (res.isValid) {
-              setIsAdmin(true); setShowAuthModal(false); setPassword(''); setAuthError(false);
-            } else setAuthError(true);
-          })
-          .catch(() => { setIsVerifyingAuth(false); setAuthError(true); });
-      };
-
-      const handleSetManualDate = useCallback((dateVal) => {
-        setSelectedNextDate(dateVal);
-        fetchAPI({ action: 'saveLockedNextDate', dateStr: dateVal }); 
-      }, []);
-      
-      const today = useMemo(() => {
-        const d = new Date();
-        return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
-      }, []); 
-      
-      const todayTasks = useMemo(() => tasks.filter(t => t.deadline && t.deadline.toString().substring(0, 10) === today), [tasks, today]);
+      const today = useMemo(() => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }, []);
+      const todayTasks = useMemo(() => tasks.filter(t => t.deadline && t.deadline.substring(0, 10) === today), [tasks, today]);
       const doneToday = useMemo(() => todayTasks.filter(t => t.status === 'done').length, [todayTasks]);
       const progress = todayTasks.length === 0 ? 0 : Math.round((doneToday / todayTasks.length) * 100);
 
@@ -506,12 +239,8 @@
         if (selectedNextDate) return selectedNextDate;
         let checkDate = new Date();
         for (let i = 0; i < 365; i++) {
-          const y = checkDate.getFullYear(); 
-          const m = String(checkDate.getMonth() + 1).padStart(2, '0'); 
-          const d = String(checkDate.getDate()).padStart(2, '0'); 
-          const dateStr = `${y}-${m}-${d}`;
-          const tasksOnDate = tasks.filter(t => t.deadline && t.deadline.toString().substring(0, 10) === dateStr);
-          if (tasksOnDate.length === 0) return dateStr;
+          const ds = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
+          if (!tasks.some(t => t.deadline && t.deadline.substring(0, 10) === ds)) return ds;
           checkDate.setDate(checkDate.getDate() + 1);
         }
         return today;
@@ -519,468 +248,73 @@
 
       const waitingCount = useMemo(() => tasks.filter(t => t.status !== 'done').length, [tasks]);
 
-      const toggleStatus = useCallback((e, id) => {
-        e.stopPropagation();
-        setTasks(prev => {
-          return prev.map(t => {
-            if (t.id === id) {
-              const newStatus = t.status === 'done' ? 'todo' : 'done';
-              fetchAPI({ action: 'updateTaskStatus', taskId: id, newStatus: newStatus });
-              return { ...t, status: newStatus };
-            }
-            return t;
-          });
-        });
-      }, []);
-
-      const toggleDoing = useCallback((e, id) => {
-        e.stopPropagation();
-        setTasks(prev => {
-          return prev.map(t => {
-            if (t.id === id) {
-              const newStatus = t.status === 'doing' ? 'todo' : 'doing';
-              fetchAPI({ action: 'updateTaskStatus', taskId: id, newStatus: newStatus });
-              return { ...t, status: newStatus };
-            }
-            return t;
-          });
-        });
-      }, []);
-
-      const handleEditTask = useCallback((task) => {
-        setEditingTask(task);
-        setShowModal(true);
-      }, []);
-
-      const handleSaveTask = (e) => {
-        e.preventDefault();
-        setIsSaving(true);
-        const formData = new FormData(e.target);
-        
-        let finalPriority = 'normal';
-        if (formData.get('priority') === 'urgent') finalPriority = 'urgent';
-        if (formData.get('priority') === 'very_urgent') finalPriority = 'very_urgent';
-
-        const timeStart = formData.get('time_start');
-        const timeEnd = formData.get('time_end');
-        let finalTimePeriod = '';
-        if (timeStart && timeEnd) {
-           finalTimePeriod = `${timeStart} - ${timeEnd}`;
-        } else if (timeStart || timeEnd) {
-           finalTimePeriod = timeStart || timeEnd;
-        }
-
-        const taskData = {
-          id: editingTask ? editingTask.id : null,
-          title: '', 
-          client: formData.get('client'),
-          type: formData.get('type'), 
-          channel: formData.get('channel'),
-          priority: finalPriority, 
-          deadline: formData.get('deadline'),
-          details: formData.get('details'),
-          time_period: finalTimePeriod 
-        };
-
-        fetchAPI({ action: 'saveOrUpdateTask', task: taskData })
-          .then(res => {
-             if (res.status === 'success') {
-                setTasks(prev => editingTask ? prev.map(t => t.id === res.task.id ? res.task : t) : [...prev, res.task]);
-             }
-             setIsSaving(false); setShowModal(false); setEditingTask(null);
-          })
-          .catch(() => { setIsSaving(false); });
-      };
-
-      const executeDeleteTask = () => {
-        if (!taskToDelete) return;
-        setIsSaving(true);
-        fetchAPI({ action: 'deleteTask', taskId: taskToDelete })
-          .then(() => {
-             setTasks(prev => prev.filter(t => t.id !== taskToDelete));
-             setIsSaving(false); setShowModal(false); setEditingTask(null); setTaskToDelete(null);
-          })
-          .catch(() => { setIsSaving(false); });
-      };
-
-      const toggleBannerVisibility = (visible) => {
-        setIsBannerVisible(visible);
-        fetchAPI({ action: 'saveBannerVisibility', isVisible: visible });
-      };
-
-      const triggerFlowerBounce = useCallback(() => { setIsBouncing(true); setTimeout(() => setIsBouncing(false), 500); }, []);
-      const handleImageUpload = useCallback(() => { setShowImageModal(true); }, []);
-
-      const filteredAllTasks = useMemo(() => tasks.filter(t => {
-        const matchSearch = t.type.toLowerCase().includes(searchQuery.toLowerCase()) || t.client.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchFilter = filterType === 'all' || (filterType === 'pending' && t.status !== 'done') || (filterType === 'done' && t.status === 'done');
-        return matchSearch && matchFilter;
-      }), [tasks, searchQuery, filterType]);
-
-      const displayedTasks = isCalendarView 
-        ? filteredAllTasks.filter(t => t.deadline && t.deadline.toString().substring(0, 10) === selectedDate) 
-        : filteredAllTasks;
-
-      let defaultTimeStart = '';
-      let defaultTimeEnd = '';
-      if (editingTask?.time_period && editingTask.time_period.includes('-')) {
-          const parts = editingTask.time_period.split('-');
-          defaultTimeStart = parts[0].trim();
-          defaultTimeEnd = parts[1].trim();
-      }
-
-      if (isLoading) {
-        return (
-          <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden" style={{ backgroundColor: COLORS.bg }}>
-             <DynamicBackground />
-             <div className="flex flex-col items-center z-10 animate-breathe">
-               <div className="flex items-center gap-1.5 px-6 py-2.5 backdrop-blur-sm rounded-full shadow-sm" style={{ backgroundColor: `${COLORS.buttonBg}99`, borderWidth: '1px', borderColor: COLORS.cardBorder }}>
-                 <p className="text-[12px] font-black tracking-widest" style={{ color: COLORS.textMain }}>กำลังโหลดข้อมูล</p>
-                 <div className="flex gap-1 pt-1 ml-1">
-                   <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ backgroundColor: COLORS.pinkDeep, animationDelay: '0s' }}></span>
-                   <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ backgroundColor: COLORS.blueDeep, animationDelay: '0.15s' }}></span>
-                   <span className="w-1.5 h-1.5 rounded-full animate-bounce" style={{ backgroundColor: COLORS.purpleDeep, animationDelay: '0.3s' }}></span>
-                 </div>
-               </div>
-             </div>
-          </div>
-        );
-      }
+      if (isLoading) return <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: COLORS.bg }}><DynamicBackground /><p className="z-10 font-black" style={{ color: COLORS.textMain }}>กำลังโหลด...</p></div>;
 
       return (
         <div className="min-h-screen font-sans relative" style={{ backgroundColor: COLORS.bg, color: COLORS.textMain }}>
           <DynamicBackground />
           <div className="max-w-md mx-auto min-h-screen relative pb-28">
-            <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin} setShowAuthModal={setShowAuthModal} handleImageUpload={handleImageUpload} profileImage={profileImage} />
-            
-            {/* ===== Banner Section ===== */}
+            <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin} setShowAuthModal={setShowAuthModal} profileImage={profileImage} />
             <div className="px-5 relative z-10 mb-4">
-               {bannerImage && isBannerVisible && (
-                 <div className="relative group w-full h-32 rounded-[24px] overflow-hidden shadow-sm backdrop-blur-sm" style={{ borderWidth: '1px', borderColor: COLORS.cardBorder, backgroundColor: `${COLORS.cardWhite}66` }}>
-                    <img src={bannerImage} alt="Shop Banner" className="w-full h-full object-cover" />
-                    <div className="absolute top-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                       {isAdmin && (
-                         <button onClick={() => setShowBannerModal(true)} className="p-1.5 backdrop-blur-md rounded-full shadow-sm text-gray-500 transition-colors" style={{ backgroundColor: `${COLORS.bannerOverlayBg}e6`, hover: {color: COLORS.pinkDeep} }} title="เปลี่ยนแบนเนอร์">
-                            <IconImage size={16} />
-                         </button>
-                       )}
-                       {isAdmin && (
-                         <button onClick={() => toggleBannerVisibility(false)} className="p-1.5 backdrop-blur-md rounded-full shadow-sm text-gray-500 transition-colors" style={{ backgroundColor: `${COLORS.bannerOverlayBg}e6`, hover: {color: COLORS.blueDeep} }} title="ซ่อนแบนเนอร์">
-                            <IconEyeOff size={16} />
-                         </button>
-                       )}
-                    </div>
-                 </div>
-               )}
-
-               {bannerImage && !isBannerVisible && isAdmin && (
-                 <div className="flex justify-end mb-1">
-                    <button onClick={() => toggleBannerVisibility(true)} className="text-[10px] font-bold flex items-center gap-1 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm hover:opacity-80 transition-colors" style={{ color: COLORS.textSoft, backgroundColor: `${COLORS.buttonBg}99`, borderWidth: '1px', borderColor: COLORS.cardBorder }}>
-                       <IconEye size={12} /> แสดงแบนเนอร์
-                    </button>
-                 </div>
-               )}
-
-               {!bannerImage && isAdmin && (
-                 <div onClick={() => setShowBannerModal(true)} className="w-full h-16 rounded-[24px] border border-dashed backdrop-blur-sm flex items-center justify-center cursor-pointer hover:opacity-80 transition-colors" style={{ borderColor: COLORS.pinkDeep, backgroundColor: `${COLORS.cardWhite}66` }}>
-                    <span className="text-[11px] font-bold flex items-center gap-2" style={{ color: COLORS.textSoft }}><IconPlus size={16}/> เพิ่มรูปแบนเนอร์ร้าน</span>
-                 </div>
-               )}
+               {bannerImage && isBannerVisible && <div className="w-full h-32 rounded-[24px] overflow-hidden shadow-sm backdrop-blur-sm border border-white/50"><img src={bannerImage} className="w-full h-full object-cover" /></div>}
             </div>
-            
-            {/* ===== Main Content ===== */}
             <div className="px-5 relative z-10">
-              {view === 'dashboard' ? (
+              {view === 'dashboard' && (
                 <div className="animate-fadeIn">
-                  {/* ปรับ mb-1.5 เพื่อขยับ Today's Task ขึ้นไปเล็กน้อย */}
                   <div className="flex gap-3 mb-1.5 items-start">
-                    <div className="flex-[1.6] h-28">
-                      <CompactStats isAdmin={isAdmin} selectedNextDate={selectedNextDate} nextQueueDate={nextQueueDate} handleSetManualDate={handleSetManualDate} waitingCount={waitingCount} />
-                    </div>
+                    <div className="flex-[1.6] h-28"><CompactStats isAdmin={isAdmin} nextQueueDate={nextQueueDate} waitingCount={waitingCount} handleSetManualDate={(d) => { setSelectedNextDate(d); fetchAPI({action:'saveLockedNextDate', dateStr: d}); }} /></div>
                     <div className="flex-1 flex flex-col gap-2">
-                      <div className="h-28">
-                        <ProgressFlower progress={progress} todayTasksLength={todayTasks.length} doneToday={doneToday} triggerFlowerBounce={triggerFlowerBounce} isBouncing={isBouncing} />
-                      </div>
-                      
-                      {/* ===== 🌟 3 ปุ่มรวมกันแบบเวอร์ชั่นแรก ===== */}
-                      <div className="flex justify-between items-center backdrop-blur-sm rounded-[22px] px-3 py-2 shadow-sm" style={{ backgroundColor: `${COLORS.cardWhite}cc`, borderWidth: '1px', borderColor: COLORS.cardBorder }}>
-                        <a href="https://notion.so" target="_blank" rel="noreferrer" className="p-1 rounded-xl hover:bg-[#fff9f9] transition-all text-[#B0BEC5] hover:text-[#ff96d3] active:scale-95 flex items-center justify-center" title="Notion">
-                          <IconNotion size={18} />
-                        </a>
-                        <a href="https://google.com" target="_blank" rel="noreferrer" className="p-1 rounded-xl hover:bg-[#fff9f9] transition-all text-[#B0BEC5] hover:text-[#ff96d3] active:scale-95 flex items-center justify-center" title="Website">
-                          <IconGlobe size={18} />
-                        </a>
-                        <a href="https://drive.google.com" target="_blank" rel="noreferrer" className="p-1 rounded-xl hover:bg-[#fff9f9] transition-all text-[#B0BEC5] hover:text-[#ff96d3] active:scale-95 flex items-center justify-center" title="Google Drive">
-                          <IconDrive size={18} />
-                        </a>
+                      <div className="h-28"><ProgressFlower progress={progress} todayTasksLength={todayTasks.length} doneToday={doneToday} triggerFlowerBounce={() => { setIsBouncing(true); setTimeout(()=>setIsBouncing(false), 500); }} isBouncing={isBouncing} /></div>
+                      {/* 🌟 3. เปลี่ยนปุ่ม <a> ให้ใช้ตัวแปรจาก State */}
+                      <div className="flex justify-between items-center backdrop-blur-sm rounded-[22px] px-3 py-2 shadow-sm bg-white/80 border border-white">
+                        <a href={linkNotion} target="_blank" rel="noreferrer" className="p-1 text-[#B0BEC5] hover:text-[#ff96d3] active:scale-95"><IconNotion size={18} /></a>
+                        <a href={linkWebsite} target="_blank" rel="noreferrer" className="p-1 text-[#B0BEC5] hover:text-[#ff96d3] active:scale-95"><IconGlobe size={18} /></a>
+                        <a href={linkDrive} target="_blank" rel="noreferrer" className="p-1 text-[#B0BEC5] hover:text-[#ff96d3] active:scale-95"><IconDrive size={18} /></a>
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center justify-between mb-2.5 ml-1">
-                    <h2 className="text-[10px] font-black text-gray-400 italic uppercase tracking-[0.3em] opacity-60">Today's Task</h2>
-                    <div className="h-[1px] flex-1 bg-gradient-to-r from-[#FFD2E4]/60 to-transparent mx-3"></div>
-                  </div>
-                  <div className="space-y-1">
-                    {todayTasks.length > 0 ? todayTasks.map(t => <TaskCard key={t.id} task={t} isAdmin={isAdmin} onEdit={handleEditTask} onToggleDoing={toggleDoing} onToggleStatus={toggleStatus} />) : (
-                      <div className="text-center py-10 rounded-[28px] border border-dashed shadow-sm" style={{ backgroundColor: `${COLORS.cardWhite}4d`, borderColor: COLORS.pinkDeep }}>
-                        <p className="text-[9px] font-bold uppercase tracking-widest opacity-60" style={{ color: COLORS.pinkDeep }}>Sky is clear ✨</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ) : (
-                <div className="animate-fadeIn">
-                  <div className="relative mb-4">
-                    <div className="absolute left-4 top-1/2 -translate-y-1/2 opacity-50" style={{ color: COLORS.blueDeep }}><IconSearch size={16} /></div>
-                    <input type="text" placeholder="ค้นหาคิวงาน..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full rounded-[22px] py-3 pl-10 pr-4 outline-none text-xs transition-all backdrop-blur-sm" style={{ backgroundColor: `${COLORS.searchInputBg}cc`, borderWidth: '1px', borderColor: COLORS.cardBorder, boxShadow: '0 4px 10px rgba(204,233,237,0.3)' }} />
-                  </div>
-                  
-                  <div className="flex gap-2 mb-3 p-1.5 rounded-full backdrop-blur-md shadow-sm" style={{ backgroundColor: `${COLORS.filterBarBg}80`, borderWidth: '1px', borderColor: COLORS.cardBorder }}>
-                      <button onClick={() => setFilterType('all')} className={`flex-1 text-[9px] font-black py-2 rounded-full transition-all tracking-wider ${filterType === 'all' ? 'shadow-sm bg-white' : 'text-gray-400'}`} style={{ color: filterType === 'all' ? COLORS.pinkDeep : '' }}>ทั้งหมด</button>
-                      <button onClick={() => setFilterType('pending')} className={`flex-1 text-[9px] font-black py-2 rounded-full transition-all tracking-wider ${filterType === 'pending' ? 'shadow-sm bg-white' : 'text-gray-400'}`} style={{ color: filterType === 'pending' ? COLORS.blueDeep : '' }}>ยังไม่ได้เริ่ม</button>
-                      <button onClick={() => setFilterType('done')} className={`flex-1 text-[9px] font-black py-2 rounded-full transition-all tracking-wider ${filterType === 'done' ? 'shadow-sm bg-white' : 'text-gray-400'}`} style={{ color: filterType === 'done' ? COLORS.pinkDeep : '' }}>เสร็จแล้ว</button>
-                  </div>
-
-                  <div className="flex justify-end mb-4 pr-1">
-                    <button onClick={() => { 
-                      const newView = !isCalendarView;
-                      setIsCalendarView(newView); 
-                      if(newView) setFilterType('all'); 
-                    }} className="flex items-center gap-1.5 px-3 py-1.5 backdrop-blur-md rounded-full text-[9px] font-black uppercase tracking-widest transition-all active:scale-95 shadow-sm" style={{ color: COLORS.blueDeep, backgroundColor: `${COLORS.cardWhite}cc`, borderWidth: '1px', borderColor: COLORS.cardBorder }}>
-                      {isCalendarView ? <><IconList size={14} /> รูปแบบรายการ</> : <><IconCalendar size={14} /> รูปแบบปฏิทิน</>}
-                    </button>
-                  </div>
-
-                  {isCalendarView && <CalendarView currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} selectedDate={selectedDate} setSelectedDate={setSelectedDate} today={today} tasks={tasks} />}
-
-                  <div className="space-y-1">
-                    {displayedTasks.length > 0 ? displayedTasks.map(t => <TaskCard key={t.id} task={t} isAdmin={isAdmin} onEdit={handleEditTask} onToggleDoing={toggleDoing} onToggleStatus={toggleStatus} />) : (
-                      <div className="text-center py-10 rounded-[28px] border border-dashed shadow-sm mt-4" style={{ backgroundColor: `${COLORS.cardWhite}4d`, borderColor: COLORS.pinkDeep }}>
-                        <p className="text-[10px] font-black uppercase tracking-widest opacity-60" style={{ color: COLORS.blueDeep }}>
-                          {isCalendarView ? "วันนี้คิวว่าง ✨" : "No records found ✨"}
-                        </p>
-                      </div>
-                    )}
-                  </div>
+                  <div className="flex items-center justify-between mb-2.5 ml-1"><h2 className="text-[10px] font-black text-gray-400 italic uppercase tracking-[0.3em] opacity-60">Today's Task</h2><div className="h-[1px] flex-1 bg-gradient-to-r from-[#FFD2E4]/60 to-transparent mx-3"></div></div>
+                  <div className="space-y-1">{todayTasks.length > 0 ? todayTasks.map(t => <TaskCard key={t.id} task={t} isAdmin={isAdmin} onToggleStatus={(e, id) => { e.stopPropagation(); setTasks(prev => prev.map(item => item.id === id ? {...item, status: item.status === 'done' ? 'todo' : 'done'} : item)); fetchAPI({action:'updateTaskStatus', taskId: id, newStatus: tasks.find(i=>i.id===id).status==='done'?'todo':'done'}); }} />) : <div className="text-center py-10 rounded-[28px] border border-dashed border-[#ff96d3]/50 bg-white/30"><p className="text-[9px] font-bold uppercase tracking-widest text-[#ff96d3]">Sky is clear ✨</p></div>}</div>
                 </div>
               )}
             </div>
-
-            {/* ===== Bottom Navigation Bar ===== */}
             <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-full max-w-[210px] z-50">
-              <div className="backdrop-blur-xl rounded-full h-14 flex items-center justify-between px-6 relative" style={{ backgroundColor: `${COLORS.navBarBg}99`, borderWidth: '1px', borderColor: COLORS.cardBorder, boxShadow: '0 10px 25px -5px rgba(255,210,228,0.2)' }}>
-                  <button onClick={() => setView('dashboard')} className={`p-1 transition-all ${view === 'dashboard' ? 'scale-110' : 'text-gray-300 opacity-60'}`} style={{ color: view === 'dashboard' ? COLORS.pinkDeep : '' }}>
-                    <IconHome size={22} />
-                  </button>
+              <div className="backdrop-blur-xl rounded-full h-14 flex items-center justify-between px-6 bg-white/60 border border-white/50 shadow-lg">
+                  <button onClick={() => setView('dashboard')} style={{ color: view === 'dashboard' ? COLORS.pinkDeep : '#ccc' }}><IconHome size={22} /></button>
                   <div className="w-8"></div>
-                  <button onClick={() => setView('all')} className={`p-1 transition-all ${view === 'all' ? 'scale-110' : 'text-gray-300 opacity-60'}`} style={{ color: view === 'all' ? COLORS.blueDeep : '' }}>
-                    <IconFileText size={22} />
-                  </button>
-                  {isAdmin && (
-                    <div className="absolute left-1/2 -translate-x-1/2 -top-6">
-                      <button onClick={() => { setEditingTask(null); setShowModal(true); }} className="w-14 h-14 rounded-full text-white flex items-center justify-center transition-transform active:scale-90 shadow-xl" style={{ backgroundColor: COLORS.blueDeep, borderWidth: '4px', borderColor: COLORS.cardBorder, boxShadow: '0 10px 15px -3px rgba(255,210,228,0.4)' }}>
-                        <IconPlus size={24} />
-                      </button>
-                    </div>
-                  )}
+                  <button onClick={() => setView('all')} style={{ color: view === 'all' ? COLORS.blueDeep : '#ccc' }}><IconFileText size={22} /></button>
+                  {isAdmin && <div className="absolute left-1/2 -translate-x-1/2 -top-6"><button onClick={() => setShowModal(true)} className="w-14 h-14 rounded-full text-white flex items-center justify-center shadow-xl bg-[#b5e48c] border-4 border-white"><IconPlus size={24} /></button></div>}
               </div>
             </div>
-
-            {/* ==========================================
-                🪟 MODAL: เพิ่ม/แก้ไขงาน
-                ========================================== */}
-            {showModal && (
-              <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
-                <form onSubmit={handleSaveTask} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp" style={{ backgroundColor: `${COLORS.modalBg}f2`, borderWidth: '1px', borderColor: COLORS.cardBorder }}>
-                   <h3 className="text-sm font-black mb-4 text-center text-gray-800" style={{ color: COLORS.pinkDeep }}>{editingTask ? 'แก้ไขคิวงาน ✨' : 'เพิ่มคิวใหม่ ✨'}</h3>
-                   <div className="space-y-2 relative">
-                     {isSaving && (
-                        <div className="absolute inset-0 z-50 flex flex-col items-center justify-center rounded-2xl backdrop-blur-sm" style={{ backgroundColor: `${COLORS.modalBg}cc` }}>
-                           <IconLoader size={32} className="animate-spin-slow" style={{ color: COLORS.pinkDeep }} />
-                           <span className="text-[10px] font-black mt-2 text-gray-500">กำลังบันทึก...</span>
-                        </div>
-                     )}
-                     
-                     <div className="flex justify-end gap-2 mb-2">
-                       <label className="flex items-center cursor-pointer gap-1.5 px-3 py-1.5 rounded-full shadow-sm border" style={{ backgroundColor: COLORS.buttonBg, borderColor: COLORS.cardBorder }}>
-                         <input type="radio" name="priority" value="normal" defaultChecked={!editingTask || editingTask?.priority === 'normal'} className="w-3 h-3 accent-[#ff96d3]" />
-                         <span className="text-[10px] font-bold text-gray-500">ปกติ</span>
-                       </label>
-                       <label className="flex items-center cursor-pointer gap-1.5 px-3 py-1.5 rounded-full shadow-sm border" style={{ backgroundColor: COLORS.buttonBg, borderColor: COLORS.cardBorder }}>
-                         <input type="radio" name="priority" value="urgent" defaultChecked={editingTask?.priority === 'urgent'} className="w-3 h-3 accent-[#ff96d3]" />
-                         <span className="text-[10px] font-bold text-gray-500">ด่วน</span>
-                       </label>
-                       <label className="flex items-center cursor-pointer gap-1.5 px-3 py-1.5 rounded-full shadow-sm border" style={{ backgroundColor: COLORS.buttonBg, borderColor: COLORS.cardBorder }}>
-                         <input type="radio" name="priority" value="very_urgent" defaultChecked={editingTask?.priority === 'very_urgent'} className="w-3 h-3 accent-[#ff96d3]" />
-                         <span className="text-[10px] font-bold text-gray-500">ด่วนมาก 🔥</span>
-                       </label>
-                     </div>
-
-                     <div className="flex flex-col gap-2 mb-2">
-                       <input name="client" required defaultValue={editingTask?.client || ''} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[11px] shadow-sm transition-all focus:border-[#FFD2E4]" style={{ backgroundColor: COLORS.cardInner }} placeholder="รายการกำหนด" />
-                       
-                       <input list="taskTypesList" name="type" required defaultValue={editingTask?.type || ''} className="w-full p-3.5 rounded-2xl font-black text-[10px] outline-none border border-gray-100 shadow-sm focus:border-[#FFD2E4]" style={{ backgroundColor: COLORS.cardInner }} placeholder="ประเภทงาน" />
-                       <datalist id="taskTypesList">
-                         {taskTypes.map(type => <option key={type} value={type} />)}
-                       </datalist>
-
-                       <div className="flex items-center justify-between p-2 pl-3.5 rounded-2xl border border-gray-100 shadow-sm transition-all focus-within:border-[#FFD2E4]" style={{ backgroundColor: COLORS.cardInner }}>
-                         <div className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider" style={{ color: COLORS.blueDeep }}>
-                           <IconClock size={12} /><span>ช่วงเวลา</span>
-                         </div>
-                         <div className="flex items-center gap-1">
-                           <input type="time" name="time_start" defaultValue={defaultTimeStart} className="w-[72px] p-1.5 rounded-xl border border-gray-100 outline-none text-[10px] font-black text-center shadow-sm bg-gray-50 focus:border-[#FFD2E4]" style={{ color: COLORS.pinkDeep }} />
-                           <span className="text-gray-300 font-bold">-</span>
-                           <input type="time" name="time_end" defaultValue={defaultTimeEnd} className="w-[72px] p-1.5 rounded-xl border border-gray-100 outline-none text-[10px] font-black text-center shadow-sm bg-gray-50 focus:border-[#FFD2E4]" style={{ color: COLORS.pinkDeep }} />
-                         </div>
-                       </div>
-
-                       <input name="channel" required defaultValue={editingTask?.channel || ''} className="w-full p-3.5 rounded-2xl font-black text-[10px] outline-none border border-gray-100 shadow-sm focus:border-[#FFD2E4]" style={{ backgroundColor: COLORS.cardInner }} placeholder="Link" />
-                       
-                       <textarea name="details" rows="2" defaultValue={editingTask?.details || ''} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[11px] shadow-sm transition-all resize-none focus:border-[#FFD2E4]" style={{ backgroundColor: COLORS.cardInner }} placeholder="สถานที่"></textarea>
-                     </div>
-                     
-                     <div className="flex items-center justify-between p-1.5 pl-4 rounded-2xl border transition-all hover:shadow-sm group mt-1" style={{ backgroundColor: `${COLORS.pink}1a`, borderColor: `${COLORS.pink}80` }}>
-                       <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-black" style={{ color: COLORS.pinkDeep }}>
-                         <IconCalendar size={12} className="group-hover:animate-bounce-slow transition-transform" /><span>กำหนดส่ง</span>
-                       </div>
-                       <input name="deadline" type="date" required defaultValue={editingTask?.deadline || nextQueueDate} className="w-32 p-2.5 rounded-xl border outline-none text-[10px] font-black shadow-sm transition-all cursor-pointer active:scale-95 focus:ring-2 focus:ring-[#ff96d3]/50 focus:border-[#ff96d3] hover:border-[#ff96d3]" style={{ backgroundColor: COLORS.cardInner, color: COLORS.pinkDeep, borderColor: COLORS.cardBorder }} />
-                     </div>
-                     
-                     <div className="flex items-center gap-2 mt-3">
-                       <button type="submit" className="flex-1 py-3.5 rounded-2xl font-black text-xs text-white shadow-lg active:scale-95 transition-all disabled:opacity-50" style={{ backgroundColor: COLORS.pinkDeep }}>บันทึกคิวงาน</button>
-                       {editingTask && (
-                         <button type="button" onClick={() => setTaskToDelete(editingTask.id)} className="w-12 h-[44px] flex items-center justify-center rounded-2xl bg-red-50 text-red-400 border border-red-100 hover:bg-red-100 active:scale-95 transition-all shadow-sm" title="ลบคิวงาน">
-                           <IconTrash size={18} />
-                         </button>
-                       )}
-                     </div>
-                     <button type="button" onClick={() => { setShowModal(false); setEditingTask(null); }} className="w-full text-[9px] font-bold text-gray-400 mt-2 uppercase tracking-widest hover:text-gray-500">Close</button>
-                   </div>
-                </form>
-              </div>
-            )}
-
-            {showAuthModal && (
-              <div className="fixed inset-0 z-[110] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
-                <form onSubmit={handleAdminLogin} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp" style={{ backgroundColor: `${COLORS.modalBg}f2`, borderWidth: '1px', borderColor: COLORS.cardBorder }}>
-                   <h3 className="text-sm font-black mb-4 text-center text-gray-800" style={{ color: COLORS.pinkDeep }}>เข้าสู่ระบบ Admin</h3>
-                   <div className="space-y-2">
-                     <input type="password" required value={password} onChange={(e) => { setPassword(e.target.value); setAuthError(false); }} className={`w-full p-3.5 rounded-2xl border outline-none text-[11px] shadow-sm transition-all text-center tracking-widest ${authError ? 'border-red-300 focus:border-red-400' : 'border-gray-100 focus:border-[#FFD2E4]'}`} style={{ backgroundColor: COLORS.cardInner }} placeholder="ใส่รหัสผ่าน" disabled={isVerifyingAuth} />
-                     {authError && <p className="text-red-400 text-[9px] text-center font-bold">รหัสผ่านไม่ถูกต้อง!</p>}
-                     <button type="submit" disabled={isVerifyingAuth} className="w-full h-11 rounded-2xl font-black text-xs mt-3 text-white shadow-lg flex items-center justify-center active:scale-95 transition-all disabled:opacity-70" style={{ backgroundColor: COLORS.pinkDeep }}>
-                        {isVerifyingAuth ? <IconLoader size={16} className="animate-spin-slow" /> : 'Login'}
-                     </button>
-                     <button type="button" onClick={() => { setShowAuthModal(false); setAuthError(false); setPassword(''); }} className="w-full text-[9px] font-bold text-gray-400 mt-1 uppercase tracking-widest hover:text-gray-500" disabled={isVerifyingAuth}>Close</button>
-                   </div>
-                </form>
-              </div>
-            )}
-
-            {showImageModal && (
-              <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
-                <form onSubmit={(e) => { 
-                    e.preventDefault(); 
-                    if (tempImageUrl) { 
-                        let finalUrl = tempImageUrl;
-                        const match = finalUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || finalUrl.match(/id=([a-zA-Z0-9_-]+)/) || finalUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
-                        if (match && match[1]) {
-                            finalUrl = `https://lh3.googleusercontent.com/d/${match[1]}`;
-                        }
-                        setProfileImage(finalUrl); 
-                        fetchAPI({ action: 'saveProfileImage', imageUrl: finalUrl });
-                    } 
-                    setShowImageModal(false); 
-                    setTempImageUrl(''); 
-                }} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp" style={{ backgroundColor: `${COLORS.modalBg}f2`, borderWidth: '1px', borderColor: COLORS.cardBorder }}>
-                   <h3 className="text-sm font-black mb-4 text-center text-gray-800" style={{ color: COLORS.pinkDeep }}>เปลี่ยนรูปโปรไฟล์ 🐰</h3>
-                   <div className="space-y-2">
-                     <input type="url" required value={tempImageUrl} onChange={(e) => setTempImageUrl(e.target.value)} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[11px] shadow-sm focus:border-[#FFD2E4] transition-all text-center" style={{ backgroundColor: COLORS.cardInner }} placeholder="วางลิงก์รูปภาพ Google Drive ที่นี่..." />
-                     <button type="submit" className="w-full py-3.5 rounded-2xl font-black text-xs mt-3 text-white shadow-lg active:scale-95 transition-all" style={{ backgroundColor: COLORS.pinkDeep }}>Save Image</button>
-                     <button type="button" onClick={() => { setShowImageModal(false); setTempImageUrl(''); }} className="w-full text-[9px] font-bold text-gray-400 mt-1 uppercase tracking-widest hover:text-gray-500">Close</button>
-                   </div>
-                </form>
-              </div>
-            )}
-
-            {showBannerModal && (
-              <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
-                <form onSubmit={(e) => { 
-                    e.preventDefault(); 
-                    if (tempBannerUrl) { 
-                        let finalUrl = tempBannerUrl;
-                        const match = finalUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || finalUrl.match(/id=([a-zA-Z0-9_-]+)/) || finalUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
-                        if (match && match[1]) {
-                            finalUrl = `https://lh3.googleusercontent.com/d/${match[1]}`;
-                        }
-                        setBannerImage(finalUrl); 
-                        toggleBannerVisibility(true);
-                        fetchAPI({ action: 'saveBannerImage', imageUrl: finalUrl });
-                    } 
-                    setShowBannerModal(false); 
-                    setTempBannerUrl(''); 
-                }} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp" style={{ backgroundColor: `${COLORS.modalBg}f2`, borderWidth: '1px', borderColor: COLORS.cardBorder }}>
-                   <h3 className="text-sm font-black mb-4 text-center text-gray-800" style={{ color: COLORS.pinkDeep }}>เปลี่ยนแบนเนอร์</h3>
-                   <div className="space-y-2">
-                     <input type="url" required value={tempBannerUrl} onChange={(e) => setTempBannerUrl(e.target.value)} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[11px] shadow-sm focus:border-[#FFD2E4] transition-all text-center" style={{ backgroundColor: COLORS.cardInner }} placeholder="วางลิงก์รูปภาพ Google Drive..." />
-                     <button type="submit" className="w-full py-3.5 rounded-2xl font-black text-xs mt-3 text-white shadow-lg active:scale-95 transition-all" style={{ backgroundColor: COLORS.blueDeep }}>Save Banner</button>
-                     <button type="button" onClick={() => { setShowBannerModal(false); setTempBannerUrl(''); }} className="w-full text-[9px] font-bold text-gray-400 mt-1 uppercase tracking-widest hover:text-gray-500">Close</button>
-                   </div>
-                </form>
-              </div>
-            )}
-
-            {taskToDelete && (
-              <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/20 backdrop-blur-[2px] animate-fadeIn">
-                <div className="backdrop-blur-xl w-full max-w-[260px] rounded-[30px] p-6 shadow-2xl animate-slideUp text-center" style={{ backgroundColor: `${COLORS.modalBg}f2`, borderWidth: '1px', borderColor: COLORS.cardBorder }}>
-                  <div className="w-14 h-14 rounded-full bg-red-50 text-red-400 flex items-center justify-center mx-auto mb-3 shadow-sm border border-red-100">
-                     <IconTrash size={26} />
-                  </div>
-                  <h3 className="text-[14px] font-black mb-1 text-gray-800" style={{ color: COLORS.pinkDeep }}>ยืนยันการลบ?</h3>
-                  <p className="text-[10px] font-bold text-gray-500 mb-5">คุณต้องการลบคิวงานนี้ใช่หรือไม่<br/>(ไม่สามารถกู้คืนได้)</p>
-                  
-                  <div className="flex gap-2">
-                    <button onClick={() => setTaskToDelete(null)} className="flex-1 py-3 rounded-2xl font-black text-[10px] text-gray-500 bg-gray-100 hover:bg-gray-200 active:scale-95 transition-all shadow-sm">ยกเลิก</button>
-                    <button onClick={executeDeleteTask} className="flex-1 py-3 rounded-2xl font-black text-[10px] text-white bg-red-400 hover:bg-red-500 active:scale-95 transition-all shadow-sm">ลบข้อมูล</button>
-                  </div>
-                </div>
-              </div>
-            )}
-
           </div>
-          
+          {showAuthModal && (
+            <div className="fixed inset-0 z-[110] flex items-center justify-center p-6 bg-black/10 backdrop-blur-sm">
+              <form onSubmit={(e) => { e.preventDefault(); fetchAPI({action: 'verifyAdminPassword', inputPassword: password}).then(res => { if(res.isValid){ setIsAdmin(true); setShowAuthModal(false); setPassword(''); }else{ alert('รหัสผ่านผิด'); } }); }} className="bg-white/95 rounded-[35px] p-6 shadow-2xl w-full max-w-xs text-center border border-white">
+                <h3 className="text-sm font-black mb-4 text-[#ff96d3]">เข้าสู่ระบบ Admin</h3>
+                <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-center text-[11px] mb-4" placeholder="รหัสผ่าน" />
+                <button type="submit" className="w-full py-3 rounded-2xl bg-[#ff96d3] text-white font-black text-xs">Login</button>
+                <button type="button" onClick={()=>setShowAuthModal(false)} className="mt-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Close</button>
+              </form>
+            </div>
+          )}
           <style>{`
             @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(25px, -15px); } }
-            @keyframes float-reverse { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-25px, 15px); } }
             @keyframes breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-            @keyframes float-particle-1 { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-20px); opacity: 0; } }
-            @keyframes float-particle-2 { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-15px) translateX(5px); opacity: 0; } }
-            @keyframes float-particle-3 { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 0.8; } 100% { transform: translateY(-25px) translateX(-5px); opacity: 0; } }
-            @keyframes bounce-slow { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
-            @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
             @keyframes text-wave { 0%, 20%, 100% { transform: translateY(0px); } 10% { transform: translateY(-5px); } }
-            @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-            .animate-text-wave { animation: text-wave 4s ease-in-out infinite; }
-            .animate-breathe { animation: breathe 4s ease-in-out infinite; transform-origin: center; }
-            .animate-float-particle-1 { animation: float-particle-1 3s ease-out infinite; }
-            .animate-float-particle-2 { animation: float-particle-2 4s ease-out infinite 1s; }
-            .animate-float-particle-3 { animation: float-particle-3 3.5s ease-out infinite 0.5s; }
             .animate-float { animation: float 15s ease-in-out infinite; }
-            .animate-float-reverse { animation: float-reverse 18s ease-in-out infinite; }
-            .animate-bounce-slow { animation: bounce-slow 4s ease-in-out infinite; }
-            .animate-slideUp { animation: slideUp 0.3s ease-out; }
+            .animate-float-reverse { animation: float 18s ease-in-out infinite reverse; }
+            .animate-breathe { animation: breathe 4s ease-in-out infinite; transform-origin: center; }
+            .animate-text-wave { animation: text-wave 4s ease-in-out infinite; }
+            .animate-spin-slow { animation: spin 4s linear infinite; }
+            @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
             .animate-fadeIn { animation: fadeIn 0.4s ease-out; }
-            .animate-spin-slow { animation: spin-slow 4s linear infinite; }
+            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
           `}</style>
         </div>
       );
     }
-
     const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(<App />);
   </script>
 </body>
 </html>
-
-

@@ -676,7 +676,7 @@
           if(url !== null) {
               let finalUrl = url;
               const match = finalUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || finalUrl.match(/id=([a-zA-Z0-9_-]+)/) || finalUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
-              if (match && match[1]) finalUrl = `https://lh3.googleusercontent.com/d/$${match[1]}`;
+              if (match && match[1]) finalUrl = `https://lh3.googleusercontent.com/d/${match[1]}`;
               setDashboardImageUrl(finalUrl);
               fetchAPI({action:'saveSetting', key:'dashboardImageUrl', value:finalUrl});
           }
@@ -1131,7 +1131,7 @@
             {/* Profile Image & Banner Upload Modals */}
             {showImageModal && (
               <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
-                <form onSubmit={(e) => { e.preventDefault(); if (tempImageUrl) { let u = tempImageUrl; const m = u.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || u.match(/id=([a-zA-Z0-9_-]+)/) || u.match(/\/d\/([a-zA-Z0-9_-]+)/); if(m && m[1]) u = `https://lh3.googleusercontent.com/d/$${m[1]}`; setProfileImage(u); fetchAPI({ action: 'saveSetting', key: 'profileImage', value: u }); } setShowImageModal(false); setTempImageUrl(''); }} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
+                <form onSubmit={(e) => { e.preventDefault(); if (tempImageUrl) { let u = tempImageUrl; const m = u.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || u.match(/id=([a-zA-Z0-9_-]+)/) || u.match(/\/d\/([a-zA-Z0-9_-]+)/); if(m && m[1]) u = `https://lh3.googleusercontent.com/d/${m[1]}`; setProfileImage(u); fetchAPI({ action: 'saveSetting', key: 'profileImage', value: u }); } setShowImageModal(false); setTempImageUrl(''); }} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
                    <h3 className="text-sm font-black mb-4 text-center text-[#ff96d3]">เปลี่ยนรูปโปรไฟล์ 🐰</h3>
                    <input type="url" required value={tempImageUrl} onChange={(e) => setTempImageUrl(e.target.value)} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[11px] shadow-sm focus:border-[#ff96d3] text-center bg-white" placeholder="ลิงก์ Drive รูปภาพ..." />
                    <button type="submit" className="w-full py-3.5 rounded-2xl font-black text-xs mt-3 text-white shadow-lg active:scale-95 bg-[#ff96d3]">Save</button>
@@ -1142,7 +1142,7 @@
             
             {showBannerModal && (
               <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
-                <form onSubmit={(e) => { e.preventDefault(); if (tempBannerUrl) { let u = tempBannerUrl; const m = u.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || u.match(/id=([a-zA-Z0-9_-]+)/) || u.match(/\/d\/([a-zA-Z0-9_-]+)/); if(m && m[1]) u = `https://lh3.googleusercontent.com/d/$${m[1]}`; setBannerImage(u); toggleBannerVisibility(true); fetchAPI({ action: 'saveSetting', key:'bannerImage', value: u }); } setShowBannerModal(false); setTempBannerUrl(''); }} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
+                <form onSubmit={(e) => { e.preventDefault(); if (tempBannerUrl) { let u = tempBannerUrl; const m = u.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || u.match(/id=([a-zA-Z0-9_-]+)/) || u.match(/\/d\/([a-zA-Z0-9_-]+)/); if(m && m[1]) u = `https://lh3.googleusercontent.com/d/${m[1]}`; setBannerImage(u); toggleBannerVisibility(true); fetchAPI({ action: 'saveSetting', key:'bannerImage', value: u }); } setShowBannerModal(false); setTempBannerUrl(''); }} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
                    <h3 className="text-sm font-black mb-4 text-center text-[#ff96d3]">เปลี่ยนแบนเนอร์</h3>
                    <input type="url" required value={tempBannerUrl} onChange={(e) => setTempBannerUrl(e.target.value)} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[11px] shadow-sm focus:border-[#ff96d3] text-center bg-white" placeholder="ลิงก์ Drive รูปภาพ..." />
                    <button type="submit" className="w-full py-3.5 rounded-2xl font-black text-xs mt-3 text-white shadow-lg active:scale-95 bg-[#b5e48c]">Save Banner</button>
@@ -1190,4 +1190,5 @@
   </script>
 </body>
 </html>
+
 

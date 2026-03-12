@@ -394,12 +394,18 @@
       );
     });
 
-    // 🚨 ตัวช่วยแปลงลิงก์ Drive หรือ ID เปล่าๆ ให้เป็นรูปภาพที่แสดงผลได้ (ฟังก์ชันใหม่)
-    const formatImageUrl = (urlOrId) => {
+    // 🚨 1. ฟังก์ชันแปลงรูประบบ (Profile, Banner, Dashboard) ให้แสดงบนเว็บได้เลย
+    const formatSystemImage = (url) => {
+        if (!url) return '';
+        const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/) || url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        if (match && match[1]) return `https://lh3.googleusercontent.com/d/${match[1]}`;
+        return url; 
+    };
+
+    // 🚨 2. ฟังก์ชันแปลงรูปนักเรียน (รองรับทั้งลิงก์ Drive และ ID เปล่าๆ)
+    const formatStudentImage = (urlOrId) => {
         if (!urlOrId) return '';
-        // ถ้าเป็น ID เปล่าๆ ไม่มี / เลย
         if (!urlOrId.includes('/')) return `https://drive.google.com/uc?id=${urlOrId}`;
-        // ถ้าเป็นลิงก์ยาวๆ ให้พยายามสกัด ID ออกมา
         const match = urlOrId.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || urlOrId.match(/id=([a-zA-Z0-9_-]+)/) || urlOrId.match(/\/d\/([a-zA-Z0-9_-]+)/);
         if (match && match[1]) return `https://drive.google.com/uc?id=${match[1]}`;
         return urlOrId;
@@ -412,12 +418,10 @@
       const [isLoading, setIsLoading] = useState(true);
       const [isSaving, setIsSaving] = useState(false); 
       
-      // -- States สำหรับข้อมูล --
       const [tasks, setTasks] = useState([]);
       const [students, setStudents] = useState([]);
       const [todos, setTodos] = useState([]);
       
-      // -- States การแสดงผลหลัก --
       const [view, setView] = useState('dashboard'); 
       const [isCalendarView, setIsCalendarView] = useState(false);
       const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -427,7 +431,6 @@
       const [filterType, setFilterType] = useState('all');
       const [searchQuery, setSearchQuery] = useState('');
       
-      // -- States สำหรับ Modal & Auth --
       const [showModal, setShowModal] = useState(false);     
       const [editingTask, setEditingTask] = useState(null);  
       const [taskToDelete, setTaskToDelete] = useState(null);
@@ -439,19 +442,16 @@
       const [authError, setAuthError] = useState(false);
       const [isVerifyingAuth, setIsVerifyingAuth] = useState(false);
 
-      // -- States สำหรับ Dashboard ใหม่ --
       const [noteText, setNoteText] = useState('');
       const [noteEmoji, setNoteEmoji] = useState('😊');
       const [dashboardImageUrl, setDashboardImageUrl] = useState('');
       const [newTodoText, setNewTodoText] = useState('');
       
-      // -- States สำหรับระบบนักเรียน --
       const [studentSubView, setStudentSubView] = useState('list');
       const [studentSearchQuery, setStudentSearchQuery] = useState('');
       const [editingStudent, setEditingStudent] = useState(null);
       const [viewingStudent, setViewingStudent] = useState(null);
 
-      // -- States สำหรับ Settings เดิม --
       const [profileImage, setProfileImage] = useState(null);
       const [tempImageUrl, setTempImageUrl] = useState('');   
       const [bannerImage, setBannerImage] = useState(null);   
@@ -464,6 +464,7 @@
       const [linkDrive, setLinkDrive] = useState('https://drive.google.com');
       const [taskTypes, setTaskTypes] = useState(['Logo', 'Banner', 'Artwork']); 
 
+      // 🚨 เปลี่ยนเป็น URL Web App ของคุณให้ถูกต้อง
       const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx9dihcpJ1-4txusI_T6x4iodxGv84heNPQ9V6ezkGnWRRD7Qp7wrwSAGFRs5sE_zyluw/exec";
 
       const fetchAPI = async (payload) => {
@@ -489,8 +490,9 @@
               
               if (response.data.settings) {
                  const s = response.data.settings;
-                 if (s.profileImage) setProfileImage(formatImageUrl(s.profileImage));
-                 if (s.bannerImage) setBannerImage(formatImageUrl(s.bannerImage));
+                 // 🚨 ดึงข้อมูลโดยผ่านฟังก์ชันแปลงลิงก์ระบบ
+                 if (s.profileImage) setProfileImage(formatSystemImage(s.profileImage));
+                 if (s.bannerImage) setBannerImage(formatSystemImage(s.bannerImage));
                  if (s.bannerVisible !== undefined) setIsBannerVisible(s.bannerVisible === 'true' || s.bannerVisible === true);
                  if (s.lockedNextDate) setSelectedNextDate(s.lockedNextDate);
                  if (s.linkNotion) setLinkNotion(s.linkNotion);
@@ -498,7 +500,7 @@
                  if (s.linkDrive) setLinkDrive(s.linkDrive);
                  if (s.noteText) setNoteText(s.noteText);
                  if (s.noteEmoji) setNoteEmoji(s.noteEmoji);
-                 if (s.dashboardImageUrl) setDashboardImageUrl(formatImageUrl(s.dashboardImageUrl));
+                 if (s.dashboardImageUrl) setDashboardImageUrl(formatSystemImage(s.dashboardImageUrl));
               }
             }
             setIsLoading(false);
@@ -686,7 +688,7 @@
       const handleDashboardImageClick = () => {
           const url = prompt("วางลิงก์รูปภาพ Google Drive สำหรับช่องนี้:", dashboardImageUrl);
           if(url !== null) {
-              const finalUrl = formatImageUrl(url);
+              const finalUrl = formatSystemImage(url);
               setDashboardImageUrl(finalUrl);
               fetchAPI({action:'saveSetting', key:'dashboardImageUrl', value:finalUrl});
           }
@@ -895,8 +897,7 @@
                           
                           <div key={student.id} onClick={() => setViewingStudent(student)} className="bg-white/90 backdrop-blur-sm rounded-[22px] p-3 shadow-sm border border-gray-100 flex items-center gap-3 transition-transform hover:scale-[1.01] cursor-pointer">
                             <div className="w-12 h-12 rounded-[14px] bg-gradient-to-tr from-[#FFD2E4] to-[#CCE9ED] shrink-0 flex items-center justify-center overflow-hidden border border-white shadow-inner">
-                              {/* 🚨 อัปเดต: แปลงลิงก์รูปให้โชว์ได้ */}
-                              {student.photo_link ? <img src={formatImageUrl(student.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={20} className="text-white opacity-80" />}
+                              {student.photo_link ? <img src={formatStudentImage(student.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={20} className="text-white opacity-80" />}
                             </div>
                             <div className="flex-1 min-w-0">
                               <h3 className="text-[12px] font-bold text-gray-700 truncate">{student.fullname}</h3>
@@ -934,8 +935,7 @@
                         {/* รูป */}
                         <div className="flex flex-col items-center mb-2">
                           <div className="w-20 h-20 rounded-[22px] bg-gradient-to-tr from-[#FFD2E4] to-[#CCE9ED] flex items-center justify-center mb-2 shadow-sm border-2 border-white overflow-hidden relative">
-                             {/* 🚨 อัปเดต: แปลงลิงก์รูปให้โชว์ได้ */}
-                             {editingStudent?.photo_link ? <img src={formatImageUrl(editingStudent.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
+                             {editingStudent?.photo_link ? <img src={formatStudentImage(editingStudent.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
                           </div>
                           <label className="text-[9px] font-bold text-gray-500 bg-white px-3 py-1.5 rounded-full border border-gray-100 cursor-pointer hover:bg-gray-50 shadow-sm transition-all active:scale-95">
                             + เลือกไฟล์รูปภาพ
@@ -1059,7 +1059,7 @@
                   
                   <div className="flex flex-col items-center mb-4 mt-2">
                     <div className="w-20 h-20 rounded-[18px] bg-gradient-to-tr from-[#FFD2E4] to-[#CCE9ED] flex items-center justify-center overflow-hidden border-2 border-white shadow-sm mb-3">
-                      {viewingStudent.photo_link ? <img src={formatImageUrl(viewingStudent.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
+                      {viewingStudent.photo_link ? <img src={formatStudentImage(viewingStudent.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
                     </div>
                     <h3 className="text-[16px] font-black text-gray-800 text-center px-4">{viewingStudent.fullname}</h3>
                     <p className="text-[12px] font-bold text-[#ff96d3] mt-0.5">{viewingStudent.nickname ? `น้อง${viewingStudent.nickname}` : ''}</p>
@@ -1093,6 +1093,7 @@
               </div>
             )}
 
+            {/* Task Form Modal */}
             {showModal && (
               <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={handleSaveTask} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
@@ -1171,6 +1172,7 @@
               </div>
             )}
 
+            {/* Auth Modal */}
             {showAuthModal && (
               <div className="fixed inset-0 z-[110] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={handleAdminLogin} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
@@ -1185,6 +1187,7 @@
               </div>
             )}
             
+            {/* Delete Modal */}
             {taskToDelete && (
               <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/20 backdrop-blur-[2px] animate-fadeIn">
                 <div className="backdrop-blur-xl w-full max-w-[260px] rounded-[30px] p-6 shadow-2xl animate-slideUp text-center bg-white/95 border border-gray-100">
@@ -1199,12 +1202,13 @@
               </div>
             )}
 
+            {/* Profile Image Upload Modal */}
             {showImageModal && (
               <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={(e) => { 
                     e.preventDefault(); 
                     if (tempImageUrl) { 
-                        const u = formatImageUrl(tempImageUrl);
+                        const u = formatSystemImage(tempImageUrl);
                         setProfileImage(u); 
                         fetchAPI({ action: 'saveSetting', key: 'profileImage', value: u }); 
                     } 
@@ -1219,12 +1223,13 @@
               </div>
             )}
             
+            {/* Banner Image Upload Modal */}
             {showBannerModal && (
               <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={(e) => { 
                     e.preventDefault(); 
                     if (tempBannerUrl) { 
-                        const u = formatImageUrl(tempBannerUrl);
+                        const u = formatSystemImage(tempBannerUrl);
                         setBannerImage(u); 
                         toggleBannerVisibility(true); 
                         fetchAPI({ action: 'saveSetting', key:'bannerImage', value: u }); 

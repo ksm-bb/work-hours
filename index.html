@@ -20,7 +20,7 @@
     const { useState, useMemo, useEffect, useCallback } = React;
 
     // ==========================================
-    // 🖼️ COMPONENTS: ไอคอน SVG
+    // 🖼️ COMPONENTS: ไอคอน SVG ทั้งหมด
     // ==========================================
     const IconPlus = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>;
     const IconHome = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>;
@@ -235,7 +235,6 @@
       </div>
     ));
 
-    // 🚨 อัปเกรด Logic: อ่านเงื่อนไขงานวนซ้ำแม่นยำขึ้น
     const isTaskOnDate = (task, dateStr) => {
         if (!task.deadline) return false;
         const taskDate = new Date(task.deadline);
@@ -255,8 +254,8 @@
             if (val.includes('-')) {
                 const parts = val.split('-').map(Number);
                 if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
-                    if (parts[0] > parts[1]) return cd >= parts[0] || cd <= parts[1]; // เช่น 25-5
-                    else return cd >= parts[0] && cd <= parts[1]; // เช่น 5-10
+                    if (parts[0] > parts[1]) return cd >= parts[0] || cd <= parts[1];
+                    else return cd >= parts[0] && cd <= parts[1];
                 }
             } else {
                 if(!isNaN(Number(val))) return cd === Number(val);
@@ -321,6 +320,7 @@
       );
     });
 
+    // 🚨 แก้ไขเพื่อไม่ให้ Error Syntax (ไม่ใช้ Backtick เครื่องหมาย ` เพื่อป้องกัน Babel สับสนกับ URL)
     const formatSystemImage = (url) => {
         if (!url) return '';
         const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/) || url.match(/\/d\/([a-zA-Z0-9_-]+)/);
@@ -328,14 +328,13 @@
         return url; 
     };
 
-    const formatStudentFile = (val, isPdf = false) => {
+    const formatStudentFile = (val, isPdf) => {
         if (!val) return '';
-        if (val.includes('/')) return val; 
-        if (isPdf) return `https://drive.google.com/file/d/${val}/view`;
-        return `https://drive.google.com/uc?id=${val}`;
+        if (val.indexOf('/') !== -1) return val; 
+        if (isPdf === true) return 'https://drive.google.com/file/d/' + val + '/view';
+        return 'https://drive.google.com/uc?id=' + val;
     };
 
-    // 🚨 7. สร้าง Custom Modal (หน้าต่างป๊อปอัปของเว็บเราเอง)
     const CustomConfirmModal = ({ isOpen, title, message, onCancel, onConfirm }) => {
         if (!isOpen) return null;
         return (
@@ -394,7 +393,6 @@
       const [showModal, setShowModal] = useState(false);     
       const [editingTask, setEditingTask] = useState(null);  
       
-      // State สำหรับหน้าต่าง Popup Custom
       const [confirmModal, setConfirmModal] = useState({ isOpen: false, title: '', message: '', action: null });
       const [promptModal, setPromptModal] = useState({ isOpen: false, type: '', title: '', placeholder: '', value: '' });
 
@@ -416,7 +414,6 @@
       const [editingStudent, setEditingStudent] = useState(null);
       const [viewingStudent, setViewingStudent] = useState(null);
 
-      // 🚨 9. ตัวแปรสำหรับคิวงานวนซ้ำในฟอร์ม
       const [recType, setRecType] = useState('none');
       const [recVal, setRecVal] = useState('');
 
@@ -432,6 +429,7 @@
       const [linkDrive, setLinkDrive] = useState('https://drive.google.com');
       const [taskTypes, setTaskTypes] = useState(['Logo', 'Banner', 'Artwork']); 
 
+      // 🚨 เปลี่ยนเป็น URL Web App ของคุณให้ถูกต้อง
       const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwm6VdTr6uZEl22yk9r7tCrpQWqQh6WGT_73AMQHocCYIYb_9obVuqYWGXMiQwAiBCc7Q/exec";
 
       const fetchAPI = async (payload) => {
@@ -504,7 +502,6 @@
 
       const waitingCount = useMemo(() => tasks.filter(t => t.status !== 'done').length, [tasks]);
 
-      // --- Task Functions ---
       const toggleStatus = useCallback((e, id) => {
         e.stopPropagation();
         setTasks(prev => prev.map(t => {
@@ -571,12 +568,12 @@
               action: () => {
                   setTasks(prev => prev.filter(t => t.id !== id));
                   fetchAPI({ action: 'deleteTask', taskId: id });
+                  setConfirmModal({ isOpen: false });
                   setShowModal(false);
               }
           });
       };
 
-      // --- Student Functions ---
       const toBase64 = file => new Promise((resolve, reject) => {
           const reader = new FileReader(); reader.readAsDataURL(file);
           reader.onload = () => resolve(reader.result); reader.onerror = error => reject(error);
@@ -618,11 +615,11 @@
               action: () => {
                   setStudents(students.filter(s => s.id !== id));
                   fetchAPI({action: 'deleteStudent', studentId: id});
+                  setConfirmModal({ isOpen: false });
               }
           });
       };
 
-      // --- ToDo Functions ---
       const handleAddTodo = (e) => {
           if (e.key === 'Enter' && newTodoText.trim() !== '') {
               const text = newTodoText.trim(); setNewTodoText('');
@@ -643,11 +640,11 @@
               action: () => {
                   setTodos(todos.filter(t => t.id !== id));
                   fetchAPI({action:'deleteTodo', todoId: id});
+                  setConfirmModal({ isOpen: false });
               }
           });
       };
 
-      // --- Settings & Prompts ---
       const toggleBannerVisibility = (visible) => { setIsBannerVisible(visible); fetchAPI({ action: 'saveSetting', key: 'bannerVisible', value: visible }); };
       const triggerFlowerBounce = useCallback(() => { setIsBouncing(true); setTimeout(() => setIsBouncing(false), 500); }, []);
       const handleImageUpload = useCallback(() => { setShowImageModal(true); }, []);
@@ -674,7 +671,6 @@
       }), [tasks, searchQuery, filterType]);
       const displayedTasks = isCalendarView ? filteredAllTasks.filter(t => isTaskOnDate(t, selectedDate)) : filteredAllTasks;
 
-      // Loading Screen
       if (isLoading) {
         return (
           <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden" style={{ backgroundColor: COLORS.bg }}>
@@ -731,10 +727,8 @@
               {view === 'dashboard' ? (
                 <div className="animate-fadeIn">
                   <div className="flex gap-3 mb-1.5 items-stretch">
-                    {/* ฝั่งซ้าย */}
                     <div className="flex-[1.6] flex flex-col gap-2">
                       <div className="h-28"><CompactStats isAdmin={isAdmin} selectedNextDate={selectedNextDate} nextQueueDate={nextQueueDate} handleSetManualDate={handleSetManualDate} waitingCount={waitingCount} /></div>
-                      {/* Note & Emoji */}
                       <div className="relative flex items-center w-full mt-0.5">
                         <input type="text" placeholder="เพิ่มโน้ตสั้นๆ..." className="w-full h-[40px] rounded-[16px] pl-3 pr-10 text-[11px] font-bold text-gray-600 outline-none shadow-sm transition-all border border-gray-100 focus:border-[#ff96d3] bg-white/90 backdrop-blur-sm"
                           value={noteText} onChange={(e) => setNoteText(e.target.value)} onBlur={(e) => fetchAPI({action:'saveSetting', key:'noteText', value:e.target.value})} disabled={!isAdmin} />
@@ -742,7 +736,6 @@
                           {isAdmin ? <span className="text-sm">{noteEmoji}</span> : <IconSmile size={16} />}
                         </button>
                       </div>
-                      {/* รูปภาพ Google Drive */}
                       <div className="flex-1 w-full rounded-[20px] overflow-hidden shadow-sm border border-gray-100 relative group flex items-center justify-center bg-white/60 backdrop-blur-sm min-h-[96px]">
                         {dashboardImageUrl ? <img src={dashboardImageUrl} className="w-full h-full object-cover" /> : <span className="text-[10px] font-bold text-gray-400 flex flex-col items-center gap-1 opacity-70"><IconImage size={18} /> ใส่รูปอ้างอิง</span>}
                         {isAdmin && (
@@ -752,7 +745,6 @@
                         )}
                       </div>
                     </div>
-                    {/* ฝั่งขวา */}
                     <div className="flex-1 flex flex-col gap-2">
                       <div className="h-28"><ProgressFlower progress={progress} todayTasksLength={todayTasks.length} doneToday={doneToday} triggerFlowerBounce={triggerFlowerBounce} isBouncing={isBouncing} /></div>
                       <div className="flex justify-between items-center backdrop-blur-sm rounded-[20px] px-3 py-1.5 shadow-sm bg-white/90 border border-gray-100">
@@ -760,7 +752,6 @@
                         <a href={linkWebsite} target="_blank" rel="noreferrer" className="p-1 rounded-xl hover:bg-[#fff9f9] transition-all text-[#B0BEC5] hover:text-[#ff96d3] active:scale-95 flex items-center justify-center"><IconGlobe size={18} /></a>
                         <a href={linkDrive} target="_blank" rel="noreferrer" className="p-1 rounded-xl hover:bg-[#fff9f9] transition-all text-[#B0BEC5] hover:text-[#ff96d3] active:scale-95 flex items-center justify-center"><IconDrive size={18} /></a>
                       </div>
-                      {/* To-Do List */}
                       <div className="flex-1 min-h-[96px] backdrop-blur-sm rounded-[20px] p-2 shadow-sm flex flex-col border border-gray-100 bg-white/90">
                         <div className="text-[9px] font-black text-[#ff96d3] uppercase tracking-widest px-1 mb-1.5 flex items-center gap-1"><IconCheck size={10}/> To-do Note</div>
                         <div className="todo-scrollbar overflow-y-auto flex-1 pr-1 space-y-2 max-h-[64px]">
@@ -782,7 +773,6 @@
                     </div>
                   </div>
 
-                  {/* Pinned Tasks */}
                   {pinnedTasks.length > 0 && (
                     <div className="mb-4 mt-3">
                       <div className="flex items-center justify-between mb-2 ml-1">
@@ -821,7 +811,6 @@
                 </div>
 
               ) : view === 'all' ? (
-              /* === ALL TASKS === */
                 <div className="animate-fadeIn">
                   <div className="relative mb-4">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 opacity-50" style={{ color: COLORS.blueDeep }}><IconSearch size={16} /></div>
@@ -848,7 +837,6 @@
                 </div>
               
               ) : view === 'students' ? (
-              /* === STUDENTS === */
                 <div className="animate-fadeIn">
                   <div className="flex gap-2 mb-4 p-1.5 rounded-full backdrop-blur-md shadow-sm border border-gray-100 bg-white/50">
                       <button onClick={() => setStudentSubView('list')} className={`flex-1 text-[10px] font-black py-2.5 rounded-full transition-all tracking-wider ${studentSubView === 'list' ? 'shadow-sm bg-white text-[#ff96d3]' : 'text-gray-400'}`}>รายชื่อนักเรียน</button>
@@ -866,14 +854,13 @@
                           
                           <div key={student.id} onClick={() => setViewingStudent(student)} className="bg-white/90 backdrop-blur-sm rounded-[22px] p-3 shadow-sm border border-gray-100 flex items-center gap-3 transition-transform hover:scale-[1.01] cursor-pointer">
                             <div className="w-12 h-12 rounded-[14px] bg-gradient-to-tr from-[#FFD2E4] to-[#CCE9ED] shrink-0 flex items-center justify-center overflow-hidden border border-white shadow-inner">
-                              {student.photo_link ? <img src={formatStudentFile(student.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={20} className="text-white opacity-80" />}
+                              {student.photo_link ? <img src={formatStudentFile(student.photo_link, false)} className="w-full h-full object-cover" /> : <IconUser size={20} className="text-white opacity-80" />}
                             </div>
                             <div className="flex-1 min-w-0">
                               <h3 className="text-[12px] font-bold text-gray-700 truncate">{student.fullname}</h3>
                               <p className="text-[10px] font-black mt-0.5 text-[#b5e48c]">{student.nickname ? `น้อง${student.nickname}` : '-'}</p>
                               <p className="text-[9px] text-gray-400 mt-1 flex items-center gap-1"><IconClock size={10}/> โทร: {student.phone || '-'}</p>
                             </div>
-                            {/* 🚨 ปุ่มตาพรีวิว PDF ขนาดเล็ก (เพิ่มตามรีเควส) */}
                             {student.pdf_link && (
                               <button onClick={(e) => { e.stopPropagation(); window.open(formatStudentFile(student.pdf_link, true), '_blank'); }} className="shrink-0 w-8 h-8 rounded-full bg-[#ff96d3]/10 text-[#ff96d3] flex items-center justify-center hover:bg-[#ff96d3] hover:text-white transition-colors" title="ดูไฟล์ PDF">
                                 <IconEye size={14} />
@@ -907,10 +894,9 @@
                       <h2 className="text-sm font-black text-center mb-5 text-[#ff96d3]">{editingStudent ? 'แก้ไขประวัตินักเรียน ✏️' : 'เพิ่มประวัตินักเรียนใหม่ ✨'}</h2>
                       
                       <div className="space-y-3 relative">
-                        {/* รูป */}
                         <div className="flex flex-col items-center mb-2">
                           <div className="w-20 h-20 rounded-[22px] bg-gradient-to-tr from-[#FFD2E4] to-[#CCE9ED] flex items-center justify-center mb-2 shadow-sm border-2 border-white overflow-hidden relative">
-                             {editingStudent?.photo_link ? <img src={formatStudentFile(editingStudent.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
+                             {editingStudent?.photo_link ? <img src={formatStudentFile(editingStudent.photo_link, false)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
                           </div>
                           <label className="text-[9px] font-bold text-gray-500 bg-white px-3 py-1.5 rounded-full border border-gray-100 cursor-pointer hover:bg-gray-50 shadow-sm transition-all active:scale-95">
                             + เลือกไฟล์รูปภาพ
@@ -973,7 +959,6 @@
                           <div className="flex items-center gap-2">
                             <input type="file" name="pdfFile" accept=".pdf" className="flex-1 bg-white p-2 rounded-[12px] border border-gray-100 text-[9px] shadow-sm file:mr-2 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-[9px] file:font-bold file:bg-[#ff96d3]/10 file:text-[#ff96d3] hover:file:bg-[#ff96d3]/20" />
                           </div>
-                          {/* 🚨 ลบปุ่มพรีวิวออกตามรีเควสข้อ 6 */}
                           {editingStudent?.pdf_link && (
                             <p className="text-[8px] font-bold text-gray-400 mt-1.5 px-1">*มีไฟล์แนบเดิมอยู่แล้ว หากไม่อัปโหลดใหม่ระบบจะใช้ไฟล์เดิม</p>
                           )}
@@ -1009,7 +994,6 @@
                   <button onClick={() => setView('students')} className={`p-1.5 transition-all ${view === 'students' ? 'scale-110 text-[#E7F098] brightness-90' : 'text-gray-300 opacity-60'}`}><IconUser size={22} /></button>
               </div>
 
-              {/* 🚨 ปุ่มบวกดันขึ้นไปอยู่สูงๆ หน่อย (ปรับจาก top-[8px] เป็น -top-2) */}
               {isAdmin && (
                 <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20 animate-fadeIn">
                   <button onClick={() => { 
@@ -1023,27 +1007,9 @@
             </div>
 
             {/* ==========================================
-                🪟 MODALS CUSTOM ป๊อปอัปที่เราสร้างเอง
+                🪟 MODALS CUSTOM
                 ========================================== */}
             
-            <CustomConfirmModal 
-               isOpen={confirmModal.isOpen} 
-               title={confirmModal.title} 
-               message={confirmModal.message} 
-               onCancel={() => setConfirmModal({ ...confirmModal, isOpen: false })} 
-               onConfirm={confirmModal.action} 
-            />
-
-            <CustomPromptModal 
-               isOpen={promptModal.isOpen} 
-               title={promptModal.title} 
-               placeholder={promptModal.placeholder} 
-               initialValue={promptModal.value} 
-               onCancel={() => setPromptModal({ ...promptModal, isOpen: false })} 
-               onConfirm={handlePromptSave} 
-            />
-
-            {/* การ์ดรายละเอียดนักเรียน */}
             {viewingStudent && (
               <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/20 backdrop-blur-[2px] animate-fadeIn" onClick={() => setViewingStudent(null)}>
                 <div className="backdrop-blur-xl w-full max-w-[320px] rounded-[30px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100 relative" onClick={e => e.stopPropagation()}>
@@ -1051,7 +1017,7 @@
                   
                   <div className="flex flex-col items-center mb-4 mt-2">
                     <div className="w-20 h-20 rounded-[18px] bg-gradient-to-tr from-[#FFD2E4] to-[#CCE9ED] flex items-center justify-center overflow-hidden border-2 border-white shadow-sm mb-3">
-                      {viewingStudent.photo_link ? <img src={formatStudentFile(viewingStudent.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
+                      {viewingStudent.photo_link ? <img src={formatStudentFile(viewingStudent.photo_link, false)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
                     </div>
                     <h3 className="text-[16px] font-black text-gray-800 text-center px-4">{viewingStudent.fullname}</h3>
                     <p className="text-[12px] font-bold text-[#ff96d3] mt-0.5">{viewingStudent.nickname ? `น้อง${viewingStudent.nickname}` : ''}</p>
@@ -1085,7 +1051,6 @@
               </div>
             )}
 
-            {/* Task Form Modal (อัปเกรดงานวนซ้ำ) */}
             {showModal && (
               <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={handleSaveTask} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
@@ -1127,7 +1092,6 @@
                        </label>
                      </div>
 
-                     {/* 🚨 อัปเกรด 9: เมนูตั้งค่างานวนซ้ำที่ปรากฏขึ้นมาเมื่อเลือก */}
                      {recType === 'weekly' && (
                        <div className="flex justify-between gap-1 mb-2 bg-gray-50 p-2 rounded-[16px] border border-gray-100">
                          {['อา','จ','อ','พ','พฤ','ศ','ส'].map((day, idx) => {
@@ -1183,7 +1147,6 @@
               </div>
             )}
 
-            {/* Auth Modal */}
             {showAuthModal && (
               <div className="fixed inset-0 z-[110] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={handleAdminLogin} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
@@ -1197,6 +1160,51 @@
                 </form>
               </div>
             )}
+            
+            <CustomConfirmModal isOpen={confirmModal.isOpen} title={confirmModal.title} message={confirmModal.message} onCancel={() => setConfirmModal({ ...confirmModal, isOpen: false })} onConfirm={confirmModal.action} />
+            <CustomPromptModal isOpen={promptModal.isOpen} title={promptModal.title} placeholder={promptModal.placeholder} initialValue={promptModal.value} onCancel={() => setPromptModal({ ...promptModal, isOpen: false })} onConfirm={handlePromptSave} />
+
+            {showImageModal && (
+              <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
+                <form onSubmit={(e) => { 
+                    e.preventDefault(); 
+                    if (tempImageUrl) { 
+                        const u = formatSystemImage(tempImageUrl);
+                        setProfileImage(u); 
+                        fetchAPI({ action: 'saveSetting', key: 'profileImage', value: u }); 
+                    } 
+                    setShowImageModal(false); 
+                    setTempImageUrl(''); 
+                }} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
+                   <h3 className="text-sm font-black mb-4 text-center text-[#ff96d3]">เปลี่ยนรูปโปรไฟล์ 🐰</h3>
+                   <input type="url" required value={tempImageUrl} onChange={(e) => setTempImageUrl(e.target.value)} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[11px] shadow-sm focus:border-[#ff96d3] text-center bg-white" placeholder="ลิงก์ Drive รูปภาพ..." />
+                   <button type="submit" className="w-full py-3.5 rounded-2xl font-black text-xs mt-3 text-white shadow-lg active:scale-95 bg-[#ff96d3]">Save</button>
+                   <button type="button" onClick={() => { setShowImageModal(false); setTempImageUrl(''); }} className="w-full text-[9px] font-bold text-gray-400 mt-2 uppercase tracking-widest hover:text-gray-500">Close</button>
+                </form>
+              </div>
+            )}
+            
+            {showBannerModal && (
+              <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
+                <form onSubmit={(e) => { 
+                    e.preventDefault(); 
+                    if (tempBannerUrl) { 
+                        const u = formatSystemImage(tempBannerUrl);
+                        setBannerImage(u); 
+                        toggleBannerVisibility(true); 
+                        fetchAPI({ action: 'saveSetting', key:'bannerImage', value: u }); 
+                    } 
+                    setShowBannerModal(false); 
+                    setTempBannerUrl(''); 
+                }} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
+                   <h3 className="text-sm font-black mb-4 text-center text-[#ff96d3]">เปลี่ยนแบนเนอร์</h3>
+                   <input type="url" required value={tempBannerUrl} onChange={(e) => setTempBannerUrl(e.target.value)} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[11px] shadow-sm focus:border-[#ff96d3] text-center bg-white" placeholder="ลิงก์ Drive รูปภาพ..." />
+                   <button type="submit" className="w-full py-3.5 rounded-2xl font-black text-xs mt-3 text-white shadow-lg active:scale-95 bg-[#b5e48c]">Save Banner</button>
+                   <button type="button" onClick={() => { setShowBannerModal(false); setTempBannerUrl(''); }} className="w-full text-[9px] font-bold text-gray-400 mt-2 uppercase tracking-widest hover:text-gray-500">Close</button>
+                </form>
+              </div>
+            )}
+
           </div>
           
           <style>{`
@@ -1236,4 +1244,3 @@
   </script>
 </body>
 </html>
-

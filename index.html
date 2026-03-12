@@ -454,23 +454,32 @@
       const [selectedNextDate, setSelectedNextDate] = useState(''); 
       const [isBouncing, setIsBouncing] = useState(false); 
       const [linkNotion, setLinkNotion] = useState('https://notion.so');
-      const [linkWebsite, setLinkWebsite] = useState('https://google.com');
+      const [linksite, setLinksite] = useState('https://google.com');
       const [linkDrive, setLinkDrive] = useState('https://drive.google.com');
       const [taskTypes, setTaskTypes] = useState(['Logo', 'Banner', 'Artwork']); 
 
       const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwX5Fm0iPS_D8G39jNyyUeW0SMtKmcuqHSpYRHydfGq0C4Se0omDMlS80hKwo4RCrq03A/exec";
 
-      const fetchAPI = async (payload) => {
+const fetchAPI = async (payload) => {
         try {
-          const res = await fetch(WEB_APP_URL, { method: 'POST', body: JSON.stringify(payload) });
+          const res = await fetch(WEB_APP_URL, {
+            method: 'POST',
+            // 🚨 เพิ่ม Headers กันติด CORS
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
           return await res.json();
-        } catch (error) { console.error("API Error:", error); throw error; }
+        } catch (error) {
+          console.error("API Error:", error);
+          throw error;
+        }
       };
 
       useEffect(() => {
         document.title = "namtip"; 
-        fetch(WEB_APP_URL + "?action=getInitialData")
-          .then(res => res.json())
+        
+        // 🚨 เปลี่ยนจาก fetch(...) ธรรมดา มาใช้ fetchAPI ของเรา
+        fetchAPI({ action: 'getInitialData' })
           .then(response => {
             if (response.status === 'success') {
               if (response.data.tasks) setTasks(response.data.tasks);
@@ -494,7 +503,10 @@
             }
             setIsLoading(false);
           })
-          .catch(() => setIsLoading(false));
+          .catch(error => {
+            console.error("Error loading data:", error);
+            setIsLoading(false);
+          });
       }, []);
 
       const handleAdminLogin = (e) => {
@@ -1191,3 +1203,4 @@
   </script>
 </body>
 </html>
+

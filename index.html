@@ -394,6 +394,17 @@
       );
     });
 
+    // 🚨 ตัวช่วยแปลงลิงก์ Drive หรือ ID เปล่าๆ ให้เป็นรูปภาพที่แสดงผลได้ (ฟังก์ชันใหม่)
+    const formatImageUrl = (urlOrId) => {
+        if (!urlOrId) return '';
+        // ถ้าเป็น ID เปล่าๆ ไม่มี / เลย
+        if (!urlOrId.includes('/')) return `https://drive.google.com/uc?id=${urlOrId}`;
+        // ถ้าเป็นลิงก์ยาวๆ ให้พยายามสกัด ID ออกมา
+        const match = urlOrId.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || urlOrId.match(/id=([a-zA-Z0-9_-]+)/) || urlOrId.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        if (match && match[1]) return `https://drive.google.com/uc?id=${match[1]}`;
+        return urlOrId;
+    };
+
     // ==========================================
     // 🏠 MAIN APP COMPONENT
     // ==========================================
@@ -401,10 +412,12 @@
       const [isLoading, setIsLoading] = useState(true);
       const [isSaving, setIsSaving] = useState(false); 
       
+      // -- States สำหรับข้อมูล --
       const [tasks, setTasks] = useState([]);
       const [students, setStudents] = useState([]);
       const [todos, setTodos] = useState([]);
       
+      // -- States การแสดงผลหลัก --
       const [view, setView] = useState('dashboard'); 
       const [isCalendarView, setIsCalendarView] = useState(false);
       const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -414,6 +427,7 @@
       const [filterType, setFilterType] = useState('all');
       const [searchQuery, setSearchQuery] = useState('');
       
+      // -- States สำหรับ Modal & Auth --
       const [showModal, setShowModal] = useState(false);     
       const [editingTask, setEditingTask] = useState(null);  
       const [taskToDelete, setTaskToDelete] = useState(null);
@@ -425,16 +439,19 @@
       const [authError, setAuthError] = useState(false);
       const [isVerifyingAuth, setIsVerifyingAuth] = useState(false);
 
+      // -- States สำหรับ Dashboard ใหม่ --
       const [noteText, setNoteText] = useState('');
       const [noteEmoji, setNoteEmoji] = useState('😊');
       const [dashboardImageUrl, setDashboardImageUrl] = useState('');
       const [newTodoText, setNewTodoText] = useState('');
       
+      // -- States สำหรับระบบนักเรียน --
       const [studentSubView, setStudentSubView] = useState('list');
       const [studentSearchQuery, setStudentSearchQuery] = useState('');
       const [editingStudent, setEditingStudent] = useState(null);
-      const [viewingStudent, setViewingStudent] = useState(null); // เพิ่ม State สำหรับดูข้อมูลนักเรียน
+      const [viewingStudent, setViewingStudent] = useState(null);
 
+      // -- States สำหรับ Settings เดิม --
       const [profileImage, setProfileImage] = useState(null);
       const [tempImageUrl, setTempImageUrl] = useState('');   
       const [bannerImage, setBannerImage] = useState(null);   
@@ -447,8 +464,7 @@
       const [linkDrive, setLinkDrive] = useState('https://drive.google.com');
       const [taskTypes, setTaskTypes] = useState(['Logo', 'Banner', 'Artwork']); 
 
-      // 🚨 เปลี่ยนเป็น URL Web App ของคุณให้ถูกต้อง
-      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxn5yWFrWhjwk1or4mUJphJQ-Mvz6rNew9g_5EM7HZxLKQoFUUYGcG3zOm3XJUfDci28A/exec";
+      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx9dihcpJ1-4txusI_T6x4iodxGv84heNPQ9V6ezkGnWRRD7Qp7wrwSAGFRs5sE_zyluw/exec";
 
       const fetchAPI = async (payload) => {
         try {
@@ -473,8 +489,8 @@
               
               if (response.data.settings) {
                  const s = response.data.settings;
-                 if (s.profileImage) setProfileImage(s.profileImage);
-                 if (s.bannerImage) setBannerImage(s.bannerImage);
+                 if (s.profileImage) setProfileImage(formatImageUrl(s.profileImage));
+                 if (s.bannerImage) setBannerImage(formatImageUrl(s.bannerImage));
                  if (s.bannerVisible !== undefined) setIsBannerVisible(s.bannerVisible === 'true' || s.bannerVisible === true);
                  if (s.lockedNextDate) setSelectedNextDate(s.lockedNextDate);
                  if (s.linkNotion) setLinkNotion(s.linkNotion);
@@ -482,7 +498,7 @@
                  if (s.linkDrive) setLinkDrive(s.linkDrive);
                  if (s.noteText) setNoteText(s.noteText);
                  if (s.noteEmoji) setNoteEmoji(s.noteEmoji);
-                 if (s.dashboardImageUrl) setDashboardImageUrl(s.dashboardImageUrl);
+                 if (s.dashboardImageUrl) setDashboardImageUrl(formatImageUrl(s.dashboardImageUrl));
               }
             }
             setIsLoading(false);
@@ -670,9 +686,7 @@
       const handleDashboardImageClick = () => {
           const url = prompt("วางลิงก์รูปภาพ Google Drive สำหรับช่องนี้:", dashboardImageUrl);
           if(url !== null) {
-              let finalUrl = url;
-              const match = finalUrl.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || finalUrl.match(/id=([a-zA-Z0-9_-]+)/) || finalUrl.match(/\/d\/([a-zA-Z0-9_-]+)/);
-              if (match && match[1]) finalUrl = `https://lh3.googleusercontent.com/d/${match[1]}`;
+              const finalUrl = formatImageUrl(url);
               setDashboardImageUrl(finalUrl);
               fetchAPI({action:'saveSetting', key:'dashboardImageUrl', value:finalUrl});
           }
@@ -879,10 +893,10 @@
                       <div className="space-y-2">
                         {students.filter(s => (s.fullname||'').includes(studentSearchQuery) || (s.nickname||'').includes(studentSearchQuery)).map((student) => (
                           
-                          // 🚨 แก้ไขจุดที่ 3: ทำให้การ์ดกดได้เพื่อดูรายละเอียด
                           <div key={student.id} onClick={() => setViewingStudent(student)} className="bg-white/90 backdrop-blur-sm rounded-[22px] p-3 shadow-sm border border-gray-100 flex items-center gap-3 transition-transform hover:scale-[1.01] cursor-pointer">
                             <div className="w-12 h-12 rounded-[14px] bg-gradient-to-tr from-[#FFD2E4] to-[#CCE9ED] shrink-0 flex items-center justify-center overflow-hidden border border-white shadow-inner">
-                              {student.photo_link ? <img src={student.photo_link} className="w-full h-full object-cover" /> : <IconUser size={20} className="text-white opacity-80" />}
+                              {/* 🚨 อัปเดต: แปลงลิงก์รูปให้โชว์ได้ */}
+                              {student.photo_link ? <img src={formatImageUrl(student.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={20} className="text-white opacity-80" />}
                             </div>
                             <div className="flex-1 min-w-0">
                               <h3 className="text-[12px] font-bold text-gray-700 truncate">{student.fullname}</h3>
@@ -920,7 +934,8 @@
                         {/* รูป */}
                         <div className="flex flex-col items-center mb-2">
                           <div className="w-20 h-20 rounded-[22px] bg-gradient-to-tr from-[#FFD2E4] to-[#CCE9ED] flex items-center justify-center mb-2 shadow-sm border-2 border-white overflow-hidden relative">
-                             {editingStudent?.photo_link ? <img src={editingStudent.photo_link} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
+                             {/* 🚨 อัปเดต: แปลงลิงก์รูปให้โชว์ได้ */}
+                             {editingStudent?.photo_link ? <img src={formatImageUrl(editingStudent.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
                           </div>
                           <label className="text-[9px] font-bold text-gray-500 bg-white px-3 py-1.5 rounded-full border border-gray-100 cursor-pointer hover:bg-gray-50 shadow-sm transition-all active:scale-95">
                             + เลือกไฟล์รูปภาพ
@@ -944,7 +959,6 @@
                         </div>
 
                         <div className="pt-2 border-t border-gray-50">
-                          {/* 🚨 แก้ไขจุดที่ 1: แยก 2 แถว 2 คอลัมน์ สำหรับบิดามารดาและอาชีพ */}
                           <div className="grid grid-cols-2 gap-2 mb-2">
                             <div>
                               <label className="text-[10px] font-black text-[#ff96d3] ml-1 mb-1 block">ชื่อ-สกุล บิดา</label>
@@ -977,7 +991,6 @@
                         </div>
 
                         <div className="pt-2 border-t border-gray-50 bg-[#fff9f9]/50 p-2.5 rounded-[20px] border border-[#FFD2E4]/50">
-                          {/* 🚨 แก้ไขจุดที่ 2: เพิ่มลิงก์เพิ่มเติมไว้บนช่องอัปโหลด PDF */}
                           <label className="text-[10px] font-black text-[#ff96d3] ml-1 mb-1 flex items-center gap-1"><IconGlobe size={12}/> ลิงก์เพิ่มเติม</label>
                           <input type="url" name="extra_link" defaultValue={editingStudent?.extra_link} className="w-full p-2.5 rounded-[12px] bg-white border border-gray-100 text-[10px] outline-none focus:border-[#ff96d3] shadow-sm mb-3" placeholder="วางลิงก์ที่นี่..." />
 
@@ -1005,7 +1018,7 @@
               ) : null}
             </div>
 
-            {/* ===== Bottom Navigation Bar (ขอบนูนตรงกลาง) ===== */}
+            {/* ===== Bottom Navigation Bar ===== */}
             <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[260px] h-[86px] z-50">
               <svg className="absolute bottom-0 left-0 w-full h-full drop-shadow-[0_10px_15px_rgba(255,210,228,0.4)]" viewBox="0 0 260 86" fill="none">
                 <path 
@@ -1023,7 +1036,6 @@
                   <button onClick={() => setView('students')} className={`p-1.5 transition-all ${view === 'students' ? 'scale-110 text-[#E7F098] brightness-90' : 'text-gray-300 opacity-60'}`}><IconUser size={22} /></button>
               </div>
 
-              {/* ปุ่มบวก (+) ฉลาด สลับการทำงานตามหน้าปัจจุบัน */}
               {isAdmin && (
                 <div className="absolute top-[8px] left-1/2 -translate-x-1/2 z-20 animate-fadeIn">
                   <button onClick={() => { 
@@ -1040,7 +1052,6 @@
                 🪟 MODALS ต่างๆ
                 ========================================== */}
             
-            {/* 🚨 เพิ่ม Modal สำหรับดูรายละเอียดนักเรียน (แก้ไขจุดที่ 3 & 4) */}
             {viewingStudent && (
               <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/20 backdrop-blur-[2px] animate-fadeIn" onClick={() => setViewingStudent(null)}>
                 <div className="backdrop-blur-xl w-full max-w-[320px] rounded-[30px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100 relative" onClick={e => e.stopPropagation()}>
@@ -1048,7 +1059,7 @@
                   
                   <div className="flex flex-col items-center mb-4 mt-2">
                     <div className="w-20 h-20 rounded-[18px] bg-gradient-to-tr from-[#FFD2E4] to-[#CCE9ED] flex items-center justify-center overflow-hidden border-2 border-white shadow-sm mb-3">
-                      {viewingStudent.photo_link ? <img src={viewingStudent.photo_link} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
+                      {viewingStudent.photo_link ? <img src={formatImageUrl(viewingStudent.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
                     </div>
                     <h3 className="text-[16px] font-black text-gray-800 text-center px-4">{viewingStudent.fullname}</h3>
                     <p className="text-[12px] font-bold text-[#ff96d3] mt-0.5">{viewingStudent.nickname ? `น้อง${viewingStudent.nickname}` : ''}</p>
@@ -1064,7 +1075,6 @@
                     <p className="flex justify-between items-start gap-2"><strong>ที่อยู่:</strong> <span className="text-right text-[10px]">{viewingStudent.address || '-'}</span></p>
                   </div>
 
-                  {/* 🚨 แก้ไขจุดที่ 4: ลิงก์เพิ่มเติมคลิกได้ ไม่โชว์ธรรมดา */}
                   {viewingStudent.extra_link && (
                     <div className="mb-3 p-3 bg-[#CCE9ED]/30 rounded-[16px] border border-[#CCE9ED]">
                        <span className="text-[10px] font-bold text-gray-500 block mb-1">ลิงก์เพิ่มเติม:</span>
@@ -1083,7 +1093,6 @@
               </div>
             )}
 
-            {/* Task Form Modal */}
             {showModal && (
               <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={handleSaveTask} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
@@ -1162,7 +1171,6 @@
               </div>
             )}
 
-            {/* Auth Modal */}
             {showAuthModal && (
               <div className="fixed inset-0 z-[110] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={handleAdminLogin} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
@@ -1177,7 +1185,6 @@
               </div>
             )}
             
-            {/* Delete Modal */}
             {taskToDelete && (
               <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/20 backdrop-blur-[2px] animate-fadeIn">
                 <div className="backdrop-blur-xl w-full max-w-[260px] rounded-[30px] p-6 shadow-2xl animate-slideUp text-center bg-white/95 border border-gray-100">
@@ -1192,15 +1199,12 @@
               </div>
             )}
 
-            {/* Profile Image Upload Modal */}
             {showImageModal && (
               <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={(e) => { 
                     e.preventDefault(); 
                     if (tempImageUrl) { 
-                        let u = tempImageUrl; 
-                        const m = u.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || u.match(/id=([a-zA-Z0-9_-]+)/) || u.match(/\/d\/([a-zA-Z0-9_-]+)/); 
-                        if(m && m[1]) u = `https://drive.google.com/uc?id=${m[1]}`; 
+                        const u = formatImageUrl(tempImageUrl);
                         setProfileImage(u); 
                         fetchAPI({ action: 'saveSetting', key: 'profileImage', value: u }); 
                     } 
@@ -1215,15 +1219,12 @@
               </div>
             )}
             
-            {/* Banner Image Upload Modal */}
             {showBannerModal && (
               <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={(e) => { 
                     e.preventDefault(); 
                     if (tempBannerUrl) { 
-                        let u = tempBannerUrl; 
-                        const m = u.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || u.match(/id=([a-zA-Z0-9_-]+)/) || u.match(/\/d\/([a-zA-Z0-9_-]+)/); 
-                        if(m && m[1]) u = `https://drive.google.com/uc?id=${m[1]}`; 
+                        const u = formatImageUrl(tempBannerUrl);
                         setBannerImage(u); 
                         toggleBannerVisibility(true); 
                         fetchAPI({ action: 'saveSetting', key:'bannerImage', value: u }); 
@@ -1278,5 +1279,3 @@
   </script>
 </body>
 </html>
-
-

@@ -301,9 +301,7 @@
             {isAdmin ? (
               <div className="flex gap-1.5 shrink-0">
                 <button onClick={(e) => onToggleDoing(e, task.id)} className={`relative w-[28px] h-[28px] rounded-[8px] flex items-center justify-center transition-all active:scale-90 shadow-[0_3px_10px_rgba(255,210,228,1)]`} style={{ color: task.status === 'doing' ? COLORS.orangeDeep : '#B0BEC5', backgroundColor: task.status === 'doing' ? '#fff9f9' : COLORS.buttonBg, borderWidth: '2px', borderColor: `${COLORS.cardBorder}cc` }}>
-                  <div className={`${task.status === 'doing' ? 'animate-spin-slow' : ''} flex items-center justify-center`}>
-                    <IconLoader size={14} />
-                  </div>
+                  <div className={`${task.status === 'doing' ? 'animate-spin-slow' : ''} flex items-center justify-center`}><IconLoader size={14} /></div>
                 </button>
                 <button onClick={(e) => onToggleStatus(e, task.id)} className={`relative w-[28px] h-[28px] rounded-[8px] flex items-center justify-center transition-all active:scale-90 shadow-[0_3px_10px_rgba(255,210,228,1)]`} style={{ color: task.status === 'done' ? COLORS.pinkDeep : '#B0BEC5', backgroundColor: task.status === 'done' ? '#fff9f9' : COLORS.buttonBg, borderWidth: '2px', borderColor: `${COLORS.cardBorder}cc` }}>
                   <IconCheck size={16} />
@@ -329,12 +327,9 @@
         const taskDateStr = task.deadline.toString().substring(0, 10);
         
         if (taskDateStr === dateStr) return true;
-        // งานวนซ้ำ จะเริ่มแสดงหลังจากวันที่ตั้งต้นเท่านั้น
         if (checkDate < taskDate) return false;
-        
         if (task.recurringType === 'weekly') return taskDate.getDay() === checkDate.getDay();
         if (task.recurringType === 'monthly') return taskDate.getDate() === checkDate.getDate();
-        
         return false;
     };
 
@@ -453,32 +448,29 @@
       const [isBannerVisible, setIsBannerVisible] = useState(true);
       const [selectedNextDate, setSelectedNextDate] = useState(''); 
       const [isBouncing, setIsBouncing] = useState(false); 
+      
+      // 🚨 ตรวจสอบให้แน่ใจว่าประกาศตัวแปรเหล่านี้ไว้แล้ว!
       const [linkNotion, setLinkNotion] = useState('https://notion.so');
-      const [linksite, setLinksite] = useState('https://google.com');
+      const [linkWebsite, setLinkWebsite] = useState('https://google.com');
       const [linkDrive, setLinkDrive] = useState('https://drive.google.com');
       const [taskTypes, setTaskTypes] = useState(['Logo', 'Banner', 'Artwork']); 
 
-      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwX5Fm0iPS_D8G39jNyyUeW0SMtKmcuqHSpYRHydfGq0C4Se0omDMlS80hKwo4RCrq03A/exec";
+      // 🚨 ใส่ URL จาก Apps Script ของคุณตรงนี้
+      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwX5Fm0iPS_D8G39jNyyUeW0SMtKmcuqHSpYRHydfGq0C4Se0omDMlS80hKwo4RCrq03A/exec"; // <-- แก้ไขเป็น URL ของคุณ!
 
-const fetchAPI = async (payload) => {
+      const fetchAPI = async (payload) => {
         try {
-          const res = await fetch(WEB_APP_URL, {
-            method: 'POST',
-            // 🚨 เพิ่ม Headers กันติด CORS
-            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-            body: JSON.stringify(payload)
+          const res = await fetch(WEB_APP_URL, { 
+              method: 'POST', 
+              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+              body: JSON.stringify(payload) 
           });
           return await res.json();
-        } catch (error) {
-          console.error("API Error:", error);
-          throw error;
-        }
+        } catch (error) { console.error("API Error:", error); throw error; }
       };
 
       useEffect(() => {
         document.title = "namtip"; 
-        
-        // 🚨 เปลี่ยนจาก fetch(...) ธรรมดา มาใช้ fetchAPI ของเรา
         fetchAPI({ action: 'getInitialData' })
           .then(response => {
             if (response.status === 'success') {
@@ -503,10 +495,7 @@ const fetchAPI = async (payload) => {
             }
             setIsLoading(false);
           })
-          .catch(error => {
-            console.error("Error loading data:", error);
-            setIsLoading(false);
-          });
+          .catch(() => setIsLoading(false));
       }, []);
 
       const handleAdminLogin = (e) => {
@@ -528,12 +517,10 @@ const fetchAPI = async (payload) => {
         const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
       }, []); 
       
-      // ดึงงานของวันนี้ (รวมงานวนซ้ำ)
       const todayTasks = useMemo(() => tasks.filter(t => isTaskOnDate(t, today)), [tasks, today]);
       const doneToday = useMemo(() => todayTasks.filter(t => t.status === 'done').length, [todayTasks]);
       const progress = todayTasks.length === 0 ? 0 : Math.round((doneToday / todayTasks.length) * 100);
 
-      // งานปักหมุด
       const pinnedTasks = useMemo(() => tasks.filter(t => t.isPinned), [tasks]);
 
       const nextQueueDate = useMemo(() => {
@@ -1111,7 +1098,7 @@ const fetchAPI = async (payload) => {
               </div>
             )}
 
-            {/* Auth Modal & Others */}
+            {/* Auth Modal */}
             {showAuthModal && (
               <div className="fixed inset-0 z-[110] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={handleAdminLogin} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
@@ -1141,7 +1128,7 @@ const fetchAPI = async (payload) => {
               </div>
             )}
 
-            {/* Profile Image & Banner Upload Modals (เดิม) */}
+            {/* Profile Image & Banner Upload Modals */}
             {showImageModal && (
               <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={(e) => { e.preventDefault(); if (tempImageUrl) { let u = tempImageUrl; const m = u.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || u.match(/id=([a-zA-Z0-9_-]+)/) || u.match(/\/d\/([a-zA-Z0-9_-]+)/); if(m && m[1]) u = `https://lh3.googleusercontent.com/d/$${m[1]}`; setProfileImage(u); fetchAPI({ action: 'saveSetting', key: 'profileImage', value: u }); } setShowImageModal(false); setTempImageUrl(''); }} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
@@ -1203,4 +1190,3 @@ const fetchAPI = async (payload) => {
   </script>
 </body>
 </html>
-

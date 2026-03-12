@@ -20,7 +20,7 @@
     const { useState, useMemo, useEffect, useCallback } = React;
 
     // ==========================================
-    // 🖼️ COMPONENTS: ไอคอน SVG ทั้งหมด
+    // 🖼️ COMPONENTS: ไอคอน SVG
     // ==========================================
     const IconPlus = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>;
     const IconHome = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>;
@@ -29,7 +29,7 @@
     const IconCheck = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="20 6 9 17 4 12"></polyline></svg>;
     const IconFileText = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>;
     const IconCalendar = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>;
-    const IconLoader = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>;
+    const IconLoader = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line></svg>;
     const IconEye = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>;
     const IconEyeOff = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>;
     const IconImage = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>;
@@ -43,47 +43,28 @@
     const IconGlobe = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>;
     const IconNotion = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><path d="M8 16V8l8 8V8"></path></svg>;
     const IconDrive = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M12 10l-6 10l-3 -5l6 -10z"></path><path d="M9 15h12l-3 5h-12z"></path><path d="M15 15l-6 -10h6l6 10z"></path></svg>;
+    const IconAlert = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>;
 
     // ==========================================
-    // 🎨 ตัวแปรสีหลัก (COLORS Object)
+    // 🎨 ตัวแปรสีหลัก
     // ==========================================
     const COLORS = {
-      blue: '#CCE9ED',       
-      pink: '#FFD2E4',       
-      purple: '#FFEEB1',     
-      orange: '#E7F098',     
-      bg: '#fcfcfc',         
-      white: '#ffffff',
-      textMain: '#ff96d3',   
-      textSoft: '#b5e48c',   
-      pinkDeep: '#ff96d3',   
-      blueDeep: '#b5e48c',   
-      purpleDeep: '#ff96d3', 
-      orangeDeep: '#b5e48c', 
-      cardBg: '#ffffff',
-      cardBgDone: '#FFD2E4', 
-      cardWhite: '#ffffff',
-      cardBorder: '#f0f0f0',
-      cardInner: '#ffffff',
-      cloudWhite: '#ffffff',
-      modalBg: '#ffffff',
-      navBarBg: '#ffffff',
-      profileBorder: '#ff96d3',
-      buttonBg: '#ffffff',
-      dividerColor: '#f3f4f6',
-      searchInputBg: '#ffffff',
-      filterBarBg: '#ffffff',
-      bannerOverlayBg: '#ffffff',
+      blue: '#CCE9ED', pink: '#FFD2E4', purple: '#FFEEB1', orange: '#E7F098', bg: '#fcfcfc',
+      white: '#ffffff', textMain: '#ff96d3', textSoft: '#b5e48c', pinkDeep: '#ff96d3',
+      blueDeep: '#b5e48c', purpleDeep: '#ff96d3', orangeDeep: '#b5e48c', cardBg: '#ffffff',
+      cardBgDone: '#FFD2E4', cardWhite: '#ffffff', cardBorder: '#f0f0f0', cardInner: '#ffffff',
+      cloudWhite: '#ffffff', modalBg: '#ffffff', navBarBg: '#ffffff', profileBorder: '#ff96d3',
+      buttonBg: '#ffffff', dividerColor: '#f3f4f6', bannerOverlayBg: '#ffffff',
     };
 
     const FluffyCloud = React.memo(({ top, left, right, bottom, scale = 1, opacity = 0.7, delay = '0s', reverse = false }) => (
       <div className="absolute pointer-events-none drop-shadow-sm z-0" style={{ top, left, right, bottom, opacity, transform: `scale(${scale})` }}>
         <div className={reverse ? 'animate-float-reverse' : 'animate-float'} style={{ animationDelay: delay }}>
           <div className="relative w-40 h-16">
-            <div className="absolute bottom-0 left-4 w-32 h-10 rounded-full" style={{ backgroundColor: `${COLORS.cloudWhite}e6` }}></div>
-            <div className="absolute bottom-2 left-2 w-14 h-14 rounded-full" style={{ backgroundColor: `${COLORS.cloudWhite}e6` }}></div>
-            <div className="absolute bottom-5 left-10 w-16 h-16 rounded-full" style={{ backgroundColor: `${COLORS.cloudWhite}e6` }}></div>
-            <div className="absolute bottom-1 right-2 w-14 h-14 rounded-full" style={{ backgroundColor: `${COLORS.cloudWhite}e6` }}></div>
+            <div className="absolute bottom-0 left-4 w-32 h-10 rounded-full bg-white/90"></div>
+            <div className="absolute bottom-2 left-2 w-14 h-14 rounded-full bg-white/90"></div>
+            <div className="absolute bottom-5 left-10 w-16 h-16 rounded-full bg-white/90"></div>
+            <div className="absolute bottom-1 right-2 w-14 h-14 rounded-full bg-white/90"></div>
           </div>
         </div>
       </div>
@@ -103,35 +84,26 @@
 
     const Header = React.memo(({ isAdmin, setIsAdmin, setShowAuthModal, handleImageUpload, profileImage }) => (
       <div className="px-5 pt-6 pb-2 relative z-10">
-        <div className="backdrop-blur-md rounded-[32px] p-4 shadow-xl flex items-center justify-between h-20 relative overflow-hidden group" style={{ backgroundColor: `${COLORS.cardWhite}99`, borderWidth: '1px', borderColor: `${COLORS.cardBorder}80`, boxShadow: '0 10px 25px -5px rgba(255,210,228,0.2)' }}>
-          <div className="absolute left-6 top-1/2 -translate-y-1/2 w-24 h-8 blur-xl rounded-full" style={{ backgroundColor: `${COLORS.pink}66` }}></div>
+        <div className="backdrop-blur-md rounded-[32px] p-4 shadow-xl flex items-center justify-between h-20 relative overflow-hidden group bg-white/60 border border-gray-100">
+          <div className="absolute left-6 top-1/2 -translate-y-1/2 w-24 h-8 blur-xl rounded-full bg-[#ff96d3]/40"></div>
           <div className="flex flex-col justify-center ml-2 relative z-10">
             <div className="flex items-center gap-1">
              <h1 className="text-2xl font-black italic tracking-tighter flex">
              {"namtip".split('').map((char, index) => (
-                <span key={index} className={`drop-shadow-sm inline-block animate-text-wave pb-2 ${char === ' ' ? 'w-2.5' : 'pr-[1.5px]'}`} style={{ animationDelay: `${index * 0.1}s`, color: '#ff96d3' }}>
-                  {char}
-                </span>
+                <span key={index} className={`drop-shadow-sm inline-block animate-text-wave pb-2 ${char === ' ' ? 'w-2.5' : 'pr-[1.5px]'}`} style={{ animationDelay: `${index * 0.1}s`, color: '#ff96d3' }}>{char}</span>
               ))}
             </h1>
-              <button onClick={() => isAdmin ? setIsAdmin(false) : setShowAuthModal(true)} className={`px-1.5 py-0.5 ml-1 rounded-full text-[7px] font-black uppercase tracking-widest border shadow-sm transition-all active:scale-95`} style={{ backgroundColor: isAdmin ? `${COLORS.buttonBg}99` : `${COLORS.buttonBg}cc`, color: isAdmin ? '#ff96d3' : '#9ca3af', borderColor: isAdmin ? '#FFD2E4' : '#e5e7eb' }}>
-                {isAdmin ? 'Admin' : 'Guest'}
+              <button onClick={() => isAdmin ? setIsAdmin(false) : setShowAuthModal(true)} className={`px-1.5 py-0.5 ml-1 rounded-full text-[7px] font-black uppercase tracking-widest border shadow-sm transition-all active:scale-95 bg-white`}>
+                {isAdmin ? <span className="text-[#ff96d3]">Admin</span> : <span className="text-gray-400">Guest</span>}
               </button>
             </div>
             <div className="flex items-center gap-1.5 opacity-70">
-              <div className="w-3 h-[1px]" style={{ backgroundColor: COLORS.pinkDeep }}></div>
-              <p className="text-[8px] font-black tracking-[0.5em] uppercase" style={{ color: COLORS.purpleDeep }}>Check Q</p>
+              <div className="w-3 h-[1px] bg-[#ff96d3]"></div>
+              <p className="text-[8px] font-black tracking-[0.5em] uppercase text-[#ff96d3]">Check Q</p>
             </div>
           </div>
-          <div onClick={isAdmin ? handleImageUpload : undefined} className={`w-16 h-16 rounded-[1.25rem] flex items-center justify-center relative overflow-hidden transition-transform ${isAdmin ? 'cursor-pointer hover:scale-105 active:scale-95' : ''}`} style={{ backgroundColor: COLORS.cardInner, borderWidth: '2px', borderColor: COLORS.profileBorder }}>
-            {profileImage ? (
-              <img src={profileImage} alt="Profile" className="w-full h-full object-cover" />
-            ) : (
-              <>
-                <div className="absolute inset-0 opacity-40" style={{ background: `linear-gradient(to top right, ${COLORS.pink}, ${COLORS.blue})` }}></div>
-                <span className="text-2xl relative z-10 select-none">🐰</span>
-              </>
-            )}
+          <div onClick={isAdmin ? handleImageUpload : undefined} className={`w-16 h-16 rounded-[1.25rem] flex items-center justify-center relative overflow-hidden bg-white border-2 border-[#ff96d3] ${isAdmin ? 'cursor-pointer hover:scale-105 transition-transform' : ''}`}>
+            {profileImage ? <img src={profileImage} className="w-full h-full object-cover" /> : <span className="text-2xl">🐰</span>}
           </div>
         </div>
       </div>
@@ -146,24 +118,15 @@
       });
 
       return (
-        <div onClick={triggerFlowerBounce} className={`backdrop-blur-sm rounded-[28px] p-3 flex flex-col items-center justify-center shadow-lg h-full relative overflow-hidden transition-all duration-300 cursor-pointer ${isBouncing ? 'scale-95' : 'hover:scale-[1.02]'}`} style={{ backgroundColor: `${COLORS.cardWhite}cc`, borderWidth: '1px', borderColor: COLORS.cardBorder, boxShadow: '0 10px 15px -3px rgba(255,210,228,0.2)' }}>
-          <div className="absolute top-2 left-3 text-[8px] font-black text-purpleDeep uppercase tracking-tighter opacity-70" style={{ color: COLORS.purpleDeep }}>ความสำเร็จวันนี้</div>
+        <div onClick={triggerFlowerBounce} className={`backdrop-blur-sm rounded-[28px] p-3 flex flex-col items-center justify-center shadow-lg h-full relative overflow-hidden transition-all duration-300 cursor-pointer bg-white/80 border border-gray-100 ${isBouncing ? 'scale-95' : 'hover:scale-[1.02]'}`}>
+          <div className="absolute top-2 left-3 text-[8px] font-black text-[#ff96d3] uppercase tracking-tighter opacity-70">ความสำเร็จวันนี้</div>
           <div className="relative w-full h-20 flex items-center justify-center mt-2">
-            {progress > 0 && (
-              <div className="absolute inset-0 pointer-events-none">
-                  <div className="absolute top-1/2 left-1/4 w-1.5 h-1.5 bg-[#ff96d3] rounded-full animate-float-particle-1 opacity-60"></div>
-                  <div className="absolute top-2/3 right-1/4 w-2 h-2 bg-[#b5e48c] rounded-full animate-float-particle-2 opacity-60"></div>
-                  <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-[#CCE9ED] rounded-full animate-float-particle-3 opacity-60"></div>
-              </div>
-            )}
             <svg viewBox="0 0 100 100" className="w-20 h-20 overflow-visible">
               <g transform="translate(50, 50)">
                   <g className="animate-breathe">
-                    <g transform={`scale(${bloomScale})`} className="transition-transform duration-1000 cubic-bezier(0.34, 1.56, 0.64, 1)">
+                    <g transform={`scale(${bloomScale})`} className="transition-transform duration-1000">
                       <g transform="translate(-50, -50)">
-                        {petals.map((p, i) => (
-                          <circle key={i} cx={p.cx} cy={p.cy} r={p.r} fill="#FFD2E4" opacity="0.95" className="transition-all duration-700"/>
-                        ))}
+                        {petals.map((p, i) => <circle key={i} cx={p.cx} cy={p.cy} r={p.r} fill="#FFD2E4" opacity="0.95" className="transition-all duration-700"/>)}
                         <circle cx="50" cy="50" r="14" fill="#FFEEB1" className="transition-all duration-700" />
                         {isFullBloom && (
                           <g transform="translate(50, 50)" className="animate-fade-in">
@@ -180,8 +143,8 @@
               </g>
             </svg>
           </div>
-          <div className="mt-1 flex items-center gap-1 px-2 py-0.5 rounded-full z-10" style={{ backgroundColor: `${COLORS.buttonBg}99`, borderWidth: '1px', borderColor: COLORS.pink }}>
-            <span className="text-xs font-black" style={{ color: COLORS.purpleDeep }}>{progress}%</span>
+          <div className="mt-1 flex items-center gap-1 px-2 py-0.5 rounded-full z-10 bg-white/90 border border-[#ff96d3]">
+            <span className="text-xs font-black text-[#ff96d3]">{progress}%</span>
             <div className="w-1 h-1 rounded-full bg-[#FFD2E4]"></div>
             <span className="text-[8px] font-bold text-gray-400 uppercase">{doneToday} / {todayTasksLength} งาน</span>
           </div>
@@ -190,58 +153,36 @@
     });
 
     const CompactStats = React.memo(({ isAdmin, selectedNextDate, nextQueueDate, handleSetManualDate, waitingCount }) => (
-      <div className="backdrop-blur-sm rounded-[28px] p-1 shadow-lg h-full flex overflow-hidden relative group transition-all" style={{ backgroundColor: `${COLORS.cardWhite}cc`, borderWidth: '1px', borderColor: COLORS.cardBorder, boxShadow: '0 10px 15px -3px rgba(204,233,237,0.3)' }}>
-          <div className={`flex-1 flex flex-col justify-center items-center p-2 relative rounded-l-[24px] transition-colors overflow-hidden ${isAdmin ? 'hover:bg-white/50 cursor-pointer' : ''}`} style={{ backgroundColor: `${COLORS.orange}66` }}>
-            {isAdmin && (
-              <input type="date" className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10" value={selectedNextDate || nextQueueDate} onChange={(e) => handleSetManualDate(e.target.value)} />
-            )}
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-md text-[7px] font-black shadow-sm border uppercase tracking-wider whitespace-nowrap" style={{ color: COLORS.blueDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.orange }}>NEXT QUEUE</div>
-            
+      <div className="backdrop-blur-sm rounded-[28px] p-1 shadow-lg h-full flex overflow-hidden relative group transition-all bg-white/80 border border-gray-100">
+          <div className={`flex-1 flex flex-col justify-center items-center p-2 relative rounded-l-[24px] transition-colors overflow-hidden bg-[#E7F098]/40 ${isAdmin ? 'hover:bg-white/50 cursor-pointer' : ''}`}>
+            {isAdmin && <input type="date" className="absolute inset-0 opacity-0 cursor-pointer w-full h-full z-10" value={selectedNextDate || nextQueueDate} onChange={(e) => handleSetManualDate(e.target.value)} />}
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded-md text-[7px] font-black shadow-sm border uppercase tracking-wider whitespace-nowrap text-[#b5e48c] bg-white border-[#E7F098]">NEXT QUEUE</div>
             <div className="flex flex-col items-center mt-1 relative z-0 pointer-events-none">
-              <span className="text-3xl font-black leading-none tracking-tighter" style={{ color: COLORS.textSoft }}>{new Date(nextQueueDate).getDate()}</span>
-              <span className="text-[8px] font-black opacity-80 uppercase mt-0.5" style={{ color: COLORS.blueDeep }}>{new Date(nextQueueDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
+              <span className="text-3xl font-black leading-none tracking-tighter text-[#b5e48c]">{new Date(nextQueueDate).getDate()}</span>
+              <span className="text-[8px] font-black opacity-80 uppercase mt-0.5 text-[#b5e48c]">{new Date(nextQueueDate).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })}</span>
             </div>
-
             {isAdmin && selectedNextDate && (
-              <button 
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleSetManualDate(''); }} 
-                className="absolute bottom-1.5 left-1/2 -translate-x-1/2 z-20 px-2.5 py-0.5 rounded-md text-[7px] font-black shadow-sm border hover:bg-[#fff9f9] active:scale-90 transition-all"
-                style={{ color: COLORS.pinkDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.pink }}
-                title="กลับไปคำนวณวันว่างอัตโนมัติ"
-              >
-                AUTO
-              </button>
+              <button onClick={(e) => { e.preventDefault(); e.stopPropagation(); handleSetManualDate(''); }} className="absolute bottom-1.5 left-1/2 -translate-x-1/2 z-20 px-2.5 py-0.5 rounded-md text-[7px] font-black shadow-sm border hover:bg-[#fff9f9] active:scale-90 transition-all text-[#ff96d3] bg-white border-[#ff96d3]">AUTO</button>
             )}
           </div>
-
-          <div className="my-4 rounded-full" style={{ width: '1px', backgroundColor: `${COLORS.dividerColor}99` }}></div>
-          
+          <div className="my-4 rounded-full w-[1px] bg-gray-100"></div>
           <div className="flex-1 flex flex-col justify-center items-center p-2 relative">
-            <div className="absolute top-2 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-md text-[7px] font-black shadow-sm border uppercase tracking-wider whitespace-nowrap z-10" style={{ color: COLORS.pinkDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.pink }}>จำนวนคิวก่อนหน้า</div>
-            
+            <div className="absolute top-2 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-md text-[7px] font-black shadow-sm border uppercase tracking-wider whitespace-nowrap z-10 text-[#ff96d3] bg-white border-[#ff96d3]">จำนวนคิว</div>
             <div className="relative mt-5 flex flex-col items-center">
                <div className="relative">
-                 <div className="absolute inset-0 blur-lg rounded-full opacity-40 scale-125" style={{ backgroundColor: COLORS.blue }}></div>
-                 <div className="w-11 h-11 rounded-full flex flex-col items-center justify-center shadow-[inset_0_2px_8px_rgba(0,0,0,0.02)] relative z-10" style={{ backgroundColor: COLORS.cardInner, borderWidth: '2px', borderColor: COLORS.blue }}>
-                    <span className="text-xl font-black leading-none" style={{ color: COLORS.pinkDeep }}>{waitingCount}</span>
+                 <div className="absolute inset-0 blur-lg rounded-full opacity-40 scale-125 bg-[#CCE9ED]"></div>
+                 <div className="w-11 h-11 rounded-full flex flex-col items-center justify-center relative z-10 bg-white border-2 border-[#CCE9ED]">
+                    <span className="text-xl font-black leading-none text-[#ff96d3]">{waitingCount}</span>
                  </div>
                </div>
-               <span className="text-[8px] font-black opacity-60 uppercase mt-1.5 relative z-10" style={{ color: COLORS.pinkDeep }}>คิว</span>
+               <span className="text-[8px] font-black opacity-60 uppercase mt-1.5 relative z-10 text-[#ff96d3]">คิว</span>
             </div>
           </div>
       </div>
     ));
 
     const TaskCard = React.memo(({ task, isAdmin, onEdit, onToggleDoing, onToggleStatus }) => (
-      <div onClick={() => isAdmin && onEdit(task)} className={`relative mb-2 rounded-[22px] p-3 transition-all shadow-sm group backdrop-blur-sm ${isAdmin ? 'active:scale-[0.97] cursor-pointer' : ''}`} 
-        style={{ 
-          backgroundColor: task.status === 'done' ? COLORS.cardBgDone : task.status === 'doing' ? COLORS.cardBg : COLORS.cardBg,
-          borderWidth: '1px',
-          borderStyle: 'solid',
-          borderColor: task.status === 'doing' ? COLORS.pinkDeep : (task.status === 'done' ? 'transparent' : COLORS.cardBorder), 
-          opacity: task.status === 'done' ? 0.9 : 1 
-        }}
-      >
+      <div onClick={() => isAdmin && onEdit(task)} className={`relative mb-2 rounded-[22px] p-3 transition-all shadow-sm group backdrop-blur-sm ${isAdmin ? 'active:scale-[0.97] cursor-pointer' : ''}`} style={{ backgroundColor: task.status === 'done' ? '#FFD2E4' : '#ffffff', borderWidth: '1px', borderColor: task.status === 'doing' ? '#ff96d3' : (task.status === 'done' ? 'transparent' : '#f0f0f0'), opacity: task.status === 'done' ? 0.9 : 1 }}>
         {task.status === 'doing' && (
            <div className="absolute inset-0 pointer-events-none z-0">
              <div className="absolute -bottom-2 -left-3 text-[14px] animate-float-particle-1 drop-shadow-sm">🍋</div>
@@ -250,68 +191,43 @@
              <div className="absolute top-[30%] -right-4 text-[10px] animate-float-particle-1 drop-shadow-sm" style={{ animationDelay: '1.2s' }}>🍋</div>
            </div>
         )}
-        <div className="absolute left-2 top-3 bottom-3 w-1 rounded-full shadow-sm z-10" style={{ backgroundColor: task.channel === 'LINE' ? '#D5EDB5' : task.channel === 'FB' || task.channel === 'FACEBOOK' ? '#C0D5E9' : task.channel === 'IG' ? '#FFD3DE' : COLORS.pinkDeep }}></div>
+        <div className="absolute left-2 top-3 bottom-3 w-1 rounded-full shadow-sm z-10" style={{ backgroundColor: task.channel === 'LINE' ? '#D5EDB5' : task.channel === 'FB' || task.channel === 'FACEBOOK' ? '#C0D5E9' : task.channel === 'IG' ? '#FFD3DE' : '#ff96d3' }}></div>
         <div className="pl-3 pr-1 relative z-10">
           <div className="flex justify-between items-start mb-1">
             <div className="flex items-center gap-2 min-w-0">
-              <span className="font-bold text-base truncate" style={{ color: task.status === 'done' ? '#ff96d3' : COLORS.textMain }}>{task.client}</span>
-              {task.priority === 'urgent' && <span className="text-[9px] font-bold animate-pulse px-2 py-0.5 rounded-full shadow-sm border" style={{ color: COLORS.pinkDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.pink }}>{'\u{1F525}'} ด่วน</span>}
-              {task.priority === 'very_urgent' && <span className="text-[9px] font-bold animate-pulse px-2 py-0.5 rounded-full shadow-sm border" style={{ color: COLORS.pinkDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.pink }}>{'\u{1F525}'} ด่วนมาก</span>}
+              <span className="font-bold text-base truncate" style={{ color: task.status === 'done' ? '#ff96d3' : '#ff96d3' }}>{task.client}</span>
+              {task.priority === 'urgent' && <span className="text-[9px] font-bold animate-pulse px-2 py-0.5 rounded-full shadow-sm border bg-white border-[#ff96d3] text-[#ff96d3]">{'\u{1F525}'} ด่วน</span>}
+              {task.priority === 'very_urgent' && <span className="text-[9px] font-bold animate-pulse px-2 py-0.5 rounded-full shadow-sm border bg-white border-[#ff96d3] text-[#ff96d3]">{'\u{1F525}'} ด่วนมาก</span>}
             </div>
-            <div className="flex items-center gap-1 text-[9px] font-black bg-[#fff9f9]/80 px-2.5 py-0.5 rounded-lg border shadow-sm" style={{ color: COLORS.pinkDeep, borderColor: COLORS.pink }}>
-                <IconCalendar size={11} style={{ color: COLORS.pinkDeep }} />
-                {task.deadline ? (
-                    (() => {
-                        const parts = task.deadline.toString().substring(0, 10).split('-');
-                        if(parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0].substring(2)}`;
-                        return task.deadline;
-                    })()
-                ) : ''}
+            <div className="flex items-center gap-1 text-[9px] font-black bg-[#fff9f9]/80 px-2.5 py-0.5 rounded-lg border shadow-sm text-[#ff96d3] border-[#ff96d3]">
+                <IconCalendar size={11} />
+                {task.deadline ? (() => { const parts = task.deadline.toString().substring(0, 10).split('-'); if(parts.length === 3) return `${parts[2]}/${parts[1]}/${parts[0].substring(2)}`; return task.deadline; })() : ''}
             </div>
           </div>
-          
           <div className="flex justify-between items-end mt-1">
             <div className="flex-1 min-w-0 mr-4 flex flex-col gap-0.5 mt-1">
               <div className="flex items-center gap-1.5">
-                <span className={`text-[11px] font-black truncate ${task.status === 'done' ? 'line-through text-[#ff96d3]/60' : ''}`} style={{ color: task.status === 'done' ? '' : COLORS.blueDeep }}>{task.type}</span>
-                {task.recurringType && task.recurringType !== 'none' && (
-                  <span className="text-[8px] bg-gray-50 border border-gray-100 text-gray-400 px-1.5 rounded-md">{task.recurringType === 'weekly' ? 'ทุกสัปดาห์' : 'ทุกเดือน'}</span>
-                )}
+                <span className={`text-[11px] font-black truncate ${task.status === 'done' ? 'line-through text-[#ff96d3]/60' : 'text-[#b5e48c]'}`}>{task.type}</span>
+                {task.recurringType && task.recurringType !== 'none' && <span className="text-[8px] bg-gray-50 border border-gray-100 text-gray-400 px-1.5 rounded-md">{task.recurringType === 'weekly' ? 'ทุกสัปดาห์' : 'ทุกเดือน'}</span>}
               </div>
-              
-              {task.time_period && (
-                <span className={`text-[10px] flex items-center gap-1 mt-0.5 ${task.status === 'done' ? 'text-[#ff96d3]/80' : 'text-gray-500'}`}>
-                  <IconClock size={10} /> {task.time_period}
-                </span>
-              )}
-              
-              {task.channel && (
-                <span className={`text-[10px] truncate ${task.status === 'done' ? 'text-[#ff96d3]/80' : 'text-gray-500'}`}>
-                  <span className="font-bold">Link:</span> {task.channel}
-                </span>
-              )}
-
-              {task.details && (
-                <span className={`text-[10px] leading-tight line-clamp-2 mt-0.5 ${task.status === 'done' ? 'text-[#ff96d3]/80' : 'text-gray-500'}`}>
-                  <span className="font-bold">สถานที่:</span> {task.details}
-                </span>
-              )}
+              {task.time_period && <span className={`text-[10px] flex items-center gap-1 mt-0.5 ${task.status === 'done' ? 'text-[#ff96d3]/80' : 'text-gray-500'}`}><IconClock size={10} /> {task.time_period}</span>}
+              {task.channel && <span className={`text-[10px] truncate ${task.status === 'done' ? 'text-[#ff96d3]/80' : 'text-gray-500'}`}><span className="font-bold">Link:</span> {task.channel}</span>}
+              {task.details && <span className={`text-[10px] leading-tight line-clamp-2 mt-0.5 ${task.status === 'done' ? 'text-[#ff96d3]/80' : 'text-gray-500'}`}><span className="font-bold">สถานที่:</span> {task.details}</span>}
             </div>
-
             {isAdmin ? (
               <div className="flex gap-1.5 shrink-0">
-                <button onClick={(e) => onToggleDoing(e, task.id)} className={`relative w-[28px] h-[28px] rounded-[8px] flex items-center justify-center transition-all active:scale-90 shadow-[0_3px_10px_rgba(255,210,228,1)]`} style={{ color: task.status === 'doing' ? COLORS.orangeDeep : '#B0BEC5', backgroundColor: task.status === 'doing' ? '#fff9f9' : COLORS.buttonBg, borderWidth: '2px', borderColor: `${COLORS.cardBorder}cc` }}>
+                <button onClick={(e) => onToggleDoing(e, task.id)} className={`relative w-[28px] h-[28px] rounded-[8px] flex items-center justify-center transition-all active:scale-90 shadow-[0_3px_10px_rgba(255,210,228,1)] ${task.status === 'doing' ? 'bg-[#fff9f9] text-[#b5e48c]' : 'bg-white text-gray-300'}`} style={{ borderWidth: '2px', borderColor: '#f0f0f0' }}>
                   <div className={`${task.status === 'doing' ? 'animate-spin-slow' : ''} flex items-center justify-center`}><IconLoader size={14} /></div>
                 </button>
-                <button onClick={(e) => onToggleStatus(e, task.id)} className={`relative w-[28px] h-[28px] rounded-[8px] flex items-center justify-center transition-all active:scale-90 shadow-[0_3px_10px_rgba(255,210,228,1)]`} style={{ color: task.status === 'done' ? COLORS.pinkDeep : '#B0BEC5', backgroundColor: task.status === 'done' ? '#fff9f9' : COLORS.buttonBg, borderWidth: '2px', borderColor: `${COLORS.cardBorder}cc` }}>
+                <button onClick={(e) => onToggleStatus(e, task.id)} className={`relative w-[28px] h-[28px] rounded-[8px] flex items-center justify-center transition-all active:scale-90 shadow-[0_3px_10px_rgba(255,210,228,1)] ${task.status === 'done' ? 'bg-[#fff9f9] text-[#ff96d3]' : 'bg-white text-gray-300'}`} style={{ borderWidth: '2px', borderColor: '#f0f0f0' }}>
                   <IconCheck size={16} />
                 </button>
               </div>
             ) : (
               <div className="flex items-center shrink-0">
-                {task.status === 'doing' && <span className="text-[10px] font-bold flex items-center gap-1 px-2 py-1 rounded-md border shadow-sm" style={{ color: COLORS.blueDeep, backgroundColor: '#fff9f9', borderColor: COLORS.pink }}><IconLoader size={10} className="animate-spin-slow"/> กำลังทำ</span>}
-                {task.status === 'done' && <span className="text-[10px] font-bold flex items-center gap-1 px-2 py-1 rounded-md border shadow-sm" style={{ color: COLORS.pinkDeep, backgroundColor: COLORS.buttonBg, borderColor: COLORS.pink }}><IconCheck size={10} /> เสร็จแล้ว</span>}
-                {task.status === 'todo' && <span className="text-[10px] font-bold text-gray-400 flex items-center gap-1 px-2 py-1 rounded-md border border-gray-100 shadow-sm" style={{ backgroundColor: COLORS.buttonBg }}><IconClock size={10} /> รอคิว</span>}
+                {task.status === 'doing' && <span className="text-[10px] font-bold flex items-center gap-1 px-2 py-1 rounded-md border shadow-sm text-[#b5e48c] bg-[#fff9f9] border-[#ff96d3]"><IconLoader size={10} className="animate-spin-slow"/> กำลังทำ</span>}
+                {task.status === 'done' && <span className="text-[10px] font-bold flex items-center gap-1 px-2 py-1 rounded-md border shadow-sm text-[#ff96d3] bg-white border-[#ff96d3]"><IconCheck size={10} /> เสร็จแล้ว</span>}
+                {task.status === 'todo' && <span className="text-[10px] font-bold text-gray-400 flex items-center gap-1 px-2 py-1 rounded-md border border-gray-100 shadow-sm bg-white"><IconClock size={10} /> รอคิว</span>}
               </div>
             )}
           </div>
@@ -319,6 +235,7 @@
       </div>
     ));
 
+    // 🚨 อัปเกรด Logic: อ่านเงื่อนไขงานวนซ้ำแม่นยำขึ้น
     const isTaskOnDate = (task, dateStr) => {
         if (!task.deadline) return false;
         const taskDate = new Date(task.deadline);
@@ -326,9 +243,25 @@
         const taskDateStr = task.deadline.toString().substring(0, 10);
         
         if (taskDateStr === dateStr) return true;
-        if (checkDate < taskDate) return false;
-        if (task.recurringType === 'weekly') return taskDate.getDay() === checkDate.getDay();
-        if (task.recurringType === 'monthly') return taskDate.getDate() === checkDate.getDate();
+        if (checkDate < taskDate) return false; 
+
+        if (task.recurringType === 'weekly' && task.recurringValue) {
+            const days = task.recurringValue.split(',').map(Number);
+            return days.includes(checkDate.getDay());
+        }
+        if (task.recurringType === 'monthly' && task.recurringValue) {
+            const val = task.recurringValue.trim();
+            const cd = checkDate.getDate();
+            if (val.includes('-')) {
+                const parts = val.split('-').map(Number);
+                if (parts.length === 2 && !isNaN(parts[0]) && !isNaN(parts[1])) {
+                    if (parts[0] > parts[1]) return cd >= parts[0] || cd <= parts[1]; // เช่น 25-5
+                    else return cd >= parts[0] && cd <= parts[1]; // เช่น 5-10
+                }
+            } else {
+                if(!isNaN(Number(val))) return cd === Number(val);
+            }
+        }
         return false;
     };
 
@@ -345,16 +278,16 @@
       const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
       return (
-        <div className="backdrop-blur-xl rounded-[32px] p-5 mb-5 animate-fadeIn shadow-sm" style={{ backgroundColor: `${COLORS.cardWhite}e6`, borderWidth: '1px', borderColor: COLORS.cardBorder, boxShadow: '0 12px 30px rgba(255,210,228,0.2)' }}>
+        <div className="backdrop-blur-xl rounded-[32px] p-5 mb-5 animate-fadeIn shadow-sm bg-white/90 border border-gray-100">
           <div className="flex justify-between items-center mb-4 px-2">
-            <button onClick={() => setCurrentMonth(new Date(year, month - 1, 1))} className="p-1.5 rounded-full transition-colors" style={{ color: COLORS.blueDeep }}><IconChevronLeft size={20}/></button>
-            <h3 className="font-black text-[16px] tracking-widest" style={{ color: COLORS.pinkDeep }}>{monthNames[month]} {year}</h3>
-            <button onClick={() => setCurrentMonth(new Date(year, month + 1, 1))} className="p-1.5 rounded-full transition-colors" style={{ color: COLORS.blueDeep }}><IconChevronRight size={20}/></button>
+            <button onClick={() => setCurrentMonth(new Date(year, month - 1, 1))} className="p-1.5 rounded-full transition-colors text-[#b5e48c]"><IconChevronLeft size={20}/></button>
+            <h3 className="font-black text-[16px] tracking-widest text-[#ff96d3]">{monthNames[month]} {year}</h3>
+            <button onClick={() => setCurrentMonth(new Date(year, month + 1, 1))} className="p-1.5 rounded-full transition-colors text-[#b5e48c]"><IconChevronRight size={20}/></button>
           </div>
           
           <div className="grid grid-cols-7 gap-1 text-center mb-3">
             {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(d => (
-              <div key={d} className="text-[9px] font-black opacity-60 uppercase" style={{ color: COLORS.blueDeep }}>{d}</div>
+              <div key={d} className="text-[9px] font-black opacity-60 uppercase text-[#b5e48c]">{d}</div>
             ))}
           </div>
           
@@ -372,18 +305,12 @@
                   <div 
                     onClick={() => setSelectedDate(dateStr)} 
                     className={`relative w-10 h-10 flex flex-col items-center justify-center cursor-pointer transition-all ${
-                      isSelected ? 'text-white rounded-full font-black shadow-md scale-105' : isToday ? 'font-black rounded-full' : 'font-bold hover:bg-[#fff9f9] hover:shadow-sm rounded-full'
+                      isSelected ? 'text-white rounded-full font-black shadow-md scale-105 bg-[#ff96d3]' : isToday ? 'font-black rounded-full text-[#ff96d3] border-2 border-[#ff96d3]' : 'font-bold hover:bg-[#fff9f9] hover:shadow-sm rounded-full text-[#b5e48c]'
                     }`}
-                    style={{
-                        backgroundColor: isSelected ? COLORS.pinkDeep : isToday ? COLORS.pink : '',
-                        color: isSelected ? COLORS.white : isToday ? COLORS.pinkDeep : COLORS.blueDeep,
-                        borderWidth: isToday && !isSelected ? '2px' : '0px',
-                        borderColor: isToday && !isSelected ? COLORS.pink : ''
-                    }}
                   >
                     <span className="text-[13px] z-10 leading-none">{day}</span>
                     {hasTasks && (
-                      <div className="absolute bottom-1 w-1.5 h-1.5 rounded-full" style={{ backgroundColor: isSelected ? COLORS.white : COLORS.pinkDeep }}></div> 
+                      <div className={`absolute bottom-1 w-1.5 h-1.5 rounded-full ${isSelected ? 'bg-white' : 'bg-[#ff96d3]'}`}></div> 
                     )}
                   </div>
                 </div>
@@ -394,21 +321,54 @@
       );
     });
 
-    // 🚨 1. ฟังก์ชันแปลงรูประบบ (Profile, Banner, Dashboard) ให้แสดงบนเว็บได้เลย
     const formatSystemImage = (url) => {
         if (!url) return '';
         const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/) || url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-        if (match && match[1]) return `https://lh3.googleusercontent.com/d/${match[1]}`;
+        if (match && match[1]) return `https://drive.google.com/uc?id=${match[1]}`;
         return url; 
     };
 
-    // 🚨 2. ฟังก์ชันแปลงรูปนักเรียน (รองรับทั้งลิงก์ Drive และ ID เปล่าๆ)
-    const formatStudentImage = (urlOrId) => {
-        if (!urlOrId) return '';
-        if (!urlOrId.includes('/')) return `https://drive.google.com/uc?id=${urlOrId}`;
-        const match = urlOrId.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || urlOrId.match(/id=([a-zA-Z0-9_-]+)/) || urlOrId.match(/\/d\/([a-zA-Z0-9_-]+)/);
-        if (match && match[1]) return `https://drive.google.com/uc?id=${match[1]}`;
-        return urlOrId;
+    const formatStudentFile = (val, isPdf = false) => {
+        if (!val) return '';
+        if (val.includes('/')) return val; 
+        if (isPdf) return `https://drive.google.com/file/d/${val}/view`;
+        return `https://drive.google.com/uc?id=${val}`;
+    };
+
+    // 🚨 7. สร้าง Custom Modal (หน้าต่างป๊อปอัปของเว็บเราเอง)
+    const CustomConfirmModal = ({ isOpen, title, message, onCancel, onConfirm }) => {
+        if (!isOpen) return null;
+        return (
+            <div className="fixed inset-0 z-[300] flex items-center justify-center p-6 bg-black/20 backdrop-blur-sm animate-fadeIn">
+                <div className="backdrop-blur-xl w-full max-w-[280px] rounded-[30px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100 text-center">
+                    <div className="w-14 h-14 rounded-full bg-red-50 text-red-400 flex items-center justify-center mx-auto mb-4 shadow-sm border border-red-100"><IconAlert size={26} /></div>
+                    <h3 className="text-[16px] font-black mb-1 text-gray-800">{title}</h3>
+                    <p className="text-[11px] font-bold text-gray-500 mb-6 leading-relaxed">{message}</p>
+                    <div className="flex gap-2">
+                        <button onClick={onCancel} className="flex-1 py-3.5 rounded-2xl font-black text-[11px] text-gray-500 bg-gray-100 hover:bg-gray-200 active:scale-95 shadow-sm transition-all">ยกเลิก</button>
+                        <button onClick={onConfirm} className="flex-1 py-3.5 rounded-2xl font-black text-[11px] text-white bg-red-400 hover:bg-red-500 active:scale-95 shadow-sm transition-all">ยืนยัน</button>
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
+    const CustomPromptModal = ({ isOpen, title, placeholder, initialValue, onCancel, onConfirm }) => {
+        const [val, setVal] = useState('');
+        useEffect(() => { if(isOpen) setVal(initialValue || '') }, [isOpen, initialValue]);
+        if (!isOpen) return null;
+        return (
+            <div className="fixed inset-0 z-[300] flex items-center justify-center p-6 bg-black/20 backdrop-blur-sm animate-fadeIn">
+                <div className="backdrop-blur-xl w-full max-w-[280px] rounded-[30px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
+                    <h3 className="text-[14px] font-black mb-4 text-[#ff96d3] text-center">{title}</h3>
+                    <input autoFocus type="text" value={val} onChange={(e) => setVal(e.target.value)} placeholder={placeholder} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[12px] font-bold text-gray-600 shadow-sm focus:border-[#ff96d3] text-center mb-5" />
+                    <div className="flex gap-2">
+                        <button onClick={onCancel} className="flex-1 py-3.5 rounded-2xl font-black text-[11px] text-gray-500 bg-gray-100 hover:bg-gray-200 active:scale-95 shadow-sm transition-all">ยกเลิก</button>
+                        <button onClick={() => onConfirm(val)} className="flex-[1.5] py-3.5 rounded-2xl font-black text-[11px] text-white bg-[#ff96d3] hover:bg-[#ff85c8] active:scale-95 shadow-sm transition-all">บันทึก</button>
+                    </div>
+                </div>
+            </div>
+        );
     };
 
     // ==========================================
@@ -433,7 +393,11 @@
       
       const [showModal, setShowModal] = useState(false);     
       const [editingTask, setEditingTask] = useState(null);  
-      const [taskToDelete, setTaskToDelete] = useState(null);
+      
+      // State สำหรับหน้าต่าง Popup Custom
+      const [confirmModal, setConfirmModal] = useState({ isOpen: false, title: '', message: '', action: null });
+      const [promptModal, setPromptModal] = useState({ isOpen: false, type: '', title: '', placeholder: '', value: '' });
+
       const [showAuthModal, setShowAuthModal] = useState(false);   
       const [showImageModal, setShowImageModal] = useState(false); 
       const [showBannerModal, setShowBannerModal] = useState(false); 
@@ -452,6 +416,10 @@
       const [editingStudent, setEditingStudent] = useState(null);
       const [viewingStudent, setViewingStudent] = useState(null);
 
+      // 🚨 9. ตัวแปรสำหรับคิวงานวนซ้ำในฟอร์ม
+      const [recType, setRecType] = useState('none');
+      const [recVal, setRecVal] = useState('');
+
       const [profileImage, setProfileImage] = useState(null);
       const [tempImageUrl, setTempImageUrl] = useState('');   
       const [bannerImage, setBannerImage] = useState(null);   
@@ -464,15 +432,12 @@
       const [linkDrive, setLinkDrive] = useState('https://drive.google.com');
       const [taskTypes, setTaskTypes] = useState(['Logo', 'Banner', 'Artwork']); 
 
-      // 🚨 เปลี่ยนเป็น URL Web App ของคุณให้ถูกต้อง
-      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbx9dihcpJ1-4txusI_T6x4iodxGv84heNPQ9V6ezkGnWRRD7Qp7wrwSAGFRs5sE_zyluw/exec";
+      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwm6VdTr6uZEl22yk9r7tCrpQWqQh6WGT_73AMQHocCYIYb_9obVuqYWGXMiQwAiBCc7Q/exec";
 
       const fetchAPI = async (payload) => {
         try {
           const res = await fetch(WEB_APP_URL, { 
-              method: 'POST', 
-              headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-              body: JSON.stringify(payload) 
+              method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) 
           });
           return await res.json();
         } catch (error) { console.error("API Error:", error); throw error; }
@@ -480,17 +445,14 @@
 
       useEffect(() => {
         document.title = "namtip"; 
-        fetchAPI({ action: 'getInitialData' })
-          .then(response => {
+        fetchAPI({ action: 'getInitialData' }).then(response => {
             if (response.status === 'success') {
               if (response.data.tasks) setTasks(response.data.tasks);
               if (response.data.students) setStudents(response.data.students);
               if (response.data.todos) setTodos(response.data.todos);
               if (response.data.taskTypes) setTaskTypes(response.data.taskTypes);
-              
               if (response.data.settings) {
                  const s = response.data.settings;
-                 // 🚨 ดึงข้อมูลโดยผ่านฟังก์ชันแปลงลิงก์ระบบ
                  if (s.profileImage) setProfileImage(formatSystemImage(s.profileImage));
                  if (s.bannerImage) setBannerImage(formatSystemImage(s.bannerImage));
                  if (s.bannerVisible !== undefined) setIsBannerVisible(s.bannerVisible === 'true' || s.bannerVisible === true);
@@ -504,18 +466,16 @@
               }
             }
             setIsLoading(false);
-          })
-          .catch(() => setIsLoading(false));
+        }).catch(() => setIsLoading(false));
       }, []);
 
       const handleAdminLogin = (e) => {
         e.preventDefault(); setIsVerifyingAuth(true); setAuthError(false);
-        fetchAPI({ action: 'verifyAdminPassword', inputPassword: password })
-          .then(res => {
+        fetchAPI({ action: 'verifyAdminPassword', inputPassword: password }).then(res => {
             setIsVerifyingAuth(false);
             if (res.isValid) { setIsAdmin(true); setShowAuthModal(false); setPassword(''); setAuthError(false); } 
             else setAuthError(true);
-          }).catch(() => { setIsVerifyingAuth(false); setAuthError(true); });
+        }).catch(() => { setIsVerifyingAuth(false); setAuthError(true); });
       };
 
       const handleSetManualDate = useCallback((dateVal) => {
@@ -530,9 +490,7 @@
       const todayTasks = useMemo(() => tasks.filter(t => isTaskOnDate(t, today)), [tasks, today]);
       const doneToday = useMemo(() => todayTasks.filter(t => t.status === 'done').length, [todayTasks]);
       const progress = todayTasks.length === 0 ? 0 : Math.round((doneToday / todayTasks.length) * 100);
-
       const pinnedTasks = useMemo(() => tasks.filter(t => t.isPinned), [tasks]);
-
       const nextQueueDate = useMemo(() => {
         if (selectedNextDate) return selectedNextDate;
         let checkDate = new Date();
@@ -571,12 +529,23 @@
         }));
       }, []);
 
-      const handleEditTask = useCallback((task) => { setEditingTask(task); setShowModal(true); }, []);
+      const openTaskModal = (task = null) => {
+          setEditingTask(task);
+          setRecType(task?.recurringType || 'none');
+          setRecVal(task?.recurringValue || '');
+          setShowModal(true);
+      };
+
+      const toggleWeeklyDay = (dayVal) => {
+          let days = recVal ? recVal.split(',').map(Number) : [];
+          if (days.includes(dayVal)) days = days.filter(d => d !== dayVal);
+          else days.push(dayVal);
+          setRecVal(days.sort().join(','));
+      };
 
       const handleSaveTask = (e) => {
         e.preventDefault(); setIsSaving(true);
         const fd = new FormData(e.target);
-        
         let finalTimePeriod = '';
         if (fd.get('time_start') && fd.get('time_end')) finalTimePeriod = `${fd.get('time_start')} - ${fd.get('time_end')}`;
         else finalTimePeriod = fd.get('time_start') || fd.get('time_end') || '';
@@ -586,7 +555,7 @@
           client: fd.get('client'), type: fd.get('type'), channel: fd.get('channel'),
           priority: fd.get('priority') || 'normal', deadline: fd.get('deadline'),
           details: fd.get('details'), time_period: finalTimePeriod,
-          recurringType: fd.get('recurringType') || 'none',
+          recurringType: recType, recurringValue: recType === 'none' ? '' : recVal,
           isPinned: fd.get('isPinned') === 'on'
         };
 
@@ -596,21 +565,21 @@
         }).catch(() => setIsSaving(false));
       };
 
-      const executeDeleteTask = () => {
-        if (!taskToDelete) return;
-        setIsSaving(true);
-        fetchAPI({ action: 'deleteTask', taskId: taskToDelete }).then(() => {
-             setTasks(prev => prev.filter(t => t.id !== taskToDelete));
-             setIsSaving(false); setShowModal(false); setEditingTask(null); setTaskToDelete(null);
-        }).catch(() => setIsSaving(false));
+      const triggerDeleteTask = (id) => {
+          setConfirmModal({
+              isOpen: true, title: 'ลบคิวงาน', message: 'คุณต้องการลบคิวงานนี้ใช่หรือไม่?',
+              action: () => {
+                  setTasks(prev => prev.filter(t => t.id !== id));
+                  fetchAPI({ action: 'deleteTask', taskId: id });
+                  setShowModal(false);
+              }
+          });
       };
 
       // --- Student Functions ---
       const toBase64 = file => new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(file);
-          reader.onload = () => resolve(reader.result);
-          reader.onerror = error => reject(error);
+          const reader = new FileReader(); reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result); reader.onerror = error => reject(error);
       });
 
       const handleSaveStudent = async (e) => {
@@ -619,14 +588,10 @@
         
         const student = {
             id: editingStudent ? editingStudent.id : null,
-            fullname: fd.get('fullname'), nickname: fd.get('nickname'),
-            birthdate: fd.get('birthdate'), 
-            father_name: fd.get('father_name'),
-            father_occ: fd.get('father_occ'),
-            mother_name: fd.get('mother_name'),
-            mother_occ: fd.get('mother_occ'),
-            phone: fd.get('phone'), address: fd.get('address'),
-            extra_link: fd.get('extra_link'),
+            fullname: fd.get('fullname'), nickname: fd.get('nickname'), birthdate: fd.get('birthdate'), 
+            father_name: fd.get('father_name'), father_occ: fd.get('father_occ'),
+            mother_name: fd.get('mother_name'), mother_occ: fd.get('mother_occ'),
+            phone: fd.get('phone'), address: fd.get('address'), extra_link: fd.get('extra_link'),
             photo_link: editingStudent ? editingStudent.photo_link : '',
             pdf_link: editingStudent ? editingStudent.pdf_link : ''
         };
@@ -647,18 +612,20 @@
         });
       };
 
-      const handleDeleteStudent = (id) => {
-        if(confirm('ยืนยันการลบประวัตินักเรียนนี้?')) {
-            setStudents(students.filter(s => s.id !== id));
-            fetchAPI({action: 'deleteStudent', studentId: id});
-        }
+      const triggerDeleteStudent = (id) => {
+          setConfirmModal({
+              isOpen: true, title: 'ลบประวัตินักเรียน', message: 'คุณแน่ใจหรือไม่ว่าจะลบข้อมูลเด็กคนนี้?',
+              action: () => {
+                  setStudents(students.filter(s => s.id !== id));
+                  fetchAPI({action: 'deleteStudent', studentId: id});
+              }
+          });
       };
 
       // --- ToDo Functions ---
       const handleAddTodo = (e) => {
           if (e.key === 'Enter' && newTodoText.trim() !== '') {
-              const text = newTodoText.trim();
-              setNewTodoText('');
+              const text = newTodoText.trim(); setNewTodoText('');
               const tempId = Date.now().toString();
               setTodos([...todos, {id: tempId, text: text, isDone: false}]);
               fetchAPI({action:'saveTodo', todo: {text}}).then(res => {
@@ -670,40 +637,42 @@
           setTodos(todos.map(t => t.id === id ? {...t, isDone} : t));
           fetchAPI({action:'toggleTodo', todoId: id, isDone});
       };
-      const handleDeleteTodo = (id) => {
-          setTodos(todos.filter(t => t.id !== id));
-          fetchAPI({action:'deleteTodo', todoId: id});
+      const triggerDeleteTodo = (id) => {
+          setConfirmModal({
+              isOpen: true, title: 'ลบรายการเช็คลิสต์', message: 'ต้องการลบรายการนี้ใช่ไหม?',
+              action: () => {
+                  setTodos(todos.filter(t => t.id !== id));
+                  fetchAPI({action:'deleteTodo', todoId: id});
+              }
+          });
       };
 
-      // --- Settings Functions ---
+      // --- Settings & Prompts ---
       const toggleBannerVisibility = (visible) => { setIsBannerVisible(visible); fetchAPI({ action: 'saveSetting', key: 'bannerVisible', value: visible }); };
       const triggerFlowerBounce = useCallback(() => { setIsBouncing(true); setTimeout(() => setIsBouncing(false), 500); }, []);
       const handleImageUpload = useCallback(() => { setShowImageModal(true); }, []);
       
-      const handleChangeNoteEmoji = () => {
-         const e = prompt('ใส่อิโมจิที่ต้องการ (1 ตัว):', noteEmoji);
-         if(e) { setNoteEmoji(e); fetchAPI({action:'saveSetting', key:'noteEmoji', value:e}); }
+      const openEmojiPrompt = () => {
+          setPromptModal({ isOpen: true, type: 'emoji', title: 'ตั้งค่าอีโมจิ 📝', placeholder: 'ใส่อีโมจิ 1 ตัว...', value: noteEmoji });
+      };
+      const openDashboardImgPrompt = () => {
+          setPromptModal({ isOpen: true, type: 'dashImg', title: 'เปลี่ยนรูปหน้าหลัก 🖼️', placeholder: 'วางลิงก์ Google Drive...', value: dashboardImageUrl });
       };
 
-      const handleDashboardImageClick = () => {
-          const url = prompt("วางลิงก์รูปภาพ Google Drive สำหรับช่องนี้:", dashboardImageUrl);
-          if(url !== null) {
-              const finalUrl = formatSystemImage(url);
-              setDashboardImageUrl(finalUrl);
-              fetchAPI({action:'saveSetting', key:'dashboardImageUrl', value:finalUrl});
+      const handlePromptSave = (val) => {
+          if (promptModal.type === 'emoji') { setNoteEmoji(val); fetchAPI({action:'saveSetting', key:'noteEmoji', value:val}); }
+          else if (promptModal.type === 'dashImg') { 
+              const f = formatSystemImage(val); setDashboardImageUrl(f); fetchAPI({action:'saveSetting', key:'dashboardImageUrl', value:f}); 
           }
+          setPromptModal({ ...promptModal, isOpen: false });
       };
 
-      // --- Filter Tasks ---
       const filteredAllTasks = useMemo(() => tasks.filter(t => {
         const matchSearch = (t.type||'').toLowerCase().includes(searchQuery.toLowerCase()) || (t.client||'').toLowerCase().includes(searchQuery.toLowerCase());
         const matchFilter = filterType === 'all' || (filterType === 'pending' && t.status !== 'done') || (filterType === 'done' && t.status === 'done');
         return matchSearch && matchFilter;
       }), [tasks, searchQuery, filterType]);
-
-      const displayedTasks = isCalendarView 
-        ? filteredAllTasks.filter(t => isTaskOnDate(t, selectedDate)) 
-        : filteredAllTasks;
+      const displayedTasks = isCalendarView ? filteredAllTasks.filter(t => isTaskOnDate(t, selectedDate)) : filteredAllTasks;
 
       // Loading Screen
       if (isLoading) {
@@ -769,7 +738,7 @@
                       <div className="relative flex items-center w-full mt-0.5">
                         <input type="text" placeholder="เพิ่มโน้ตสั้นๆ..." className="w-full h-[40px] rounded-[16px] pl-3 pr-10 text-[11px] font-bold text-gray-600 outline-none shadow-sm transition-all border border-gray-100 focus:border-[#ff96d3] bg-white/90 backdrop-blur-sm"
                           value={noteText} onChange={(e) => setNoteText(e.target.value)} onBlur={(e) => fetchAPI({action:'saveSetting', key:'noteText', value:e.target.value})} disabled={!isAdmin} />
-                        <button onClick={isAdmin ? handleChangeNoteEmoji : undefined} className="absolute right-1.5 h-[28px] w-[28px] rounded-full flex items-center justify-center text-gray-400 hover:text-[#ff96d3] active:scale-95 transition-colors bg-transparent">
+                        <button onClick={isAdmin ? openEmojiPrompt : undefined} className="absolute right-1.5 h-[28px] w-[28px] rounded-full flex items-center justify-center text-gray-400 hover:text-[#ff96d3] active:scale-95 transition-colors bg-transparent">
                           {isAdmin ? <span className="text-sm">{noteEmoji}</span> : <IconSmile size={16} />}
                         </button>
                       </div>
@@ -777,7 +746,7 @@
                       <div className="flex-1 w-full rounded-[20px] overflow-hidden shadow-sm border border-gray-100 relative group flex items-center justify-center bg-white/60 backdrop-blur-sm min-h-[96px]">
                         {dashboardImageUrl ? <img src={dashboardImageUrl} className="w-full h-full object-cover" /> : <span className="text-[10px] font-bold text-gray-400 flex flex-col items-center gap-1 opacity-70"><IconImage size={18} /> ใส่รูปอ้างอิง</span>}
                         {isAdmin && (
-                          <button onClick={handleDashboardImageClick} className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                          <button onClick={openDashboardImgPrompt} className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                             <span className="bg-white/90 text-[#ff96d3] text-[9px] px-3 py-1.5 rounded-full font-black shadow-sm">แก้ไขรูปภาพ</span>
                           </button>
                         )}
@@ -798,8 +767,8 @@
                           {todos.map(todo => (
                             <label key={todo.id} className="flex items-start gap-1.5 text-[10px] cursor-pointer group relative">
                               <input type="checkbox" checked={todo.isDone || false} onChange={(e) => handleToggleTodo(todo.id, e.target.checked)} className="mt-[1px] accent-[#ff96d3] shrink-0" disabled={!isAdmin} />
-                              <span className={`leading-tight font-bold transition-colors ${todo.isDone ? 'text-gray-400 line-through' : 'text-gray-600 group-hover:text-[#ff96d3]'}`}>{todo.text}</span>
-                              {isAdmin && <button onClick={(e) => { e.preventDefault(); handleDeleteTodo(todo.id); }} className="absolute right-0 top-0 text-red-300 opacity-0 group-hover:opacity-100 hover:text-red-500"><IconTrash size={12}/></button>}
+                              <span className={`leading-tight font-bold transition-colors pr-4 ${todo.isDone ? 'text-gray-400 line-through' : 'text-gray-600 group-hover:text-[#ff96d3]'}`}>{todo.text}</span>
+                              {isAdmin && <button onClick={(e) => { e.preventDefault(); triggerDeleteTodo(todo.id); }} className="absolute right-0 top-0 text-red-300 opacity-0 group-hover:opacity-100 hover:text-red-500"><IconTrash size={12}/></button>}
                             </label>
                           ))}
                         </div>
@@ -822,7 +791,7 @@
                       </div>
                       <div className="grid grid-cols-2 gap-2">
                         {pinnedTasks.map(t => (
-                          <div key={t.id} onClick={() => isAdmin && handleEditTask(t)} className="running-border shadow-sm cursor-pointer hover:scale-[1.02] transition-transform">
+                          <div key={t.id} onClick={() => isAdmin && openTaskModal(t)} className="running-border shadow-sm cursor-pointer hover:scale-[1.02] transition-transform">
                             <div className="running-border-inner p-2.5 flex flex-col relative overflow-hidden">
                               <span className="text-[11px] font-bold text-gray-700 truncate pr-8">{t.client}</span>
                               <span className="text-[9px] font-black text-[#b5e48c] mt-0.5 truncate">{t.type}</span>
@@ -843,7 +812,7 @@
                     <div className="h-[1px] flex-1 bg-gradient-to-r from-[#FFD2E4]/60 to-transparent mx-3"></div>
                   </div>
                   <div className="space-y-1">
-                    {todayTasks.length > 0 ? todayTasks.map(t => <TaskCard key={t.id} task={t} isAdmin={isAdmin} onEdit={handleEditTask} onToggleDoing={toggleDoing} onToggleStatus={toggleStatus} />) : (
+                    {todayTasks.length > 0 ? todayTasks.map(t => <TaskCard key={t.id} task={t} isAdmin={isAdmin} onEdit={openTaskModal} onToggleDoing={toggleDoing} onToggleStatus={toggleStatus} />) : (
                       <div className="text-center py-10 rounded-[28px] border border-dashed shadow-sm" style={{ backgroundColor: `${COLORS.cardWhite}4d`, borderColor: COLORS.pinkDeep }}>
                         <p className="text-[9px] font-bold uppercase tracking-widest opacity-60" style={{ color: COLORS.pinkDeep }}>Sky is clear ✨</p>
                       </div>
@@ -870,7 +839,7 @@
                   </div>
                   {isCalendarView && <CalendarView currentMonth={currentMonth} setCurrentMonth={setCurrentMonth} selectedDate={selectedDate} setSelectedDate={setSelectedDate} today={today} tasks={tasks} />}
                   <div className="space-y-1">
-                    {displayedTasks.length > 0 ? displayedTasks.map(t => <TaskCard key={t.id} task={t} isAdmin={isAdmin} onEdit={handleEditTask} onToggleDoing={toggleDoing} onToggleStatus={toggleStatus} />) : (
+                    {displayedTasks.length > 0 ? displayedTasks.map(t => <TaskCard key={t.id} task={t} isAdmin={isAdmin} onEdit={openTaskModal} onToggleDoing={toggleDoing} onToggleStatus={toggleStatus} />) : (
                       <div className="text-center py-10 rounded-[28px] border border-dashed shadow-sm mt-4 border-[#ff96d3] bg-white/30">
                         <p className="text-[10px] font-black uppercase tracking-widest opacity-60 text-[#b5e48c]">{isCalendarView ? "วันนี้คิวว่าง ✨" : "No records found ✨"}</p>
                       </div>
@@ -897,19 +866,25 @@
                           
                           <div key={student.id} onClick={() => setViewingStudent(student)} className="bg-white/90 backdrop-blur-sm rounded-[22px] p-3 shadow-sm border border-gray-100 flex items-center gap-3 transition-transform hover:scale-[1.01] cursor-pointer">
                             <div className="w-12 h-12 rounded-[14px] bg-gradient-to-tr from-[#FFD2E4] to-[#CCE9ED] shrink-0 flex items-center justify-center overflow-hidden border border-white shadow-inner">
-                              {student.photo_link ? <img src={formatStudentImage(student.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={20} className="text-white opacity-80" />}
+                              {student.photo_link ? <img src={formatStudentFile(student.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={20} className="text-white opacity-80" />}
                             </div>
                             <div className="flex-1 min-w-0">
                               <h3 className="text-[12px] font-bold text-gray-700 truncate">{student.fullname}</h3>
                               <p className="text-[10px] font-black mt-0.5 text-[#b5e48c]">{student.nickname ? `น้อง${student.nickname}` : '-'}</p>
-                              <p className="text-[9px] text-gray-400 mt-1 flex items-center gap-1"><IconClock size={10}/> โทร: {student.phone}</p>
+                              <p className="text-[9px] text-gray-400 mt-1 flex items-center gap-1"><IconClock size={10}/> โทร: {student.phone || '-'}</p>
                             </div>
+                            {/* 🚨 ปุ่มตาพรีวิว PDF ขนาดเล็ก (เพิ่มตามรีเควส) */}
+                            {student.pdf_link && (
+                              <button onClick={(e) => { e.stopPropagation(); window.open(formatStudentFile(student.pdf_link, true), '_blank'); }} className="shrink-0 w-8 h-8 rounded-full bg-[#ff96d3]/10 text-[#ff96d3] flex items-center justify-center hover:bg-[#ff96d3] hover:text-white transition-colors" title="ดูไฟล์ PDF">
+                                <IconEye size={14} />
+                              </button>
+                            )}
                             {isAdmin && (
-                              <div className="flex flex-col gap-1.5 shrink-0 border-l border-gray-100 pl-2">
+                              <div className="flex flex-col gap-1.5 shrink-0 border-l border-gray-100 pl-2 ml-1">
                                 <button onClick={(e) => { e.stopPropagation(); setEditingStudent(student); setStudentSubView('form'); }} className="w-7 h-7 rounded-lg bg-[#fff9f9] border border-[#FFD2E4] text-[#ff96d3] flex items-center justify-center hover:bg-[#ff96d3] hover:text-white transition-colors active:scale-90" title="แก้ไข">
                                   <IconEdit size={14} />
                                 </button>
-                                <button onClick={(e) => { e.stopPropagation(); handleDeleteStudent(student.id); }} className="w-7 h-7 rounded-lg bg-red-50 border border-red-100 text-red-400 flex items-center justify-center hover:bg-red-400 hover:text-white transition-colors active:scale-90" title="ลบ">
+                                <button onClick={(e) => { e.stopPropagation(); triggerDeleteStudent(student.id); }} className="w-7 h-7 rounded-lg bg-red-50 border border-red-100 text-red-400 flex items-center justify-center hover:bg-red-400 hover:text-white transition-colors active:scale-90" title="ลบ">
                                   <IconTrash size={14} />
                                 </button>
                               </div>
@@ -935,7 +910,7 @@
                         {/* รูป */}
                         <div className="flex flex-col items-center mb-2">
                           <div className="w-20 h-20 rounded-[22px] bg-gradient-to-tr from-[#FFD2E4] to-[#CCE9ED] flex items-center justify-center mb-2 shadow-sm border-2 border-white overflow-hidden relative">
-                             {editingStudent?.photo_link ? <img src={formatStudentImage(editingStudent.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
+                             {editingStudent?.photo_link ? <img src={formatStudentFile(editingStudent.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
                           </div>
                           <label className="text-[9px] font-bold text-gray-500 bg-white px-3 py-1.5 rounded-full border border-gray-100 cursor-pointer hover:bg-gray-50 shadow-sm transition-all active:scale-95">
                             + เลือกไฟล์รูปภาพ
@@ -995,14 +970,12 @@
                           <input type="url" name="extra_link" defaultValue={editingStudent?.extra_link} className="w-full p-2.5 rounded-[12px] bg-white border border-gray-100 text-[10px] outline-none focus:border-[#ff96d3] shadow-sm mb-3" placeholder="วางลิงก์ที่นี่..." />
 
                           <label className="text-[10px] font-black text-[#ff96d3] ml-1 mb-1 flex items-center gap-1"><IconFileText size={12}/> อัปโหลดไฟล์ประวัติ PDF</label>
-                          <div className="flex items-center gap-2 mb-1">
+                          <div className="flex items-center gap-2">
                             <input type="file" name="pdfFile" accept=".pdf" className="flex-1 bg-white p-2 rounded-[12px] border border-gray-100 text-[9px] shadow-sm file:mr-2 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-[9px] file:font-bold file:bg-[#ff96d3]/10 file:text-[#ff96d3] hover:file:bg-[#ff96d3]/20" />
                           </div>
+                          {/* 🚨 ลบปุ่มพรีวิวออกตามรีเควสข้อ 6 */}
                           {editingStudent?.pdf_link && (
-                            <div className="flex gap-2 mt-2">
-                              <button type="button" onClick={() => window.open(editingStudent.pdf_link.replace('/view', '/preview'), '_blank')} className="flex-1 bg-[#CCE9ED] text-[#4a90e2] text-[9px] font-black px-3 py-2 rounded-[10px] shadow-sm hover:opacity-80 transition-opacity active:scale-95 flex items-center justify-center gap-1"><IconEye size={12}/> Preview</button>
-                              <button type="button" onClick={() => window.open(editingStudent.pdf_link, '_blank')} className="flex-1 bg-[#FFD2E4] text-[#d63384] text-[9px] font-black px-3 py-2 rounded-[10px] shadow-sm hover:opacity-80 transition-opacity active:scale-95 flex items-center justify-center gap-1"><IconDrive size={12}/> Drive</button>
-                            </div>
+                            <p className="text-[8px] font-bold text-gray-400 mt-1.5 px-1">*มีไฟล์แนบเดิมอยู่แล้ว หากไม่อัปโหลดใหม่ระบบจะใช้ไฟล์เดิม</p>
                           )}
                         </div>
 
@@ -1018,7 +991,7 @@
               ) : null}
             </div>
 
-            {/* ===== Bottom Navigation Bar ===== */}
+            {/* ===== Bottom Navigation Bar (ปรับปุ่ม + ลอยขึ้น) ===== */}
             <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[260px] h-[86px] z-50">
               <svg className="absolute bottom-0 left-0 w-full h-full drop-shadow-[0_10px_15px_rgba(255,210,228,0.4)]" viewBox="0 0 260 86" fill="none">
                 <path 
@@ -1036,22 +1009,41 @@
                   <button onClick={() => setView('students')} className={`p-1.5 transition-all ${view === 'students' ? 'scale-110 text-[#E7F098] brightness-90' : 'text-gray-300 opacity-60'}`}><IconUser size={22} /></button>
               </div>
 
+              {/* 🚨 ปุ่มบวกดันขึ้นไปอยู่สูงๆ หน่อย (ปรับจาก top-[8px] เป็น -top-2) */}
               {isAdmin && (
-                <div className="absolute top-[8px] left-1/2 -translate-x-1/2 z-20 animate-fadeIn">
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20 animate-fadeIn">
                   <button onClick={() => { 
                       if(view === 'students') { setEditingStudent(null); setStudentSubView('form'); } 
-                      else { setEditingTask(null); setShowModal(true); } 
-                  }} className="w-12 h-12 rounded-full text-white flex items-center justify-center transition-transform active:scale-90 shadow-sm border-[3px] border-white bg-[#b5e48c]">
-                    <IconPlus size={22} />
+                      else { openTaskModal(); } 
+                  }} className="w-14 h-14 rounded-full text-white flex items-center justify-center transition-transform active:scale-90 shadow-sm border-[4px] border-white bg-[#ff96d3]">
+                    <IconPlus size={24} />
                   </button>
                 </div>
               )}
             </div>
 
             {/* ==========================================
-                🪟 MODALS ต่างๆ
+                🪟 MODALS CUSTOM ป๊อปอัปที่เราสร้างเอง
                 ========================================== */}
             
+            <CustomConfirmModal 
+               isOpen={confirmModal.isOpen} 
+               title={confirmModal.title} 
+               message={confirmModal.message} 
+               onCancel={() => setConfirmModal({ ...confirmModal, isOpen: false })} 
+               onConfirm={confirmModal.action} 
+            />
+
+            <CustomPromptModal 
+               isOpen={promptModal.isOpen} 
+               title={promptModal.title} 
+               placeholder={promptModal.placeholder} 
+               initialValue={promptModal.value} 
+               onCancel={() => setPromptModal({ ...promptModal, isOpen: false })} 
+               onConfirm={handlePromptSave} 
+            />
+
+            {/* การ์ดรายละเอียดนักเรียน */}
             {viewingStudent && (
               <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/20 backdrop-blur-[2px] animate-fadeIn" onClick={() => setViewingStudent(null)}>
                 <div className="backdrop-blur-xl w-full max-w-[320px] rounded-[30px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100 relative" onClick={e => e.stopPropagation()}>
@@ -1059,20 +1051,20 @@
                   
                   <div className="flex flex-col items-center mb-4 mt-2">
                     <div className="w-20 h-20 rounded-[18px] bg-gradient-to-tr from-[#FFD2E4] to-[#CCE9ED] flex items-center justify-center overflow-hidden border-2 border-white shadow-sm mb-3">
-                      {viewingStudent.photo_link ? <img src={formatStudentImage(viewingStudent.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
+                      {viewingStudent.photo_link ? <img src={formatStudentFile(viewingStudent.photo_link)} className="w-full h-full object-cover" /> : <IconUser size={32} className="text-white opacity-80" />}
                     </div>
                     <h3 className="text-[16px] font-black text-gray-800 text-center px-4">{viewingStudent.fullname}</h3>
                     <p className="text-[12px] font-bold text-[#ff96d3] mt-0.5">{viewingStudent.nickname ? `น้อง${viewingStudent.nickname}` : ''}</p>
                   </div>
 
                   <div className="space-y-2 text-[11px] text-gray-600 bg-gray-50 p-4 rounded-[20px] border border-gray-100 mb-3">
-                    <p className="flex justify-between"><strong>วันเกิด:</strong> <span>{viewingStudent.birthdate || '-'}</span></p>
+                    <p className="flex justify-between"><strong>วันเกิด:</strong> <span>{viewingStudent.birthdate ? new Date(viewingStudent.birthdate).toLocaleDateString('th-TH', {day: '2-digit', month: 'short', year: 'numeric'}) : '-'}</span></p>
                     <div className="border-t border-gray-200 my-1"></div>
                     <p className="flex justify-between"><strong>บิดา:</strong> <span className="text-right">{viewingStudent.father_name || '-'} <br/> <span className="text-[9px] text-gray-400">({viewingStudent.father_occ || '-'})</span></span></p>
                     <p className="flex justify-between mt-2"><strong>มารดา:</strong> <span className="text-right">{viewingStudent.mother_name || '-'} <br/> <span className="text-[9px] text-gray-400">({viewingStudent.mother_occ || '-'})</span></span></p>
                     <div className="border-t border-gray-200 my-1"></div>
                     <p className="flex justify-between"><strong>โทร:</strong> <span>{viewingStudent.phone || '-'}</span></p>
-                    <p className="flex justify-between items-start gap-2"><strong>ที่อยู่:</strong> <span className="text-right text-[10px]">{viewingStudent.address || '-'}</span></p>
+                    <p className="flex justify-between items-start gap-2"><strong>ที่อยู่:</strong> <span className="text-right text-[10px] max-w-[150px]">{viewingStudent.address || '-'}</span></p>
                   </div>
 
                   {viewingStudent.extra_link && (
@@ -1085,7 +1077,7 @@
                   )}
 
                   {viewingStudent.pdf_link && (
-                    <button onClick={() => window.open(viewingStudent.pdf_link.replace('/view', '/preview'), '_blank')} className="w-full py-3.5 rounded-[16px] font-black text-[11px] text-white bg-[#ff96d3] hover:opacity-80 active:scale-95 transition-all shadow-md flex items-center justify-center gap-2">
+                    <button onClick={() => window.open(formatStudentFile(viewingStudent.pdf_link, true), '_blank')} className="w-full py-3.5 rounded-[16px] font-black text-[11px] text-white bg-[#ff96d3] hover:opacity-80 active:scale-95 transition-all shadow-md flex items-center justify-center gap-2">
                       <IconEye size={16} /> เปิดดูไฟล์ประวัติ (PDF)
                     </button>
                   )}
@@ -1093,7 +1085,7 @@
               </div>
             )}
 
-            {/* Task Form Modal */}
+            {/* Task Form Modal (อัปเกรดงานวนซ้ำ) */}
             {showModal && (
               <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
                 <form onSubmit={handleSaveTask} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
@@ -1120,10 +1112,10 @@
                        </label>
                      </div>
 
-                     <div className="flex items-center justify-between gap-2 mb-3 mt-1">
+                     <div className="flex items-center justify-between gap-2 mb-1 mt-1">
                        <div className="flex-1 flex items-center justify-between p-2 rounded-[14px] border border-gray-100 shadow-sm bg-white focus-within:border-[#ff96d3]">
                          <div className="flex items-center gap-1 text-[9px] font-bold uppercase tracking-wider text-[#b5e48c]"><IconClock size={12} /><span>รอบงาน</span></div>
-                         <select name="recurringType" defaultValue={editingTask?.recurringType || 'none'} className="bg-transparent text-[10px] font-black text-gray-600 outline-none pr-1">
+                         <select value={recType} onChange={e => {setRecType(e.target.value); setRecVal('');}} className="bg-transparent text-[10px] font-black text-gray-600 outline-none pr-1">
                            <option value="none">ครั้งเดียว</option>
                            <option value="weekly">ทุกสัปดาห์</option>
                            <option value="monthly">ทุกเดือน</option>
@@ -1135,7 +1127,26 @@
                        </label>
                      </div>
 
-                     <div className="flex flex-col gap-2 mb-2">
+                     {/* 🚨 อัปเกรด 9: เมนูตั้งค่างานวนซ้ำที่ปรากฏขึ้นมาเมื่อเลือก */}
+                     {recType === 'weekly' && (
+                       <div className="flex justify-between gap-1 mb-2 bg-gray-50 p-2 rounded-[16px] border border-gray-100">
+                         {['อา','จ','อ','พ','พฤ','ศ','ส'].map((day, idx) => {
+                            const isSelected = recVal ? recVal.split(',').map(Number).includes(idx) : false;
+                            return (
+                              <button key={idx} type="button" onClick={() => toggleWeeklyDay(idx)} className={`w-7 h-7 rounded-full text-[10px] font-black transition-all shadow-sm ${isSelected ? 'bg-[#ff96d3] text-white' : 'bg-white text-gray-400 border border-gray-200'}`}>
+                                {day}
+                              </button>
+                            )
+                         })}
+                       </div>
+                     )}
+                     {recType === 'monthly' && (
+                       <div className="mb-2">
+                         <input type="text" value={recVal} onChange={e=>setRecVal(e.target.value)} placeholder="ใส่วันที่ (เช่น 10) หรือช่วงวัน (เช่น 25-5)" className="w-full p-2.5 rounded-[14px] border border-gray-100 text-[10px] font-bold text-center bg-gray-50 outline-none focus:border-[#ff96d3]" />
+                       </div>
+                     )}
+
+                     <div className="flex flex-col gap-2 mb-2 mt-2">
                        <input name="client" required defaultValue={editingTask?.client || ''} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[11px] shadow-sm focus:border-[#ff96d3] bg-white" placeholder="รายการกำหนด" />
                        <input list="taskTypesList" name="type" required defaultValue={editingTask?.type || ''} className="w-full p-3.5 rounded-2xl font-black text-[10px] outline-none border border-gray-100 shadow-sm focus:border-[#ff96d3] bg-white" placeholder="ประเภทงาน" />
                        <datalist id="taskTypesList">{taskTypes.map(type => <option key={type} value={type} />)}</datalist>
@@ -1155,7 +1166,7 @@
                      
                      <div className="flex items-center justify-between p-1.5 pl-4 rounded-2xl border transition-all bg-[#ff96d3]/10 border-[#ff96d3]/50">
                        <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-black text-[#ff96d3]">
-                         <IconCalendar size={12} /><span>กำหนดส่ง</span>
+                         <IconCalendar size={12} /><span>{recType === 'none' ? 'กำหนดส่ง' : 'วันเริ่มนับรอบ'}</span>
                        </div>
                        <input name="deadline" type="date" required defaultValue={editingTask?.deadline || nextQueueDate} className="w-32 p-2.5 rounded-xl border outline-none text-[10px] font-black shadow-sm focus:border-[#ff96d3] bg-white text-[#ff96d3] border-gray-100" />
                      </div>
@@ -1163,10 +1174,10 @@
                      <div className="flex items-center gap-2 mt-3">
                        <button type="submit" className="flex-1 py-3.5 rounded-2xl font-black text-xs text-white shadow-lg active:scale-95 transition-all bg-[#ff96d3]">บันทึกคิวงาน</button>
                        {editingTask && (
-                         <button type="button" onClick={() => setTaskToDelete(editingTask.id)} className="w-12 h-[44px] flex items-center justify-center rounded-2xl bg-red-50 text-red-400 border border-red-100 hover:bg-red-100 shadow-sm"><IconTrash size={18} /></button>
+                         <button type="button" onClick={() => triggerDeleteTask(editingTask.id)} className="w-12 h-[44px] flex items-center justify-center rounded-2xl bg-red-50 text-red-400 border border-red-100 hover:bg-red-100 shadow-sm"><IconTrash size={18} /></button>
                        )}
                      </div>
-                     <button type="button" onClick={() => { setShowModal(false); setEditingTask(null); }} className="w-full text-[9px] font-bold text-gray-400 mt-2 uppercase tracking-widest hover:text-gray-500">Close</button>
+                     <button type="button" onClick={() => setShowModal(false)} className="w-full text-[9px] font-bold text-gray-400 mt-2 uppercase tracking-widest hover:text-gray-500">Close</button>
                    </div>
                 </form>
               </div>
@@ -1186,65 +1197,6 @@
                 </form>
               </div>
             )}
-            
-            {/* Delete Modal */}
-            {taskToDelete && (
-              <div className="fixed inset-0 z-[200] flex items-center justify-center p-6 bg-black/20 backdrop-blur-[2px] animate-fadeIn">
-                <div className="backdrop-blur-xl w-full max-w-[260px] rounded-[30px] p-6 shadow-2xl animate-slideUp text-center bg-white/95 border border-gray-100">
-                  <div className="w-14 h-14 rounded-full bg-red-50 text-red-400 flex items-center justify-center mx-auto mb-3 shadow-sm border border-red-100"><IconTrash size={26} /></div>
-                  <h3 className="text-[14px] font-black mb-1 text-[#ff96d3]">ยืนยันการลบ?</h3>
-                  <p className="text-[10px] font-bold text-gray-500 mb-5">คุณต้องการลบข้อมูลนี้ใช่หรือไม่<br/>(ไม่สามารถกู้คืนได้)</p>
-                  <div className="flex gap-2">
-                    <button onClick={() => setTaskToDelete(null)} className="flex-1 py-3 rounded-2xl font-black text-[10px] text-gray-500 bg-gray-100 hover:bg-gray-200 active:scale-95 shadow-sm">ยกเลิก</button>
-                    <button onClick={executeDeleteTask} className="flex-1 py-3 rounded-2xl font-black text-[10px] text-white bg-red-400 hover:bg-red-500 active:scale-95 shadow-sm">ลบข้อมูล</button>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Profile Image Upload Modal */}
-            {showImageModal && (
-              <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
-                <form onSubmit={(e) => { 
-                    e.preventDefault(); 
-                    if (tempImageUrl) { 
-                        const u = formatSystemImage(tempImageUrl);
-                        setProfileImage(u); 
-                        fetchAPI({ action: 'saveSetting', key: 'profileImage', value: u }); 
-                    } 
-                    setShowImageModal(false); 
-                    setTempImageUrl(''); 
-                }} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
-                   <h3 className="text-sm font-black mb-4 text-center text-[#ff96d3]">เปลี่ยนรูปโปรไฟล์ 🐰</h3>
-                   <input type="url" required value={tempImageUrl} onChange={(e) => setTempImageUrl(e.target.value)} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[11px] shadow-sm focus:border-[#ff96d3] text-center bg-white" placeholder="ลิงก์ Drive รูปภาพ..." />
-                   <button type="submit" className="w-full py-3.5 rounded-2xl font-black text-xs mt-3 text-white shadow-lg active:scale-95 bg-[#ff96d3]">Save</button>
-                   <button type="button" onClick={() => { setShowImageModal(false); setTempImageUrl(''); }} className="w-full text-[9px] font-bold text-gray-400 mt-2 uppercase tracking-widest hover:text-gray-500">Close</button>
-                </form>
-              </div>
-            )}
-            
-            {/* Banner Image Upload Modal */}
-            {showBannerModal && (
-              <div className="fixed inset-0 z-[120] flex items-center justify-center p-6 bg-black/10 backdrop-blur-[2px] animate-fadeIn">
-                <form onSubmit={(e) => { 
-                    e.preventDefault(); 
-                    if (tempBannerUrl) { 
-                        const u = formatSystemImage(tempBannerUrl);
-                        setBannerImage(u); 
-                        toggleBannerVisibility(true); 
-                        fetchAPI({ action: 'saveSetting', key:'bannerImage', value: u }); 
-                    } 
-                    setShowBannerModal(false); 
-                    setTempBannerUrl(''); 
-                }} className="backdrop-blur-xl w-full max-w-xs rounded-[35px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
-                   <h3 className="text-sm font-black mb-4 text-center text-[#ff96d3]">เปลี่ยนแบนเนอร์</h3>
-                   <input type="url" required value={tempBannerUrl} onChange={(e) => setTempBannerUrl(e.target.value)} className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[11px] shadow-sm focus:border-[#ff96d3] text-center bg-white" placeholder="ลิงก์ Drive รูปภาพ..." />
-                   <button type="submit" className="w-full py-3.5 rounded-2xl font-black text-xs mt-3 text-white shadow-lg active:scale-95 bg-[#b5e48c]">Save Banner</button>
-                   <button type="button" onClick={() => { setShowBannerModal(false); setTempBannerUrl(''); }} className="w-full text-[9px] font-bold text-gray-400 mt-2 uppercase tracking-widest hover:text-gray-500">Close</button>
-                </form>
-              </div>
-            )}
-
           </div>
           
           <style>{`

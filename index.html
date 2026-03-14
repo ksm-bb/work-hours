@@ -323,17 +323,26 @@
     const formatSystemImage = (url) => {
         if (!url) return '';
         const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/) || url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-        if (match && match[1]) return 'https://drive.google.com/uc?id=' + match[1];
+        if (match && match[1]) return `https://lh3.googleusercontent.com/d/${val}`;
         return url; 
     };
 
-    const formatStudentFile = (val, isPdf) => {
-        if (!val) return '';
-        if (val.indexOf('/') !== -1) return val; 
-        if (isPdf === true) return 'https://drive.google.com/file/d/' + val + '/view';
-        return 'https://drive.google.com/uc?id=' + val;
-    };
-
+   const formatStudentFile = (val, isPdf) => {
+    if (!val) return '';
+    if (isPdf === true) {
+        // PDF ยังคงใช้ drive.google.com แบบเดิม
+        if (val.indexOf('/') !== -1) return val;
+        return 'https://drive.google.com/file/d/' + val + '/view';
+    }
+    // รูปภาพ — แปลงเป็น lh3 เหมือน formatSystemImage
+    const match = val.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) 
+                || val.match(/id=([a-zA-Z0-9_-]+)/) 
+                || val.match(/\/d\/([a-zA-Z0-9_-]+)/);
+    if (match && match[1]) return `https://lh3.googleusercontent.com/d/${match[1]}`;
+    // ถ้าเป็น ID ล้วนๆ (ไม่มี / เลย)
+    if (val.indexOf('/') === -1) return `https://lh3.googleusercontent.com/d/${val}`;
+    return val;
+};
     const CustomConfirmModal = ({ isOpen, title, message, onCancel, onConfirm }) => {
         if (!isOpen) return null;
         return (

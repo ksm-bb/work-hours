@@ -30,19 +30,7 @@
     const IconFileText = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>;
     const IconCalendar = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>;
 
-    // ✅ แก้ IconLoader ให้ครบ 8 ขีด (spinner แบบ radial ชัดเจน)
-    const IconLoader = ({size=24, className=""}) => (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" className={className}>
-        <line x1="12" y1="2"    x2="12" y2="5"    strokeOpacity="1"   />
-        <line x1="16.95" y1="3.05"  x2="15.54" y2="4.46"  strokeOpacity="0.875" />
-        <line x1="22" y1="12"   x2="19" y2="12"   strokeOpacity="0.75"  />
-        <line x1="16.95" y1="20.95" x2="15.54" y2="19.54" strokeOpacity="0.625" />
-        <line x1="12" y1="22"   x2="12" y2="19"   strokeOpacity="0.5"   />
-        <line x1="4.22" y1="19.78" x2="5.63" y2="18.37" strokeOpacity="0.375" />
-        <line x1="2"  y1="12"   x2="5"  y2="12"   strokeOpacity="0.25"  />
-        <line x1="4.22" y1="4.22"  x2="5.63" y2="5.63"  strokeOpacity="0.125" />
-      </svg>
-    );
+    const IconLoader = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className={className}><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg>;
 
     const IconEye = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>;
     const IconEyeOff = ({size=24, className=""}) => <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>;
@@ -400,6 +388,8 @@
       const [password, setPassword] = useState('');
       const [authError, setAuthError] = useState(false);
       const [isVerifyingAuth, setIsVerifyingAuth] = useState(false);
+      const [showEmojiModal, setShowEmojiModal] = useState(false);
+      const [tempEmoji, setTempEmoji] = useState('');
       const [noteText, setNoteText] = useState('');
       const [noteEmoji, setNoteEmoji] = useState('😊');
       const [dashboardImageUrl, setDashboardImageUrl] = useState('');
@@ -711,38 +701,19 @@
                         <input type="text" placeholder="เพิ่มโน้ตสั้นๆ..." className="w-full h-[40px] rounded-[16px] pl-3 pr-10 text-[11px] font-bold text-gray-600 outline-none shadow-sm transition-all border border-gray-100 focus:border-[#ff96d3] bg-white/90 backdrop-blur-sm"
                           value={noteText} onChange={(e) => setNoteText(e.target.value)} onBlur={(e) => fetchAPI({action:'saveSetting', key:'noteText', value:e.target.value})} disabled={!isAdmin} />
 
-                        {/* ✅ Emoji Button แก้ใหม่ด้วย inline style ทำงานได้บนมือถือ */}
-                        <div style={{position:'absolute', right:'6px', zIndex:20}}>
+                        {/* ✅ Emoji Button — เปิด modal พิมพ์เอง */}
+                        <div className="absolute right-1.5">
                           {isAdmin ? (
-                            <div style={{position:'relative', width:'28px', height:'28px'}}>
-                              <span style={{
-                                position:'absolute', top:0, left:0, right:0, bottom:0,
-                                display:'flex', alignItems:'center', justifyContent:'center',
-                                fontSize:'14px', zIndex:0, pointerEvents:'none', userSelect:'none'
-                              }}>
-                                {noteEmoji || '😊'}
-                              </span>
-                              <input
-                                type="text"
-                                style={{
-                                  position:'absolute', top:0, left:0, width:'100%', height:'100%',
-                                  opacity:0, cursor:'pointer', zIndex:10,
-                                  WebkitTapHighlightColor:'transparent', border:'none', background:'transparent'
-                                }}
-                                onChange={e => {
-                                  const chars = [...e.target.value];
-                                  const emoji = chars.find(c => c.codePointAt(0) > 127);
-                                  if (emoji) {
-                                    setNoteEmoji(emoji);
-                                    fetchAPI({action:'saveSetting', key:'noteEmoji', value:emoji});
-                                  }
-                                  e.target.value = '';
-                                }}
-                              />
-                            </div>
+                            <button
+                              type="button"
+                              onClick={() => { setTempEmoji(''); setShowEmojiModal(true); }}
+                              className="h-[28px] w-[28px] rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors"
+                            >
+                              <span className="text-sm select-none">{noteEmoji || '😊'}</span>
+                            </button>
                           ) : (
-                            <div style={{width:'28px', height:'28px', display:'flex', alignItems:'center', justifyContent:'center'}}>
-                              <span style={{fontSize:'14px', userSelect:'none'}}>{noteEmoji || '😊'}</span>
+                            <div className="h-[28px] w-[28px] flex items-center justify-center">
+                              <span className="text-sm select-none">{noteEmoji || '😊'}</span>
                             </div>
                           )}
                         </div>
@@ -1189,9 +1160,37 @@
               </div>
             )}
 
-          </div>
+            {/* ===== Emoji Modal ===== */}
+            {showEmojiModal && (
+              <div className="fixed inset-0 z-[300] flex items-center justify-center p-6 bg-black/20 backdrop-blur-sm animate-fadeIn">
+                <div className="backdrop-blur-xl w-full max-w-[280px] rounded-[30px] p-6 shadow-2xl animate-slideUp bg-white/95 border border-gray-100">
+                  <h3 className="text-[14px] font-black mb-1 text-[#ff96d3] text-center">เปลี่ยนอิโมจิ</h3>
+                  <p className="text-[10px] text-gray-400 text-center mb-4">พิมพ์หรือวางอิโมจิที่ต้องการ</p>
+                  <input
+                    autoFocus
+                    type="text"
+                    value={tempEmoji}
+                    onChange={e => setTempEmoji(e.target.value)}
+                    placeholder="😊"
+                    className="w-full p-3.5 rounded-2xl border border-gray-100 outline-none text-[28px] shadow-sm focus:border-[#ff96d3] text-center mb-5"
+                  />
+                  <div className="flex gap-2">
+                    <button onClick={() => setShowEmojiModal(false)} className="flex-1 py-3.5 rounded-2xl font-black text-[11px] text-gray-500 bg-gray-100 active:scale-95 shadow-sm transition-all">ยกเลิก</button>
+                    <button onClick={() => {
+                      const chars = [...tempEmoji];
+                      const emoji = chars.find(c => c.codePointAt(0) > 127) || tempEmoji.trim();
+                      if (emoji) {
+                        setNoteEmoji(emoji);
+                        fetchAPI({action:'saveSetting', key:'noteEmoji', value:emoji});
+                      }
+                      setShowEmojiModal(false);
+                    }} className="flex-[1.5] py-3.5 rounded-2xl font-black text-[11px] text-white bg-[#ff96d3] active:scale-95 shadow-sm transition-all">บันทึก</button>
+                  </div>
+                </div>
+              </div>
+            )}
 
-          <style>{`
+          </div>
             @keyframes border-dance { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
             .running-border { position: relative; border-radius: 22px; background: linear-gradient(90deg, #ff96d3, #ffe4ef, #ff96d3, #ffe4ef, #ff96d3); background-size: 300% 300%; animation: border-dance 3s linear infinite; padding: 2px; }
             .running-border-inner { background: #ffffff; border-radius: 20px; height: 100%; width: 100%; }

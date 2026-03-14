@@ -320,30 +320,19 @@
       );
     });
 
-    // 🚨 แก้ไขเพื่อไม่ให้ Error Syntax (ไม่ใช้ Backtick เครื่องหมาย ` เพื่อป้องกัน Babel สับสนกับ URL)
     const formatSystemImage = (url) => {
         if (!url) return '';
         const match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/) || url.match(/\/d\/([a-zA-Z0-9_-]+)/);
-        if (match && match[1]) return `https://lh3.googleusercontent.com/d/${match[1]}`;
+        if (match && match[1]) return 'https://drive.google.com/uc?id=' + match[1];
         return url; 
     };
 
     const formatStudentFile = (val, isPdf) => {
-    if (!val) return '';
-    if (isPdf === true) {
-        // PDF ยังคงใช้ drive.google.com แบบเดิม
-        if (val.indexOf('/') !== -1) return val;
-        return 'https://drive.google.com/file/d/' + val + '/view';
-    }
-    // รูปภาพ — แปลงเป็น lh3 เหมือน formatSystemImage
-    const match = val.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) 
-                || val.match(/id=([a-zA-Z0-9_-]+)/) 
-                || val.match(/\/d\/([a-zA-Z0-9_-]+)/);
-    if (match && match[1]) return `https://lh3.googleusercontent.com/d/${match[1]}`;
-    // ถ้าเป็น ID ล้วนๆ (ไม่มี / เลย)
-    if (val.indexOf('/') === -1) return `https://lh3.googleusercontent.com/d/${val}`;
-    return val;
-};
+        if (!val) return '';
+        if (val.indexOf('/') !== -1) return val; 
+        if (isPdf === true) return 'https://drive.google.com/file/d/' + val + '/view';
+        return 'https://drive.google.com/uc?id=' + val;
+    };
 
     const CustomConfirmModal = ({ isOpen, title, message, onCancel, onConfirm }) => {
         if (!isOpen) return null;
@@ -416,6 +405,7 @@
 
       const [noteText, setNoteText] = useState('');
       const [noteEmoji, setNoteEmoji] = useState('😊');
+      const [showEmojiPicker, setShowEmojiPicker] = useState(false); // 🚨 State ใหม่สำหรับแผง Emoji
       const [dashboardImageUrl, setDashboardImageUrl] = useState('');
       const [newTodoText, setNewTodoText] = useState('');
       
@@ -440,7 +430,7 @@
       const [taskTypes, setTaskTypes] = useState(['Logo', 'Banner', 'Artwork']); 
 
       // 🚨 เปลี่ยนเป็น URL Web App ของคุณให้ถูกต้อง
-      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwm6VdTr6uZEl22yk9r7tCrpQWqQh6WGT_73AMQHocCYIYb_9obVuqYWGXMiQwAiBCc7Q/exec";
+      const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwX5Fm0iPSD8G39jNyyUeW0SMtKmcuqHSpYRHydfS4qR2s4c5wz4q2P5A/exec";
 
       const fetchAPI = async (payload) => {
         try {
@@ -659,16 +649,12 @@
       const triggerFlowerBounce = useCallback(() => { setIsBouncing(true); setTimeout(() => setIsBouncing(false), 500); }, []);
       const handleImageUpload = useCallback(() => { setShowImageModal(true); }, []);
       
-      const openEmojiPrompt = () => {
-          setPromptModal({ isOpen: true, type: 'emoji', title: 'ตั้งค่าอีโมจิ 📝', placeholder: 'ใส่อีโมจิ 1 ตัว...', value: noteEmoji });
-      };
       const openDashboardImgPrompt = () => {
           setPromptModal({ isOpen: true, type: 'dashImg', title: 'เปลี่ยนรูปหน้าหลัก 🖼️', placeholder: 'วางลิงก์ Google Drive...', value: dashboardImageUrl });
       };
 
       const handlePromptSave = (val) => {
-          if (promptModal.type === 'emoji') { setNoteEmoji(val); fetchAPI({action:'saveSetting', key:'noteEmoji', value:val}); }
-          else if (promptModal.type === 'dashImg') { 
+          if (promptModal.type === 'dashImg') { 
               const f = formatSystemImage(val); setDashboardImageUrl(f); fetchAPI({action:'saveSetting', key:'dashboardImageUrl', value:f}); 
           }
           setPromptModal({ ...promptModal, isOpen: false });
@@ -705,7 +691,6 @@
           <div className="max-w-md mx-auto min-h-screen relative pb-28">
             <Header isAdmin={isAdmin} setIsAdmin={setIsAdmin} setShowAuthModal={setShowAuthModal} handleImageUpload={handleImageUpload} profileImage={profileImage} />
             
-            {/* ===== Banner Section ===== */}
             {view !== 'students' && (
               <div className="px-5 relative z-10 mb-4">
                  {bannerImage && isBannerVisible && (
@@ -730,22 +715,40 @@
               </div>
             )}
             
-            {/* ===== Main Content ===== */}
             <div className="px-5 relative z-10">
               
-              {/* === DASHBOARD === */}
               {view === 'dashboard' ? (
                 <div className="animate-fadeIn">
                   <div className="flex gap-3 mb-1.5 items-stretch">
+                    {/* ฝั่งซ้าย */}
                     <div className="flex-[1.6] flex flex-col gap-2">
                       <div className="h-28"><CompactStats isAdmin={isAdmin} selectedNextDate={selectedNextDate} nextQueueDate={nextQueueDate} handleSetManualDate={handleSetManualDate} waitingCount={waitingCount} /></div>
+                      
+                      {/* 🚨 อัปเดต 1: โน้ต & แผง Emoji Picker */}
                       <div className="relative flex items-center w-full mt-0.5">
                         <input type="text" placeholder="เพิ่มโน้ตสั้นๆ..." className="w-full h-[40px] rounded-[16px] pl-3 pr-10 text-[11px] font-bold text-gray-600 outline-none shadow-sm transition-all border border-gray-100 focus:border-[#ff96d3] bg-white/90 backdrop-blur-sm"
                           value={noteText} onChange={(e) => setNoteText(e.target.value)} onBlur={(e) => fetchAPI({action:'saveSetting', key:'noteText', value:e.target.value})} disabled={!isAdmin} />
-                        <button onClick={isAdmin ? openEmojiPrompt : undefined} className="absolute right-1.5 h-[28px] w-[28px] rounded-full flex items-center justify-center text-gray-400 hover:text-[#ff96d3] active:scale-95 transition-colors bg-transparent">
-                          {isAdmin ? <span className="text-sm">{noteEmoji}</span> : <IconSmile size={16} />}
-                        </button>
+                        
+                        <div className="absolute right-1.5">
+                          <button onClick={isAdmin ? () => setShowEmojiPicker(!showEmojiPicker) : undefined} className={`h-[28px] w-[28px] rounded-full flex items-center justify-center text-gray-400 transition-colors bg-transparent ${isAdmin ? 'hover:bg-gray-100 cursor-pointer' : 'cursor-default'}`}>
+                            <span className="text-sm select-none">{noteEmoji || '😊'}</span>
+                          </button>
+
+                          {showEmojiPicker && isAdmin && (
+                            <div className="absolute right-0 top-full mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 z-[60] grid grid-cols-4 gap-1 w-[160px] animate-fadeIn">
+                              {['😊','😂','🥰','😎','🥺','✨','🔥','🎉','👍','💖','🍋','🐰'].map(e => (
+                                <button key={e} onClick={() => {
+                                  setNoteEmoji(e);
+                                  fetchAPI({action:'saveSetting', key:'noteEmoji', value:e});
+                                  setShowEmojiPicker(false);
+                                }} className="hover:bg-gray-100 rounded-lg p-1.5 text-lg transition-colors flex items-center justify-center select-none">{e}</button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+
                       </div>
+
                       <div className="flex-1 w-full rounded-[20px] overflow-hidden shadow-sm border border-gray-100 relative group flex items-center justify-center bg-white/60 backdrop-blur-sm min-h-[96px]">
                         {dashboardImageUrl ? <img src={dashboardImageUrl} className="w-full h-full object-cover" /> : <span className="text-[10px] font-bold text-gray-400 flex flex-col items-center gap-1 opacity-70"><IconImage size={18} /> ใส่รูปอ้างอิง</span>}
                         {isAdmin && (
@@ -755,16 +758,21 @@
                         )}
                       </div>
                     </div>
+
+                    {/* ฝั่งขวา */}
                     <div className="flex-1 flex flex-col gap-2">
                       <div className="h-28"><ProgressFlower progress={progress} todayTasksLength={todayTasks.length} doneToday={doneToday} triggerFlowerBounce={triggerFlowerBounce} isBouncing={isBouncing} /></div>
-                      <div className="flex justify-between items-center backdrop-blur-sm rounded-[20px] px-3 py-1.5 shadow-sm bg-white/90 border border-gray-100">
+                      <div className="flex justify-between items-center backdrop-blur-sm rounded-[20px] px-3 py-1.5 shadow-sm bg-white/90 border border-gray-100 shrink-0">
                         <a href={linkNotion} target="_blank" rel="noreferrer" className="p-1 rounded-xl hover:bg-[#fff9f9] transition-all text-[#B0BEC5] hover:text-[#ff96d3] active:scale-95 flex items-center justify-center"><IconNotion size={18} /></a>
                         <a href={linkWebsite} target="_blank" rel="noreferrer" className="p-1 rounded-xl hover:bg-[#fff9f9] transition-all text-[#B0BEC5] hover:text-[#ff96d3] active:scale-95 flex items-center justify-center"><IconGlobe size={18} /></a>
                         <a href={linkDrive} target="_blank" rel="noreferrer" className="p-1 rounded-xl hover:bg-[#fff9f9] transition-all text-[#B0BEC5] hover:text-[#ff96d3] active:scale-95 flex items-center justify-center"><IconDrive size={18} /></a>
                       </div>
-                      <div className="flex-1 min-h-[96px] backdrop-blur-sm rounded-[20px] p-2 shadow-sm flex flex-col border border-gray-100 bg-white/90">
-                        <div className="text-[9px] font-black text-[#ff96d3] uppercase tracking-widest px-1 mb-1.5 flex items-center gap-1"><IconCheck size={10}/> To-do Note</div>
-                        <div className="todo-scrollbar overflow-y-auto flex-1 pr-1 space-y-2 max-h-[64px]">
+
+                      {/* 🚨 อัปเดต 2: ปรับ Layout กล่อง To do list ให้ยืดหยุ่นถูกต้อง */}
+                      <div className="flex-1 min-h-[96px] backdrop-blur-sm rounded-[20px] p-2 shadow-sm flex flex-col border border-gray-100 bg-white/90 relative">
+                        <div className="text-[9px] font-black text-[#ff96d3] uppercase tracking-widest px-1 mb-1.5 flex items-center gap-1 shrink-0"><IconCheck size={10}/> To do list</div>
+                        
+                        <div className="todo-scrollbar overflow-y-auto flex-1 pr-1 space-y-2">
                           {todos.map(todo => (
                             <label key={todo.id} className="flex items-start gap-1.5 text-[10px] cursor-pointer group relative">
                               <input type="checkbox" checked={todo.isDone || false} onChange={(e) => handleToggleTodo(todo.id, e.target.checked)} className="mt-[1px] accent-[#ff96d3] shrink-0" disabled={!isAdmin} />
@@ -773,8 +781,9 @@
                             </label>
                           ))}
                         </div>
+
                         {isAdmin && (
-                          <div className="mt-1 pt-1 border-t border-gray-100 flex items-center gap-1">
+                          <div className="mt-1 pt-1 border-t border-gray-100 flex items-center gap-1 shrink-0">
                             <input type="text" placeholder="พิมพ์เพิ่ม..." value={newTodoText} onChange={e=>setNewTodoText(e.target.value)} onKeyDown={handleAddTodo} className="flex-1 bg-transparent text-[9px] font-bold outline-none px-1 text-gray-600 placeholder-gray-300" />
                             <button onClick={()=>handleAddTodo({key:'Enter'})} className="text-[#b5e48c] p-0.5 hover:bg-gray-50 rounded-md transition-colors"><IconPlus size={14}/></button>
                           </div>
@@ -986,7 +995,7 @@
               ) : null}
             </div>
 
-            {/* ===== Bottom Navigation Bar (ปรับปุ่ม + ลอยขึ้น) ===== */}
+            {/* ===== Bottom Navigation Bar ===== */}
             <div className="fixed bottom-6 left-1/2 -translate-x-1/2 w-[260px] h-[86px] z-50">
               <svg className="absolute bottom-0 left-0 w-full h-full drop-shadow-[0_10px_15px_rgba(255,210,228,0.4)]" viewBox="0 0 260 86" fill="none">
                 <path 
@@ -1254,5 +1263,3 @@
   </script>
 </body>
 </html>
-
-

@@ -845,11 +845,6 @@
                               <p className="text-[10px] font-black mt-0.5 text-[#b5e48c]">{student.nickname ? `น้อง${student.nickname}` : '-'}</p>
                               <p className="text-[9px] text-gray-400 mt-1 flex items-center gap-1"><IconClock size={10}/> โทร: {student.phone || '-'}</p>
                             </div>
-                            {student.pdf_link && (
-                              <button onClick={(e) => { e.stopPropagation(); window.open(formatStudentFile(student.pdf_link, true), '_blank'); }} className="shrink-0 w-8 h-8 rounded-full bg-[#ff96d3]/10 text-[#ff96d3] flex items-center justify-center hover:bg-[#ff96d3] hover:text-white transition-colors" title="ดูไฟล์ PDF">
-                                <IconEye size={14} />
-                              </button>
-                            )}
                             {isAdmin && (
                               <div className="flex flex-col gap-1.5 shrink-0 border-l border-gray-100 pl-2 ml-1">
                                 <button onClick={(e) => { e.stopPropagation(); setEditingStudent(student); setStudentSubView('form'); }} className="w-7 h-7 rounded-lg bg-[#fff9f9] border border-[#FFD2E4] text-[#ff96d3] flex items-center justify-center hover:bg-[#ff96d3] hover:text-white transition-colors active:scale-90" title="แก้ไข">

@@ -405,7 +405,7 @@
 
       const [noteText, setNoteText] = useState('');
       const [noteEmoji, setNoteEmoji] = useState('😊');
-      const [showEmojiPicker, setShowEmojiPicker] = useState(false); // 🚨 State ใหม่สำหรับแผง Emoji
+      const [showEmojiPicker, setShowEmojiPicker] = useState(false);
       const [dashboardImageUrl, setDashboardImageUrl] = useState('');
       const [newTodoText, setNewTodoText] = useState('');
       
@@ -429,13 +429,14 @@
       const [linkDrive, setLinkDrive] = useState('https://drive.google.com');
       const [taskTypes, setTaskTypes] = useState(['Logo', 'Banner', 'Artwork']); 
 
-      // 🚨 เปลี่ยนเป็น URL Web App ของคุณให้ถูกต้อง
+      // 🚨 ใส่ลิงก์ WEB_APP_URL ของคุณที่นี่
       const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwm6VdTr6uZEl22yk9r7tCrpQWqQh6WGT_73AMQHocCYIYb_9obVuqYWGXMiQwAiBCc7Q/exec";
 
       const fetchAPI = async (payload) => {
         try {
+          // 🚨 เอา Headers ออกเพื่อไม่ให้เกิด Error CORS Preflight บน GitHub Pages
           const res = await fetch(WEB_APP_URL, { 
-              method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) 
+              method: 'POST', body: JSON.stringify(payload) 
           });
           return await res.json();
         } catch (error) { console.error("API Error:", error); throw error; }
@@ -720,11 +721,9 @@
               {view === 'dashboard' ? (
                 <div className="animate-fadeIn">
                   <div className="flex gap-3 mb-1.5 items-stretch">
-                    {/* ฝั่งซ้าย */}
                     <div className="flex-[1.6] flex flex-col gap-2">
                       <div className="h-28"><CompactStats isAdmin={isAdmin} selectedNextDate={selectedNextDate} nextQueueDate={nextQueueDate} handleSetManualDate={handleSetManualDate} waitingCount={waitingCount} /></div>
                       
-                      {/* 🚨 อัปเดต 1: โน้ต & แผง Emoji Picker */}
                       <div className="relative flex items-center w-full mt-0.5">
                         <input type="text" placeholder="เพิ่มโน้ตสั้นๆ..." className="w-full h-[40px] rounded-[16px] pl-3 pr-10 text-[11px] font-bold text-gray-600 outline-none shadow-sm transition-all border border-gray-100 focus:border-[#ff96d3] bg-white/90 backdrop-blur-sm"
                           value={noteText} onChange={(e) => setNoteText(e.target.value)} onBlur={(e) => fetchAPI({action:'saveSetting', key:'noteText', value:e.target.value})} disabled={!isAdmin} />
@@ -759,7 +758,6 @@
                       </div>
                     </div>
 
-                    {/* ฝั่งขวา */}
                     <div className="flex-1 flex flex-col gap-2">
                       <div className="h-28"><ProgressFlower progress={progress} todayTasksLength={todayTasks.length} doneToday={doneToday} triggerFlowerBounce={triggerFlowerBounce} isBouncing={isBouncing} /></div>
                       <div className="flex justify-between items-center backdrop-blur-sm rounded-[20px] px-3 py-1.5 shadow-sm bg-white/90 border border-gray-100 shrink-0">
@@ -768,7 +766,6 @@
                         <a href={linkDrive} target="_blank" rel="noreferrer" className="p-1 rounded-xl hover:bg-[#fff9f9] transition-all text-[#B0BEC5] hover:text-[#ff96d3] active:scale-95 flex items-center justify-center"><IconDrive size={18} /></a>
                       </div>
 
-                      {/* 🚨 อัปเดต 2: ปรับ Layout กล่อง To do list ให้ยืดหยุ่นถูกต้อง */}
                       <div className="flex-1 min-h-[96px] backdrop-blur-sm rounded-[20px] p-2 shadow-sm flex flex-col border border-gray-100 bg-white/90 relative">
                         <div className="text-[9px] font-black text-[#ff96d3] uppercase tracking-widest px-1 mb-1.5 flex items-center gap-1 shrink-0"><IconCheck size={10}/> To do list</div>
                         

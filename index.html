@@ -736,38 +736,32 @@
                         <input type="text" placeholder="เพิ่มโน้ตสั้นๆ..." className="w-full h-[40px] rounded-[16px] pl-3 pr-10 text-[11px] font-bold text-gray-600 outline-none shadow-sm transition-all border border-gray-100 focus:border-[#ff96d3] bg-white/90 backdrop-blur-sm"
                           value={noteText} onChange={(e) => setNoteText(e.target.value)} onBlur={(e) => fetchAPI({action:'saveSetting', key:'noteText', value:e.target.value})} disabled={!isAdmin} />
                         
-                        <div className="absolute right-1.5">
+<div className="absolute right-1.5">
   {isAdmin ? (
-    <label className="h-[28px] w-[28px] rounded-full flex items-center justify-center hover:bg-gray-100 cursor-pointer transition-colors relative">
-      <span className="text-sm select-none">{noteEmoji || '😊'}</span>
+    <div className="relative h-[28px] w-[28px]">
+      <span className="absolute inset-0 flex items-center justify-center text-sm pointer-events-none z-10 select-none">
+        {noteEmoji || '😊'}
+      </span>
       <input
         type="text"
-        inputMode="none"
-        className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
-        onFocus={e => { e.target.blur(); }}
-        onClick={e => {
-          // เปิด native emoji keyboard บนมือถือ
-          e.target.style.opacity = '1';
-          e.target.focus();
-          e.target.style.opacity = '0';
-        }}
+        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer rounded-full"
         onChange={e => {
-          const val = e.target.value;
-          if (val) {
-            setNoteEmoji(val);
-            fetchAPI({action:'saveSetting', key:'noteEmoji', value:val});
-            e.target.value = '';
+          const chars = [...e.target.value];
+          const emoji = chars.find(c => c.codePointAt(0) > 127);
+          if (emoji) {
+            setNoteEmoji(emoji);
+            fetchAPI({action:'saveSetting', key:'noteEmoji', value:emoji});
           }
+          e.target.value = '';
         }}
       />
-    </label>
+    </div>
   ) : (
-    <div className="h-[28px] w-[28px] flex items-center justify-center cursor-default">
+    <div className="h-[28px] w-[28px] flex items-center justify-center">
       <span className="text-sm select-none">{noteEmoji || '😊'}</span>
     </div>
   )}
 </div>
-
                       </div>
 
                       <div className="flex-1 w-full rounded-[20px] overflow-hidden shadow-sm border border-gray-100 relative group flex items-center justify-center bg-white/60 backdrop-blur-sm min-h-[96px]">

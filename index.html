@@ -414,7 +414,6 @@
 
       const [noteText, setNoteText] = useState('');
       const [noteEmoji, setNoteEmoji] = useState('😊');
-      const [showEmojiPicker, setShowEmojiPicker] = useState(false);
       const [dashboardImageUrl, setDashboardImageUrl] = useState('');
       const [newTodoText, setNewTodoText] = useState('');
       
@@ -738,22 +737,36 @@
                           value={noteText} onChange={(e) => setNoteText(e.target.value)} onBlur={(e) => fetchAPI({action:'saveSetting', key:'noteText', value:e.target.value})} disabled={!isAdmin} />
                         
                         <div className="absolute right-1.5">
-                          <button onClick={isAdmin ? () => setShowEmojiPicker(!showEmojiPicker) : undefined} className={`h-[28px] w-[28px] rounded-full flex items-center justify-center text-gray-400 transition-colors bg-transparent ${isAdmin ? 'hover:bg-gray-100 cursor-pointer' : 'cursor-default'}`}>
-                            <span className="text-sm select-none">{noteEmoji || '😊'}</span>
-                          </button>
-
-                          {showEmojiPicker && isAdmin && (
-                            <div className="absolute right-0 top-full mt-2 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 z-[60] grid grid-cols-4 gap-1 w-[160px] animate-fadeIn">
-                              {['😊','😂','🥰','😎','🥺','✨','🔥','🎉','👍','💖','🍋','🐰'].map(e => (
-                                <button key={e} onClick={() => {
-                                  setNoteEmoji(e);
-                                  fetchAPI({action:'saveSetting', key:'noteEmoji', value:e});
-                                  setShowEmojiPicker(false);
-                                }} className="hover:bg-gray-100 rounded-lg p-1.5 text-lg transition-colors flex items-center justify-center select-none">{e}</button>
-                              ))}
-                            </div>
-                          )}
-                        </div>
+  {isAdmin ? (
+    <label className="h-[28px] w-[28px] rounded-full flex items-center justify-center hover:bg-gray-100 cursor-pointer transition-colors relative">
+      <span className="text-sm select-none">{noteEmoji || '😊'}</span>
+      <input
+        type="text"
+        inputMode="none"
+        className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+        onFocus={e => { e.target.blur(); }}
+        onClick={e => {
+          // เปิด native emoji keyboard บนมือถือ
+          e.target.style.opacity = '1';
+          e.target.focus();
+          e.target.style.opacity = '0';
+        }}
+        onChange={e => {
+          const val = e.target.value;
+          if (val) {
+            setNoteEmoji(val);
+            fetchAPI({action:'saveSetting', key:'noteEmoji', value:val});
+            e.target.value = '';
+          }
+        }}
+      />
+    </label>
+  ) : (
+    <div className="h-[28px] w-[28px] flex items-center justify-center cursor-default">
+      <span className="text-sm select-none">{noteEmoji || '😊'}</span>
+    </div>
+  )}
+</div>
 
                       </div>
 
